@@ -22,9 +22,10 @@ class CountryModel {
 	}
 }
 
+	let constants = Constants()
 	var countries : [[CountryModel]] = [ [
 	
-	CountryModel(name: "Greece", description: "Bourdelo me thea", image: "Flag_of_Greece", euMember: true),
+		CountryModel(name: "Greece", description: constants.Greece, image: "Flag_of_Greece", euMember: true),
 	
 	CountryModel(name: "Italy", description: "Fiat and Ferrari", image: "Flag_of_Italy", euMember: true),
 	
@@ -54,7 +55,7 @@ class CountryModel {
 	
 	CountryModel(name: "Lithuania", description: "Bourdelo me thea", image: "Flag_of_Lithuania", euMember: true),
 	
-	CountryModel(name: "Luxemburg", description: "Bourdelo me thea", image: "Flag_of_Luxemburg", euMember: true),
+	CountryModel(name: "Luxembourg", description: "Bourdelo me thea", image: "Flag_of_Luxembourg", euMember: true),
 	
 	CountryModel(name: "Malta", description: "Bourdelo me thea", image: "Flag_of_Malta", euMember: true),
 	

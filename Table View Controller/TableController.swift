@@ -4,6 +4,11 @@
 //
 //  Created by Evangelos Spyromilios on 13.01.23.
 //
+/// Array to be presented in TableView.
+/// Each row to DetailView -> Modal like here
+/// DetailView to show full text of  TableView row
+/// Row with Image, title and description
+
 
 import UIKit
 
@@ -12,11 +17,6 @@ class TableController: UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Uncomment the following line to preserve selection between presentations
-		// self.clearsSelectionOnViewWillAppear = false
-		
-		// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-		self.navigationItem.leftBarButtonItem = self.editButtonItem
 	}
 	
 	// MARK: - Table view data source
@@ -27,10 +27,8 @@ class TableController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		// #warning Incomplete implementation, return the number of rows
 		
 		return countries[section].count
-		
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,7 +44,7 @@ class TableController: UITableViewController {
 		
 		return cell
 	}
-
+	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		if section == 0 {
 			return "EU"
@@ -57,6 +55,10 @@ class TableController: UITableViewController {
 		else { return nil }
 	}
 	
+	//	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+	//		let country = countries[indexPath.row]
+	//		performSegue(withIdentifier: "seguetoDetaillView", sender: country)
+	//	}
 	
 	/*
 	 // Override to support conditional editing of the table view.
@@ -92,15 +94,22 @@ class TableController: UITableViewController {
 	 return true
 	 }
 	 */
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		let country = countries[indexPath.section][indexPath.row]
+		print("\(country.name)")
+		performSegue(withIdentifier: "seguetoDetailView", sender: country)
+	}
 	
-	/*
-	 // MARK: - Navigation
-	 
-	 // In a storyboard-based application, you will often want to do a little preparation before navigation
-	 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	 // Get the new view controller using segue.destination.
-	 // Pass the selected object to the new view controller.
-	 }
-	 */
+	// MARK: - Navigation
 	
+	// In a storyboard-based application, you will often want to do a little preparation before navigation
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+		if let indexPath = tableView.indexPathForSelectedRow{
+			let selectedRow = indexPath.row
+			let destinationViewController = segue.destination as! ViewController
+			destinationViewController.countryData = countries[indexPath.section][selectedRow]
+		}
+	}
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF7EF0752971FFE700AA6344 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7EF0742971FFE700AA6344 /* Constants.swift */; };
 		EFD21BC5297171EF000C0F11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC4297171EF000C0F11 /* AppDelegate.swift */; };
 		EFD21BC7297171EF000C0F11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC6297171EF000C0F11 /* SceneDelegate.swift */; };
 		EFD21BC9297171EF000C0F11 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC8297171EF000C0F11 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF7EF0742971FFE700AA6344 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EFD21BC1297171EF000C0F11 /* Table View Controller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Table View Controller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFD21BC4297171EF000C0F11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFD21BC6297171EF000C0F11 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				EFD21BC8297171EF000C0F11 /* ViewController.swift */,
 				EFD21BCA297171EF000C0F11 /* Main.storyboard */,
 				EFD21BD929717275000C0F11 /* TableController.swift */,
+				EF7EF0742971FFE700AA6344 /* Constants.swift */,
 				EFD21BDB297172DC000C0F11 /* Country Model.swift */,
 				EFD21BD2297171F1000C0F11 /* Info.plist */,
 			);
@@ -157,6 +160,7 @@
 				EFD21BC5297171EF000C0F11 /* AppDelegate.swift in Sources */,
 				EFD21BDA29717275000C0F11 /* TableController.swift in Sources */,
 				EFD21BC7297171EF000C0F11 /* SceneDelegate.swift in Sources */,
+				EF7EF0752971FFE700AA6344 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

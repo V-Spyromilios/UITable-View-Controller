@@ -41,7 +41,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="cgY-V9-PFE" kind="show" identifier="segueFullView" trigger="accessoryAction" destinationCreationSelector="segueToDetailView:" id="HpT-4U-2wV"/>
+                                    <segue destination="cgY-V9-PFE" kind="show" identifier="seguetoDetailView" trigger="accessoryAction" destinationCreationSelector="segueToDetailView:" id="HpT-4U-2wV"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
