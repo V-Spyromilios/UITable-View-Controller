@@ -22,7 +22,7 @@ class TableController: UITableViewController {
 	// MARK: - Table view data source
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		// #warning Incomplete implementation, return the number of sections
+
 		return 2
 	}
 	
@@ -59,7 +59,14 @@ class TableController: UITableViewController {
 		}
 		else { return nil }
 	}
-	
+
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		let country = countries[indexPath.section][indexPath.row]
+		performSegue(withIdentifier: "seguetoDetailView", sender: country) //?
+	}
+
+
 	//	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 	//		let country = countries[indexPath.row]
 	//		performSegue(withIdentifier: "seguetoDetaillView", sender: country)
@@ -99,12 +106,6 @@ class TableController: UITableViewController {
 	 return true
 	 }
 	 */
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		
-		let country = countries[indexPath.section][indexPath.row]
-		print("\(country.name)")
-		performSegue(withIdentifier: "seguetoDetailView", sender: country)
-	}
 	
 	// MARK: - Navigation
 	
