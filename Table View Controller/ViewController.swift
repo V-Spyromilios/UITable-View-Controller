@@ -21,10 +21,12 @@ class ViewController: UIViewController {
 
 		super.viewDidLoad()
 		countryNameLabel.text 				= countryData.name
+		countryNameLabel.font				= UIFont(name: "Gill Sans", size: 24)
 		countryFlagImage.image 				= UIImage(named: countryData.flag ?? "")
 		countryDescriptionTextView.text 	= countryData.description
-		
-		// Do any additional setup after loading the view.
+
+//		countryDescriptionTextView.adjustsFontForContentSizeCategory 	= true
+//		countryNameLabel.adjustsFontForContentSizeCategory 			= true
 	}
 }
 		

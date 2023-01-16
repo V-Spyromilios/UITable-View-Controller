@@ -39,7 +39,7 @@ class TableController: UITableViewController {
 		cellDefaultConfiguration.text = countries[indexPath.section][indexPath.row].name.uppercased()
 		cellDefaultConfiguration.textProperties.numberOfLines = 1
 		cellDefaultConfiguration.secondaryTextProperties.numberOfLines = 1
-		cellDefaultConfiguration.secondaryTextProperties.lineBreakMode = .byWordWrapping
+		cellDefaultConfiguration.secondaryTextProperties.lineBreakMode = .byTruncatingTail
 		cellDefaultConfiguration.secondaryTextProperties.color = .lightGray
 
 		cellDefaultConfiguration.secondaryText = countries[indexPath.section][indexPath.row].description
