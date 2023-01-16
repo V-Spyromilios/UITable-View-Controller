@@ -36,7 +36,12 @@ class TableController: UITableViewController {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath)
 		var cellDefaultConfiguration = cell.defaultContentConfiguration()
 		
-		cellDefaultConfiguration.text = countries[indexPath.section][indexPath.row].name
+		cellDefaultConfiguration.text = countries[indexPath.section][indexPath.row].name.uppercased()
+		cellDefaultConfiguration.textProperties.numberOfLines = 1
+		cellDefaultConfiguration.secondaryTextProperties.numberOfLines = 1
+		cellDefaultConfiguration.secondaryTextProperties.lineBreakMode = .byWordWrapping
+		cellDefaultConfiguration.secondaryTextProperties.color = .lightGray
+
 		cellDefaultConfiguration.secondaryText = countries[indexPath.section][indexPath.row].description
 		cellDefaultConfiguration.image = UIImage(named: countries[indexPath.section][indexPath.row].flag ?? "")
 		cellDefaultConfiguration.imageProperties.maximumSize = CGSize(width: 50, height: 50)

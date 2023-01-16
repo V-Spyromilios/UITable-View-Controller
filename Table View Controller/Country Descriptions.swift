@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Constants {
+struct CountryDescriptions {
 	let Greece: String = """
 Οπαλα. Οπαλα Οπαλα Οπαλα ω Οπαλα Οπαλα Οπαλα Οπαλα Οπαλα Οπαλα Οπαλα Οπαλα Οπαλα
 Οπαλα

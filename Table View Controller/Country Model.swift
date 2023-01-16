@@ -22,7 +22,7 @@ class CountryModel {
 	}
 }
 
-	let constants = Constants()
+	let constants = CountryDescriptions()
 	var countries : [[CountryModel]] = [ [
 	
 		CountryModel(name: "Greece", description: constants.Greece, image: "Flag_of_Greece", euMember: true),
