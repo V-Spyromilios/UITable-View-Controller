@@ -20,14 +20,14 @@ class DetailViewController: UIViewController {
 	override func viewDidLoad() {
 
 		super.viewDidLoad()
-
-		guard let countryData = countryData else { return } //just checking if let..  is nil and private funcion
+		setUpDetailView()
+	}
+	
+	private func setUpDetailView() {
+		guard let countryData = countryData else { return } //just checking if  'countryData'  is nil
 		countryNameLabel.text = countryData.name
 		countryNameLabel.font = UIFont(name: "Gill Sans", size: 24)
-		countryFlagImage.image = UIImage(named: countryData.flag ?? "")
+		countryFlagImage.image = UIImage(named: countryData.flagName ?? "")
 		countryDescriptionTextView.text = countryData.description
-
-//		countryDescriptionTextView.adjustsFontForContentSizeCategory 	= true
-//		countryNameLabel.adjustsFontForContentSizeCategory 			= true
 	}
 }

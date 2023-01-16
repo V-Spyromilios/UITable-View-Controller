@@ -16,6 +16,7 @@ class TableController: UITableViewController { // or ViewController and extend w
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCountry))
 	}
 	
 	// MARK: - Table view data source
@@ -23,6 +24,10 @@ class TableController: UITableViewController { // or ViewController and extend w
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		
 		return 2
+	}
+	
+	@objc func addCountry() {
+		
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -33,7 +38,6 @@ class TableController: UITableViewController { // or ViewController and extend w
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let country = countries[indexPath.section][indexPath.row]
-		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath)
 		var cellDefaultConfiguration = cell.defaultContentConfiguration()
 		
@@ -45,15 +49,9 @@ class TableController: UITableViewController { // or ViewController and extend w
 		cellDefaultConfiguration.secondaryTextProperties.color = .lightGray
 		cellDefaultConfiguration.secondaryText = country.description
 		
-		cellDefaultConfiguration.image = UIImage(named: countries[indexPath.section][indexPath.row].flag ?? "")
+		cellDefaultConfiguration.image = UIImage(named: country.flagName ?? "")
 		cellDefaultConfiguration.imageProperties.maximumSize = CGSize(width: 50, height: 50)
 		cell.contentConfiguration = cellDefaultConfiguration //update cell's content Config. !!!
-		
-//		if indexPath.row % 2 == 1 {
-//			cell.backgroundColor = .green
-//		} else {
-//			cell.backgroundColor = .clear
-//		}
 		
 		return cell
 	}
@@ -71,15 +69,9 @@ class TableController: UITableViewController { // or ViewController and extend w
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
-		//		let country = countries[indexPath.section][indexPath.row]
 		performSegue(withIdentifier: "seguetoDetailView", sender: self) // self = the tableView. (who performed segue). could be nil
 	}
 	
-	
-	//	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-	//		let country = countries[indexPath.row]
-	//		performSegue(withIdentifier: "seguetoDetaillView", sender: country)
-	//	}
 	
 	/*
 	 // Override to support conditional editing of the table view.
@@ -89,17 +81,15 @@ class TableController: UITableViewController { // or ViewController and extend w
 	 }
 	 */
 	
-	/*
-	 // Override to support editing the table view.
-	 override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-	 if editingStyle == .delete {
-	 // Delete the row from the data source
-	 tableView.deleteRows(at: [indexPath], with: .fade)
-	 } else if editingStyle == .insert {
-	 // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-	 }
-	 }
-	 */
+	
+	// Override to support editing the table view.
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			countries[indexPath.section].remove(at: indexPath.row)
+			tableView.deleteRows(at: [indexPath], with: .bottom)
+		}
+	}
+
 	
 	/*
 	 // Override to support rearranging the table view.
