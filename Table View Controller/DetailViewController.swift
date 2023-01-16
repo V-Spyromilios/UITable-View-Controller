@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class DetailViewController: UIViewController {
 	
-	var countryData: CountryModel = CountryModel(name: "", description: "", image: "", euMember: false)
+	var countryData: CountryModel?
 	
 	@IBOutlet weak var countryNameLabel: UILabel!
 	
@@ -20,13 +20,14 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 
 		super.viewDidLoad()
-		countryNameLabel.text 				= countryData.name
-		countryNameLabel.font				= UIFont(name: "Gill Sans", size: 24)
-		countryFlagImage.image 				= UIImage(named: countryData.flag ?? "")
-		countryDescriptionTextView.text 	= countryData.description
+
+		guard let countryData = countryData else { return } //just checking if let..  is nil and private funcion
+		countryNameLabel.text = countryData.name
+		countryNameLabel.font = UIFont(name: "Gill Sans", size: 24)
+		countryFlagImage.image = UIImage(named: countryData.flag ?? "")
+		countryDescriptionTextView.text = countryData.description
 
 //		countryDescriptionTextView.adjustsFontForContentSizeCategory 	= true
 //		countryNameLabel.adjustsFontForContentSizeCategory 			= true
 	}
 }
-		

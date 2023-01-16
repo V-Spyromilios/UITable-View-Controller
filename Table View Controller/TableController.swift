@@ -12,8 +12,7 @@
 
 import UIKit
 
-class TableController: UITableViewController {
-	
+class TableController: UITableViewController { // or ViewController and extend with the necessary functions
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -22,7 +21,7 @@ class TableController: UITableViewController {
 	// MARK: - Table view data source
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
-
+		
 		return 2
 	}
 	
@@ -33,24 +32,34 @@ class TableController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
+		let country = countries[indexPath.section][indexPath.row]
+		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath)
 		var cellDefaultConfiguration = cell.defaultContentConfiguration()
 		
-		cellDefaultConfiguration.text = countries[indexPath.section][indexPath.row].name.uppercased()
+		cellDefaultConfiguration.text = country.name.uppercased()
 		cellDefaultConfiguration.textProperties.numberOfLines = 1
+		
 		cellDefaultConfiguration.secondaryTextProperties.numberOfLines = 1
 		cellDefaultConfiguration.secondaryTextProperties.lineBreakMode = .byTruncatingTail
 		cellDefaultConfiguration.secondaryTextProperties.color = .lightGray
-
-		cellDefaultConfiguration.secondaryText = countries[indexPath.section][indexPath.row].description
+		cellDefaultConfiguration.secondaryText = country.description
+		
 		cellDefaultConfiguration.image = UIImage(named: countries[indexPath.section][indexPath.row].flag ?? "")
 		cellDefaultConfiguration.imageProperties.maximumSize = CGSize(width: 50, height: 50)
 		cell.contentConfiguration = cellDefaultConfiguration //update cell's content Config. !!!
+		
+//		if indexPath.row % 2 == 1 {
+//			cell.backgroundColor = .green
+//		} else {
+//			cell.backgroundColor = .clear
+//		}
 		
 		return cell
 	}
 	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		
 		if section == 0 {
 			return "EU"
 		}
@@ -59,14 +68,14 @@ class TableController: UITableViewController {
 		}
 		else { return nil }
 	}
-
+	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
-		let country = countries[indexPath.section][indexPath.row]
-		performSegue(withIdentifier: "seguetoDetailView", sender: country) //?
+		//		let country = countries[indexPath.section][indexPath.row]
+		performSegue(withIdentifier: "seguetoDetailView", sender: self) // self = the tableView. (who performed segue). could be nil
 	}
-
-
+	
+	
 	//	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 	//		let country = countries[indexPath.row]
 	//		performSegue(withIdentifier: "seguetoDetaillView", sender: country)
@@ -111,10 +120,10 @@ class TableController: UITableViewController {
 	
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-		if let indexPath = tableView.indexPathForSelectedRow{
+		
+		if let indexPath = tableView.indexPathForSelectedRow {
 			let selectedRow = indexPath.row
-			let destinationViewController = segue.destination as! ViewController
+			guard let destinationViewController = segue.destination as? DetailViewController else { return }
 			destinationViewController.countryData = countries[indexPath.section][selectedRow]
 		}
 	}

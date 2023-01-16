@@ -10,7 +10,7 @@
 		EF7EF0752971FFE700AA6344 /* Country Descriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7EF0742971FFE700AA6344 /* Country Descriptions.swift */; };
 		EFD21BC5297171EF000C0F11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC4297171EF000C0F11 /* AppDelegate.swift */; };
 		EFD21BC7297171EF000C0F11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC6297171EF000C0F11 /* SceneDelegate.swift */; };
-		EFD21BC9297171EF000C0F11 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC8297171EF000C0F11 /* ViewController.swift */; };
+		EFD21BC9297171EF000C0F11 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC8297171EF000C0F11 /* DetailViewController.swift */; };
 		EFD21BCC297171EF000C0F11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFD21BCA297171EF000C0F11 /* Main.storyboard */; };
 		EFD21BCE297171F1000C0F11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD21BCD297171F1000C0F11 /* Assets.xcassets */; };
 		EFD21BD1297171F1000C0F11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFD21BCF297171F1000C0F11 /* LaunchScreen.storyboard */; };
@@ -23,7 +23,7 @@
 		EFD21BC1297171EF000C0F11 /* Table View Controller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Table View Controller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFD21BC4297171EF000C0F11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFD21BC6297171EF000C0F11 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EFD21BC8297171EF000C0F11 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EFD21BC8297171EF000C0F11 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		EFD21BCB297171EF000C0F11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EFD21BCD297171F1000C0F11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFD21BD0297171F1000C0F11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,7 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				EFD21BD82971720E000C0F11 /* Secondary Files */,
-				EFD21BC8297171EF000C0F11 /* ViewController.swift */,
+				EFD21BC8297171EF000C0F11 /* DetailViewController.swift */,
 				EFD21BCA297171EF000C0F11 /* Main.storyboard */,
 				EFD21BD929717275000C0F11 /* TableController.swift */,
 				EF7EF0742971FFE700AA6344 /* Country Descriptions.swift */,
@@ -155,7 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFD21BC9297171EF000C0F11 /* ViewController.swift in Sources */,
+				EFD21BC9297171EF000C0F11 /* DetailViewController.swift in Sources */,
 				EFD21BDC297172DC000C0F11 /* Country Model.swift in Sources */,
 				EFD21BC5297171EF000C0F11 /* AppDelegate.swift in Sources */,
 				EFD21BDA29717275000C0F11 /* TableController.swift in Sources */,
