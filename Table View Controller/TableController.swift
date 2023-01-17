@@ -19,6 +19,9 @@ class TableController: UITableViewController { // or ViewController and extend w
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCountry))
 	}
 	
+	@objc func addCountry() {
+		self.performSegue(withIdentifier: "addNewCountrySegue", sender: self)
+	}
 	// MARK: - Table view data source
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
@@ -26,9 +29,6 @@ class TableController: UITableViewController { // or ViewController and extend w
 		return 2
 	}
 	
-	@objc func addCountry() {
-		
-	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
@@ -87,6 +87,7 @@ class TableController: UITableViewController { // or ViewController and extend w
 		if editingStyle == .delete {
 			countries[indexPath.section].remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: .bottom)
+			self.tableView.reloadData()
 		}
 	}
 
