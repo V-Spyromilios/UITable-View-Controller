@@ -17,6 +17,12 @@ class TableController: UITableViewController { // or ViewController and extend w
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCountry))
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshTable))
+		self.tableView.reloadData()
+	}
+	
+	@objc func refreshTable() {
+		self.tableView.reloadData()
 	}
 	
 	@objc func addCountry() {

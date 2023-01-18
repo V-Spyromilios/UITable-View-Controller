@@ -18,10 +18,10 @@ import Foundation
 
 struct CountryModel {
 	
-	let name: String
-	let description: String
-	let flagName: String?
-	let euMember: Bool
+	var name: String
+	var description: String
+	var flagName: String?
+	var euMember: Bool
 }
 
 let descriptions = CountryDescriptions()

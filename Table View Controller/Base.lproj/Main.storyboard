@@ -151,43 +151,65 @@
             </objects>
             <point key="canvasLocation" x="3479" y="481"/>
         </scene>
-        <!--Add New Country View Controller-->
+        <!--Add New Country Parent View Controller-->
         <scene sceneID="Pwb-dg-fai">
             <objects>
-                <viewController id="XNe-cT-5LD" customClass="AddNewCountryViewController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XNe-cT-5LD" customClass="AddNewCountryParentViewController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c3c-Jf-R0q">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add New Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2U-u8-Xw1">
+                                <rect key="frame" x="112" y="79" width="169" height="27"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hkj-Kp-eLK">
-                                <rect key="frame" x="0.0" y="59" width="393" height="550"/>
+                                <rect key="frame" x="0.0" y="116" width="393" height="550"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="550" id="Wx1-n2-Tzu"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="4vt-mf-wGH" kind="embed" id="Pqv-DM-uvn"/>
+                                    <segue destination="4vt-mf-wGH" kind="embed" identifier="segueToAddCountryTable" id="Pqv-DM-uvn"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uay-0B-am9">
+                                <rect key="frame" x="172.66666666666666" y="723" width="48" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="OK"/>
+                                <connections>
+                                    <segue destination="0h3-vz-PQB" kind="unwind" unwindAction="UnwindActionWithUnwindSegue:" id="P6L-uA-QMD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DvN-35-KSe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="DvN-35-KSe" firstAttribute="bottom" secondItem="uay-0B-am9" secondAttribute="bottom" constant="25" id="00m-l1-msT"/>
                             <constraint firstItem="DvN-35-KSe" firstAttribute="trailing" secondItem="hkj-Kp-eLK" secondAttribute="trailing" id="4Pb-UJ-Jnq"/>
-                            <constraint firstItem="hkj-Kp-eLK" firstAttribute="top" secondItem="DvN-35-KSe" secondAttribute="top" id="4Th-Bu-ryo"/>
+                            <constraint firstItem="uay-0B-am9" firstAttribute="centerX" secondItem="DvN-35-KSe" secondAttribute="centerX" id="74Z-zL-Y3E"/>
+                            <constraint firstItem="hkj-Kp-eLK" firstAttribute="top" secondItem="k2U-u8-Xw1" secondAttribute="bottom" constant="10" id="I0K-2N-u34"/>
+                            <constraint firstItem="DvN-35-KSe" firstAttribute="top" secondItem="k2U-u8-Xw1" secondAttribute="top" constant="-20" id="jOh-xZ-IkA"/>
+                            <constraint firstItem="k2U-u8-Xw1" firstAttribute="centerX" secondItem="DvN-35-KSe" secondAttribute="centerX" id="uD4-Bq-OMn"/>
                             <constraint firstItem="hkj-Kp-eLK" firstAttribute="leading" secondItem="DvN-35-KSe" secondAttribute="leading" id="yAd-MO-GMP"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="OkButton" destination="uay-0B-am9" id="KKd-1a-B4U"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Gy-Ge-9gF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="0h3-vz-PQB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3479" y="-238"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Add New Country Child Table View Controller-->
         <scene sceneID="kxZ-O9-zeT">
             <objects>
-                <tableViewController id="4vt-mf-wGH" sceneMemberID="viewController">
+                <tableViewController id="4vt-mf-wGH" customClass="AddNewCountryChildTableViewController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="duN-O1-Gzo">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="550"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
@@ -204,6 +226,10 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="393" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="countryNameEditingDidEnd:" destination="ZHC-4A-vg5" eventType="editingDidEnd" id="Mrs-gT-H5p"/>
+                                                        <action selector="countryNameField:" destination="ZHC-4A-vg5" eventType="editingDidEnd" id="gwA-wD-QIv"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -305,8 +331,15 @@
                             <outlet property="delegate" destination="4vt-mf-wGH" id="oiy-Oi-rlg"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="countryDescriptionField" destination="cDn-up-XXk" id="kST-Zh-rO4"/>
+                        <outlet property="countryGdpField" destination="Sq3-SH-EVT" id="zac-fr-TYf"/>
+                        <outlet property="countryNameField" destination="kZ8-Me-q9K" id="Nuv-c4-4SC"/>
+                        <outlet property="isEuMemberSwitch" destination="oRc-pC-ksg" id="xR6-jE-Svs"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S4h-g3-uN5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="ZHC-4A-vg5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4213.740458015267" y="-186.61971830985917"/>
         </scene>
