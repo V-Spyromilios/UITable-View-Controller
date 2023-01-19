@@ -19,9 +19,11 @@ class AddNewCountryChildTableViewController: UITableViewController {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		countryNameField.delegate = self
-		countryDescriptionField.delegate = self
-		
+		let parent = self.parent as? AddNewCountryParentViewController
+		parent?.OkButton.isEnabled = false
+		[countryNameField, countryDescriptionField, countryGdpField].forEach({
+			$0?.addTarget(self, action: #selector(changeButtonStatus), for: .editingChanged)
+		})
 		
 //		let parentController = self.parent as? AddNewCountryViewController
 //		parentController?.newCountry?.name = countryNameField.text ?? ""
@@ -33,6 +35,22 @@ class AddNewCountryChildTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+	
+	@objc func changeButtonStatus() {
+		let parentViewController = self.parent as? AddNewCountryParentViewController
+		if countryNameField.text?.count ?? "".count < 5 || countryDescriptionField.text?.count ?? "".count < 5 || countryGdpField.text?.count ?? "".count < 5 {
+			return
+		}
+		guard
+			let _ = countryNameField.text, !(countryNameField.text?.isEmpty ?? true),
+			let _ = countryDescriptionField.text, !(countryDescriptionField.text?.isEmpty ?? true),
+			let _ = countryGdpField.text, !(countryGdpField.text?.isEmpty ?? true)
+		else {
+			parentViewController?.OkButton.isEnabled = false
+			return
+		}
+		parentViewController?.OkButton.isEnabled = true
+	}
 
     // MARK: - Table view data source
 
@@ -43,14 +61,16 @@ class AddNewCountryChildTableViewController: UITableViewController {
 		parentController?.newCountry.euMember = isEuMemberSwitch.isOn
 		
 		if parentController?.newCountry.name != nil {
-			if ((parentController?.newCountry.euMember) != false) {
+			if ((parentController?.newCountry.euMember) == true) {
 				countries[0].append((parentController?.newCountry)!)
 			}
 			else {
 				countries[1].append((parentController?.newCountry)!)
 			}
-			dismiss(animated: true)
+			//let grandpa = self.parent?.parent as? TableController // nil !
+			//grandpa?.loadView()
 		}
+		dismiss(animated: true)
 	}
 
 //    override func numberOfSections(in tableView: UITableView) -> Int {
@@ -120,22 +140,22 @@ class AddNewCountryChildTableViewController: UITableViewController {
 
 }
 
-extension AddNewCountryChildTableViewController: UITextFieldDelegate {
-
-	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-
-		guard let oldCountryNameText = countryNameField.text,
-			 let oldCountryDescriptionText = countryDescriptionField.text else { return false }
-
-		let newCountryNameText = (oldCountryNameText as NSString).replacingCharacters(in: NSRangeFromString(string), with: string)
-		let newCountryDescriptionText = (oldCountryDescriptionText as NSString).replacingCharacters(in: NSRangeFromString(string), with: string)
-
-		(self.parent as? AddNewCountryParentViewController)?.OkButton.isEnabled = {
-			if !newCountryNameText.isEmpty && !newCountryDescriptionText.isEmpty {
-				return true
-			}
-			else { return false }
-		}()
-		return true
-	}
-}
+//extension AddNewCountryChildTableViewController: UITextFieldDelegate {
+//
+//	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//
+//		guard let oldCountryNameText = countryNameField.text,
+//			 let oldCountryDescriptionText = countryDescriptionField.text else { return false }
+//
+//		let newCountryNameText = (oldCountryNameText as NSString).replacingCharacters(in: NSRangeFromString(string), with: string)
+//		let newCountryDescriptionText = (oldCountryDescriptionText as NSString).replacingCharacters(in: NSRangeFromString(string), with: string)
+//
+//		(self.parent as? AddNewCountryParentViewController)?.OkButton.isEnabled = {
+//			if !newCountryNameText.isEmpty && !newCountryDescriptionText.isEmpty {
+//				return true
+//			}
+//			else { return false }
+//		}()
+//		return true
+//	}
+//}

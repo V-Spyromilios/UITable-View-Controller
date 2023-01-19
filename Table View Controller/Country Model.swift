@@ -24,7 +24,7 @@ struct CountryModel {
 	var euMember: Bool
 }
 
-let descriptions = CountryDescriptions()
+var descriptions = CountryDescriptions()
 
 var countries : [[CountryModel]] = [ [
 	
@@ -102,4 +102,4 @@ var countries : [[CountryModel]] = [ [
 	CountryModel(name: "Haiti", description: "Wonderfull Country", flagName: "Flag_of_Haiti", euMember: false),
 	
 	CountryModel(name: "Mexico", description: "Wonderfull Country", flagName: "Flag_of_Mexico", euMember: false),
- ] ]
+]]

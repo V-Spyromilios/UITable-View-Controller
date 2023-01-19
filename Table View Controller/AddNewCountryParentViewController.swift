@@ -21,6 +21,7 @@ class AddNewCountryParentViewController: UIViewController {
 	}
 	
 	
+	
 	//MARK: - Navigation
 	
 	//    // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -43,5 +44,15 @@ class AddNewCountryParentViewController: UIViewController {
 	//		}
 	//    }
 	
+	//	override func viewWillDisappear(_ animated: Bool) {
+	//		let parentView = self.parent
+	//		print(parentView)
+	//	}
 	
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		let father = self.presentingViewController
+		let tableViewController = father?.children[0] as? TableController
+		tableViewController?.tableView.reloadData()
+	}
 }
