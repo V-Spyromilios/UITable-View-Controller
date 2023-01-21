@@ -22,37 +22,11 @@ class AddNewCountryParentViewController: UIViewController {
 	
 	
 	
-	//MARK: - Navigation
-	
-	//    // In a storyboard-based application, you will often want to do a little preparation before navigation
-	//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	//		if segue.identifier == "segueToAddCountryTable" {
-	//			let childViewController = segue.destination as? AddCountryTableViewController
-	//			newCountry?.name = childViewController?.countryNameField.text ?? "Default from Segue"
-	//			newCountry?.description = childViewController?.countryDescriptionField.text ?? "Default from Segue"
-	//			newCountry?.euMember = (childViewController?.isEuMemberSwitch.isOn) == true
-	//			if newCountry?.name != nil {
-	//				if ((newCountry?.euMember) != false) {
-	//					countries[0].append(newCountry!)
-	//				}
-	//				else  {
-	//					countries[1].append(newCountry!)
-	//				}
-	//				let parentViewController = self.parent as? UITableViewController
-	//				parentViewController?.tableView.reloadData()
-	//			}
-	//		}
-	//    }
-	
-	//	override func viewWillDisappear(_ animated: Bool) {
-	//		let parentView = self.parent
-	//		print(parentView)
-	//	}
-	
+	//MARK: - Reload Table Data at viewWillDisappear
 	
 	override func viewWillDisappear(_ animated: Bool) {
-		let father = self.presentingViewController
-		let tableViewController = father?.children[0] as? TableController
+		let rootViewController = self.presentingViewController
+		let tableViewController = rootViewController?.children[0] as? TableController
 		tableViewController?.tableView.reloadData()
 	}
 }

@@ -21,13 +21,23 @@ class DetailViewController: UIViewController {
 
 		super.viewDidLoad()
 		setUpDetailView()
+
 	}
 	
 	private func setUpDetailView() {
 		guard let countryData = countryData else { return } //just checking if  'countryData'  is nil
-		countryNameLabel.text = countryData.name
-		countryNameLabel.font = UIFont(name: "Gill Sans", size: 24)
-		countryFlagImage.image = UIImage(named: countryData.flagName ?? "")
+		countryNameLabel.text = countryData.name.uppercased()
+		guard let customFont = UIFont(name: "George Rounded Bold Italic", size: 25) else {
+			fatalError("""
+				Failed to load the "George Rounded Semibold Italic" font.
+				Make sure the font file is included in the project and the font name is spelled correctly.
+				"""
+			)
+		}
+		countryNameLabel.font = UIFontMetrics.default.scaledFont(for: customFont)
+		countryNameLabel.adjustsFontForContentSizeCategory = true
+		
+		countryFlagImage.image = countryData.flagName
 		countryDescriptionTextView.text = countryData.description
 	}
 }

@@ -55,7 +55,7 @@ class TableController: UITableViewController { // or ViewController and extend w
 		cellDefaultConfiguration.secondaryTextProperties.color = .lightGray
 		cellDefaultConfiguration.secondaryText = country.description
 		
-		cellDefaultConfiguration.image = UIImage(named: country.flagName ?? "")
+		cellDefaultConfiguration.image = country.flagName
 		cellDefaultConfiguration.imageProperties.maximumSize = CGSize(width: 50, height: 50)
 		cell.contentConfiguration = cellDefaultConfiguration //update cell's content Config. !!!
 		
@@ -78,17 +78,7 @@ class TableController: UITableViewController { // or ViewController and extend w
 		performSegue(withIdentifier: "seguetoDetailView", sender: self) // self = the tableView. (who performed segue). could be nil
 	}
 	
-	
-	/*
-	 // Override to support conditional editing of the table view.
-	 override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-	 // Return false if you do not want the specified item to be editable.
-	 return true
-	 }
-	 */
-	
-	
-	// Override to support editing the table view.
+	//MARK: - Delete row, reloadData
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
 			countries[indexPath.section].remove(at: indexPath.row)
@@ -96,26 +86,9 @@ class TableController: UITableViewController { // or ViewController and extend w
 			self.tableView.reloadData()
 		}
 	}
+	
+	// MARK: - Prepare for segue.
 
-	
-	/*
-	 // Override to support rearranging the table view.
-	 override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-	 
-	 }
-	 */
-	
-	/*
-	 // Override to support conditional rearranging of the table view.
-	 override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-	 // Return false if you do not want the item to be re-orderable.
-	 return true
-	 }
-	 */
-	
-	// MARK: - Navigation
-	
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
 		if let indexPath = tableView.indexPathForSelectedRow {
