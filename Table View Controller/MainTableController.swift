@@ -41,25 +41,16 @@ class MainTableController: UITableViewController { // or ViewController and exte
 		
 		return countries[section].count
 	}
+
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
+		let cell = tableView.dequeueReusableCell(withIdentifier: "customCellIdentifier", for: indexPath) as! CustomCell
 		let country = countries[indexPath.section][indexPath.row]
-		let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell", for: indexPath)
-		var cellDefaultConfiguration = cell.defaultContentConfiguration()
+		cell.updateCustomCell(with: country)
+		cell.showsReorderControl = true
 		
-		cellDefaultConfiguration.text = country.name.uppercased()
-		cellDefaultConfiguration.textProperties.numberOfLines = 1
-		
-		cellDefaultConfiguration.secondaryTextProperties.numberOfLines = 1
-		cellDefaultConfiguration.secondaryTextProperties.lineBreakMode = .byTruncatingTail
-		cellDefaultConfiguration.secondaryTextProperties.color = .lightGray
-		cellDefaultConfiguration.secondaryText = country.description
-		
-		cellDefaultConfiguration.image = country.flagName
-		cellDefaultConfiguration.imageProperties.maximumSize = CGSize(width: 50, height: 50)
-		cell.contentConfiguration = cellDefaultConfiguration //update cell's content Config. !!!
-		
+
 		return cell
 	}
 	

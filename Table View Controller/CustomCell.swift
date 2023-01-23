@@ -19,12 +19,6 @@ class CustomCell: UITableViewCell {
 		
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-	
 	func updateCustomCell(with country: CountryModel) {
 
 		self.countryNameLabel.text = country.name
@@ -34,7 +28,4 @@ class CustomCell: UITableViewCell {
 			self.countryGdpLabel.text = "\(country.gdp!)"
 		}
 	}
-	
-	
-
 }

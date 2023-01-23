@@ -51,8 +51,7 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		parentViewController?.OkButton.isEnabled = true
 	}
 	
-	@objc private func choosePhoto() {
-		print("Image Taped !")
+	@objc func choosePhoto() {
 		openPHPicker()
 	}
 	
@@ -64,6 +63,7 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		parentController?.newCountry.description = countryDescriptionField.text ?? ""
 		parentController?.newCountry.euMember = isEuMemberSwitch.isOn
 		parentController?.newCountry.flagName = imageView.image
+		parentController?.newCountry.gdp = Int(countryGdpField.text ?? "")
 		
 		if parentController?.newCountry.euMember == true {
 			countries[0].append(parentController!.newCountry)
@@ -75,7 +75,7 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 	}
 	
 	
-	func openPHPicker() {
+	private func openPHPicker() {
 		var configuration = PHPickerConfiguration()
 		configuration.selectionLimit = 1
 		configuration.filter = .images
@@ -92,7 +92,7 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 			result.itemProvider.loadObject(ofClass: UIImage.self, completionHandler: { (object, error) in
 				if let image = object as? UIImage {
 					DispatchQueue.main.async {
-						self.imageView.image = image
+							self.imageView.image = image
 					}
 				}
 			})
