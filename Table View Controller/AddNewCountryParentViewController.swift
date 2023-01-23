@@ -26,7 +26,7 @@ class AddNewCountryParentViewController: UIViewController {
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		let rootViewController = self.presentingViewController
-		let tableViewController = rootViewController?.children[0] as? TableController
+		let tableViewController = rootViewController?.children[0] as? MainTableController
 		tableViewController?.tableView.reloadData()
 	}
 }

@@ -65,11 +65,11 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		parentController?.newCountry.euMember = isEuMemberSwitch.isOn
 		parentController?.newCountry.flagName = imageView.image
 		
-		if ((parentController?.newCountry.euMember) == true) {
-			countries[0].append((parentController?.newCountry)!)
+		if parentController?.newCountry.euMember == true {
+			countries[0].append(parentController!.newCountry)
 		}
 		else {
-			countries[1].append((parentController?.newCountry)!)
+			countries[1].append(parentController!.newCountry)
 		}
 		dismiss(animated: true)
 	}

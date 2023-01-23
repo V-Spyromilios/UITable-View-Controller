@@ -12,9 +12,8 @@
 
 import UIKit
 
-class TableController: UITableViewController { // or ViewController and extend with the necessary functions
+class MainTableController: UITableViewController { // or ViewController and extend with the necessary functions
 	
-	var opt: Int?
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCountry))
@@ -22,10 +21,12 @@ class TableController: UITableViewController { // or ViewController and extend w
 	}
 	
 	@objc func refreshTable() {
+
 		self.tableView.reloadData()
 	}
 	
 	@objc func addCountry() {
+
 		self.performSegue(withIdentifier: "addNewCountrySegue", sender: self)
 	}
 	// MARK: - Table view data source
