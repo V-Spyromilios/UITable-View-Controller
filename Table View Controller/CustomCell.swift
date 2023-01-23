@@ -25,7 +25,7 @@ class CustomCell: UITableViewCell {
 		self.countryDescriptionLabel.text = country.description
 		self.flagImageView.image = country.flagName
 		if country.gdp != nil {
-			self.countryGdpLabel.text = "\(country.gdp!)"
+			self.countryGdpLabel.text = "$\(country.gdp!)"
 		}
 	}
 }
