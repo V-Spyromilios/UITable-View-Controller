@@ -34,5 +34,4 @@ class NewCustomCell: UITableViewCell {
 			self.countryGdpLabel.font = UIFont(name: "Gill Sans Italic", size: 15)
 		}
 	}
-	
 }
