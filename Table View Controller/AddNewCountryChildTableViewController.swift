@@ -24,7 +24,8 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+
+		//MARK: - Add Gesture Rec. to Image for PHPicker
 		let tapRecogniser = UITapGestureRecognizer(target: self, action: #selector(choosePhoto))
 		imageView.addGestureRecognizer(tapRecogniser)
 		
@@ -35,18 +36,17 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		})
 	}
 	
-	//MARK: - Change Button Status
-	
+	//MARK: - Change Button visibility
 	@objc func changeButtonStatus() {
 		let parentViewController = self.parent as? AddNewCountryParentViewController
 		if countryNameField.text?.count ?? "".count < 5 || countryDescriptionField.text?.count ?? "".count < 5 || countryGdpField.text?.count ?? "".count < 5 {
 			return
 		}
-		guard
-			let _ = countryNameField.text, !(countryNameField.text?.isEmpty ?? true),
-			let _ = countryDescriptionField.text, !(countryDescriptionField.text?.isEmpty ?? true),
-			let _ = countryGdpField.text, !(countryGdpField.text?.isEmpty ?? true)
-		else { return }
+//		guard
+//			let _ = countryNameField.text, !(countryNameField.text?.isEmpty ?? true),
+//			let _ = countryDescriptionField.text, !(countryDescriptionField.text?.isEmpty ?? true),
+//			let _ = countryGdpField.text, !(countryGdpField.text?.isEmpty ?? true)
+//		else { return }
 		
 		parentViewController?.OkButton.isEnabled = true
 	}
@@ -56,7 +56,6 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 	}
 	
 	// MARK: - Save Country with UnwindAction
-	
 	@IBAction func UnwindAction(unwindSegue: UIStoryboardSegue) {
 		let parentController = self.parent as? AddNewCountryParentViewController
 		parentController?.newCountry.name = countryNameField.text ?? ""
@@ -74,7 +73,7 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		dismiss(animated: true)
 	}
 	
-	
+	//MARK: - PHPicker functions
 	private func openPHPicker() {
 		var configuration = PHPickerConfiguration()
 		configuration.selectionLimit = 1

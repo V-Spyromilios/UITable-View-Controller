@@ -14,13 +14,13 @@ class NewCustomViewController: UIViewController, UITableViewDelegate, UITableVie
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return countries[section].count
 	}
-	
+
+	//MARK: - cellForRowAt, dequeueReusable
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "NewCustomCell", for: indexPath) as! NewCustomCell
 		let country = countries[indexPath.section][indexPath.row]
 		cell.updateCustomCell(with: country)
-		//cell.showsReorderControl = true
 		
 		return cell
 	}
@@ -30,6 +30,7 @@ class NewCustomViewController: UIViewController, UITableViewDelegate, UITableVie
 		return 2
 	}
 
+	//MARK: - viewDidLoad
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -38,15 +39,16 @@ class NewCustomViewController: UIViewController, UITableViewDelegate, UITableVie
 		
 		self.navigationItem.title = "Countries!"
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCountry))
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(enableMovingRow))
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleMovingRowEdit))
 	}
 	
-	@objc func enableMovingRow() {
-		if self.table.isEditing == false {
-			self.table.isEditing = true
+	@objc func toggleMovingRowEdit() {
+		self.table.isEditing = !self.table.isEditing
+		if table.isEditing {
+			self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(toggleMovingRowEdit))
 		}
 		else {
-			self.table.isEditing = false
+			self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleMovingRowEdit))
 		}
 	}
 	
@@ -55,9 +57,7 @@ class NewCustomViewController: UIViewController, UITableViewDelegate, UITableVie
 		self.performSegue(withIdentifier: "addNewCountrySegue", sender: self)
 	}
 
-
 	//MARK: - Moving Rows
-
 	func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
 		if sourceIndexPath.section == 0 && destinationIndexPath.section == 0 {
@@ -85,9 +85,7 @@ class NewCustomViewController: UIViewController, UITableViewDelegate, UITableVie
 		else { return nil }
 	}
 
-	
 	//MARK: - Delete row, reloadData
-
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
 			countries[indexPath.section].remove(at: indexPath.row)
@@ -96,9 +94,7 @@ class NewCustomViewController: UIViewController, UITableViewDelegate, UITableVie
 		}
 	}
 
-
-	//MARK: - Segues to DetailView
-
+	//MARK: - didSelectRow -> Segue to DetailView
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
 		performSegue(withIdentifier: "seguetoDetailView", sender: self) // self = the tableView. (who performed segue). could be nil
