@@ -16,6 +16,10 @@ class NewCustomCell: UITableViewCell {
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
+
+		self.countryNameLabel.font = UIFont(name: "George Rounded Bold Italic", size: 27)
+		self.countryGdpLabel.font = UIFont(name: "Gill Sans Italic", size: 15)
+		
 	}
 	
 	override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,14 +28,15 @@ class NewCustomCell: UITableViewCell {
 	}
 	
 	func updateCustomCell(with country: CountryModel) {
-		
-		self.countryNameLabel.text = country.name
-		self.countryNameLabel.font = UIFont(name: "George Rounded Bold Italic", size: 27)
-		self.countryDescriptionLabel.text = country.description
-		self.countryImageView.image = country.flagName
-		if country.gdp != nil {
-			self.countryGdpLabel.text = "$\(country.gdp!)"
-			self.countryGdpLabel.font = UIFont(name: "Gill Sans Italic", size: 15)
+		//remove self
+		countryNameLabel.text = country.name
+		countryDescriptionLabel.text = country.description
+		countryImageView.image = country.flagName
+		if let countryGdp = country.gdp { // Right Way to handle Optionals !
+			countryGdpLabel.text = "$ \(countryGdp)"
+		} else {
+			countryGdpLabel.text = "-"
 		}
+		
 	}
 }

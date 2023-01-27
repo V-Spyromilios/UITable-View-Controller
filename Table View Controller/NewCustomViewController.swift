@@ -7,14 +7,15 @@
 
 import UIKit
 
-class NewCustomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+///Delegate and DataSource into extension!!!
+class NewCustomViewController: UIViewController {
 	
 	@IBOutlet weak var table: UITableView!
-
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return countries[section].count
 	}
-
+	
 	//MARK: - cellForRowAt, dequeueReusable
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
@@ -24,22 +25,23 @@ class NewCustomViewController: UIViewController, UITableViewDelegate, UITableVie
 		
 		return cell
 	}
-
+	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		
 		return 2
 	}
-
+	
 	//MARK: - viewDidLoad
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		table.dataSource = self
 		table.delegate = self
-		
+		table.dataSource = self
+
 		self.navigationItem.title = "Countries!"
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCountry))
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleMovingRowEdit))
+		table.rowHeight = 135
 	}
 	
 	@objc func toggleMovingRowEdit() {
@@ -56,10 +58,10 @@ class NewCustomViewController: UIViewController, UITableViewDelegate, UITableVie
 		
 		self.performSegue(withIdentifier: "addNewCountrySegue", sender: self)
 	}
-
+	
 	//MARK: - Moving Rows
 	func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-
+		
 		if sourceIndexPath.section == 0 && destinationIndexPath.section == 0 {
 			let selectedCountry = countries[0].remove(at: (sourceIndexPath.row))
 			countries[destinationIndexPath.section].insert(selectedCountry, at: destinationIndexPath.row)
@@ -73,27 +75,22 @@ class NewCustomViewController: UIViewController, UITableViewDelegate, UITableVie
 		}
 		table.reloadData()
 	}
-
+	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		
-		if section == 0 {
-			return "EU"
-		}
-		else if section == 1 {
-			return "LATIN AMERICA"
-		}
+		if section == 0 { return "EU" }
+		else if section == 1 { return "LATIN AMERICA" }
 		else { return nil }
 	}
-
+	
 	//MARK: - Delete row, reloadData
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
 			countries[indexPath.section].remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: .automatic)
-			self.table.reloadData()
 		}
 	}
-
+	
 	//MARK: - didSelectRow -> Segue to DetailView
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
@@ -101,11 +98,24 @@ class NewCustomViewController: UIViewController, UITableViewDelegate, UITableVie
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		
-		if let indexPath = table.indexPathForSelectedRow {
-			let selectedRow = indexPath.row
-			guard let destinationViewController = segue.destination as? DetailViewController else { return }
-			destinationViewController.countryData = countries[indexPath.section][selectedRow]
+		if let destinationDetailViewController = segue.destination as? DetailViewController {
+			if let indexPath = table.indexPathForSelectedRow {
+				let selectedRow = indexPath.row
+				destinationDetailViewController.countryData = countries[indexPath.section][selectedRow]
+			}
 		}
+		guard let destinationAddNewCountryParentViewController = segue.destination as? AddNewCountryParentViewController  else { return }
+		destinationAddNewCountryParentViewController.delegate = self
+	}
+}
+
+extension NewCustomViewController: UITableViewDelegate, UITableViewDataSource {
+
+}
+
+extension NewCustomViewController: reloadTableProtocol {
+	
+	func reloadTable() {
+		table.reloadData()
 	}
 }

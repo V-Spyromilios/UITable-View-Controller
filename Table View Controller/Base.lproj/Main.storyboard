@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxe-OH-f49">
-                                <rect key="frame" x="12" y="167" width="361" height="29.666666666666657"/>
+                                <rect key="frame" x="12" y="167" width="361" height="28"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Label">
                                         <attributes>
@@ -28,22 +28,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WfC-lj-0En" userLabel="Gdp Label">
-                                <rect key="frame" x="20" y="204.66666666666666" width="361" height="20"/>
+                                <rect key="frame" x="20" y="203" width="361" height="20"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Ds-Mn-QQp">
-                                <rect key="frame" x="100" y="236.66666666666663" width="193" height="128"/>
+                                <rect key="frame" x="100" y="235" width="193" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="f2y-ba-GgC"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2sF-SQ-xW8" userLabel="ParentView">
-                                <rect key="frame" x="20" y="384.66666666666674" width="353" height="421.33333333333326"/>
+                                <rect key="frame" x="20" y="383" width="353" height="423"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2iT-9j-Ksm">
-                                        <rect key="frame" x="0.0" y="0.0" width="353" height="421.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="423"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SbU-g3-Wfh" userLabel="ContainerView">
                                                 <rect key="frame" x="0.0" y="0.0" width="353" height="264.33333333333331"/>
@@ -332,7 +332,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hxu-SS-grB">
-                                <rect key="frame" x="12" y="123" width="369" height="683"/>
+                                <rect key="frame" x="12" y="183" width="369" height="623"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewCustomCell" rowHeight="165" id="AG3-0e-fMQ" customClass="NewCustomCell" customModule="Table_View_Controller" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="369" height="165"/>
@@ -401,7 +401,7 @@
                             <constraint firstItem="hxu-SS-grB" firstAttribute="leading" secondItem="IC8-DQ-efi" secondAttribute="leading" constant="12" id="8jt-Fj-bXA"/>
                             <constraint firstItem="IC8-DQ-efi" firstAttribute="trailing" secondItem="hxu-SS-grB" secondAttribute="trailing" constant="12" id="8sN-qV-z8D"/>
                             <constraint firstItem="IC8-DQ-efi" firstAttribute="bottom" secondItem="hxu-SS-grB" secondAttribute="bottom" constant="12" id="WL5-FE-xhd"/>
-                            <constraint firstItem="hxu-SS-grB" firstAttribute="top" secondItem="IC8-DQ-efi" secondAttribute="top" constant="20" id="unb-Wy-zhb"/>
+                            <constraint firstItem="hxu-SS-grB" firstAttribute="top" secondItem="IC8-DQ-efi" secondAttribute="top" constant="80" id="unb-Wy-zhb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qXq-su-HYn"/>

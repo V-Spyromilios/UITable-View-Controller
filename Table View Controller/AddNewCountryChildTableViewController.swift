@@ -20,7 +20,7 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		}
 	}
 	@IBOutlet weak var countryGdpField: UITextField!
-	
+
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -42,12 +42,6 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		if countryNameField.text?.count ?? "".count < 5 || countryDescriptionField.text?.count ?? "".count < 5 || countryGdpField.text?.count ?? "".count < 5 {
 			return
 		}
-//		guard
-//			let _ = countryNameField.text, !(countryNameField.text?.isEmpty ?? true),
-//			let _ = countryDescriptionField.text, !(countryDescriptionField.text?.isEmpty ?? true),
-//			let _ = countryGdpField.text, !(countryGdpField.text?.isEmpty ?? true)
-//		else { return }
-		
 		parentViewController?.OkButton.isEnabled = true
 	}
 	

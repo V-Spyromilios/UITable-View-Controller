@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EF1D830A2976E9A00084B7B9 /* AddNewCountryParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D83092976E9A00084B7B9 /* AddNewCountryParentViewController.swift */; };
+		EF40C6652984260B004B2E61 /* reloadTableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF40C6642984260B004B2E61 /* reloadTableProtocol.swift */; };
 		EF578C2E2980022700146346 /* NewCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF578C2D2980022600146346 /* NewCustomViewController.swift */; };
 		EF578C302980026400146346 /* NewCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF578C2F2980026400146346 /* NewCustomCell.swift */; };
 		EF5A8A1A297C67B0000962E5 /* GeorgeRoundedSemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF5A8A19297C6382000962E5 /* GeorgeRoundedSemiboldItalic.otf */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		EF1D83092976E9A00084B7B9 /* AddNewCountryParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCountryParentViewController.swift; sourceTree = "<group>"; };
+		EF40C6642984260B004B2E61 /* reloadTableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reloadTableProtocol.swift; sourceTree = "<group>"; };
 		EF578C2D2980022600146346 /* NewCustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomViewController.swift; sourceTree = "<group>"; };
 		EF578C2F2980026400146346 /* NewCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomCell.swift; sourceTree = "<group>"; };
 		EF5A8A19297C6382000962E5 /* GeorgeRoundedSemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GeorgeRoundedSemiboldItalic.otf; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				EF578C2F2980026400146346 /* NewCustomCell.swift */,
 				EF578C2D2980022600146346 /* NewCustomViewController.swift */,
 				EF1D83092976E9A00084B7B9 /* AddNewCountryParentViewController.swift */,
+				EF40C6642984260B004B2E61 /* reloadTableProtocol.swift */,
 				EF92AB072977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift */,
 				EF7EF0742971FFE700AA6344 /* Country Descriptions.swift */,
 				EFD21BDB297172DC000C0F11 /* Country Model.swift */,
@@ -177,6 +180,7 @@
 				EF92AB082977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift in Sources */,
 				EFD21BDC297172DC000C0F11 /* Country Model.swift in Sources */,
 				EFD21BC5297171EF000C0F11 /* AppDelegate.swift in Sources */,
+				EF40C6652984260B004B2E61 /* reloadTableProtocol.swift in Sources */,
 				EFD21BC7297171EF000C0F11 /* SceneDelegate.swift in Sources */,
 				EF578C2E2980022700146346 /* NewCustomViewController.swift in Sources */,
 				EF7EF0752971FFE700AA6344 /* Country Descriptions.swift in Sources */,

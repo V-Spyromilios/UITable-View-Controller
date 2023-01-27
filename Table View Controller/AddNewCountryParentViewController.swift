@@ -4,10 +4,12 @@
 //
 //  Created by Evangelos Spyromilios on 17.01.23.
 //
-
+/// Delegate and Closure for below,
+/// Std Collection Views!! like Ikea: Countries. PopUp instead of DetailView. To be shrink according to data.
 import UIKit
 
 class AddNewCountryParentViewController: UIViewController {
+	weak var delegate: reloadTableProtocol?
 	
 	@IBOutlet weak var OkButton: UIButton!
 	var newCountry = CountryModel(name: "", description: "", euMember: false)
@@ -16,16 +18,10 @@ class AddNewCountryParentViewController: UIViewController {
 		super.viewDidLoad()
 		
 		OkButton.isEnabled = false
-		
-		// Do any additional setup after loading the view.
 	}
-	
-	
-	
+
 	//MARK: - Reload Table Data at viewWillDisappear
 	override func viewWillDisappear(_ animated: Bool) {
-		let rootViewController = self.presentingViewController
-		let tableViewController = rootViewController?.children[0] as? NewCustomViewController
-		tableViewController?.table.reloadData()
+		delegate?.reloadTable()
 	}
 }
