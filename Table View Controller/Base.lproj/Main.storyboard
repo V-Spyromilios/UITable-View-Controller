@@ -342,7 +342,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionCellIdentifier" id="RX2-f4-etG">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionCellIdentifier" id="RX2-f4-etG" customClass="CollectionViewCell" customModule="Table_View_Controller" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="41.333333333333343" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MHk-mh-w2U">
@@ -369,6 +369,10 @@
                                                 <constraint firstAttribute="trailing" secondItem="ofO-Em-Cog" secondAttribute="trailing" id="oZJ-Iw-tc8"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imageView" destination="ofO-Em-Cog" id="Hxg-sz-Xiy"/>
+                                            <outlet property="labelView" destination="4JP-nQ-bei" id="jGY-yF-8YT"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -451,6 +455,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="qXq-su-HYn"/>
                     <connections>
+                        <outlet property="collection" destination="Ww1-NP-X2S" id="a4I-R8-Zo1"/>
                         <outlet property="table" destination="hxu-SS-grB" id="Lhh-IY-OA0"/>
                         <segue destination="cgY-V9-PFE" kind="show" identifier="seguetoDetailView" id="HcY-hM-4X2"/>
                         <segue destination="XNe-cT-5LD" kind="presentation" identifier="addNewCountrySegue" id="pai-J5-C5g"/>

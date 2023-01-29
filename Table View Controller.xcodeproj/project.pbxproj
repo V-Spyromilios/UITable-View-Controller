@@ -13,6 +13,7 @@
 		EF578C302980026400146346 /* NewCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF578C2F2980026400146346 /* NewCustomCell.swift */; };
 		EF5A8A1A297C67B0000962E5 /* GeorgeRoundedSemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF5A8A19297C6382000962E5 /* GeorgeRoundedSemiboldItalic.otf */; };
 		EF5A8A1C297C680F000962E5 /* GeorgeRoundedBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF5A8A1B297C680A000962E5 /* GeorgeRoundedBoldItalic.otf */; };
+		EF7BFFDA2986E808001D3A34 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7BFFD92986E808001D3A34 /* CollectionViewCell.swift */; };
 		EF7EF0752971FFE700AA6344 /* Country Descriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7EF0742971FFE700AA6344 /* Country Descriptions.swift */; };
 		EF92AB082977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF92AB072977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift */; };
 		EFD21BC5297171EF000C0F11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC4297171EF000C0F11 /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 		EF578C2F2980026400146346 /* NewCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomCell.swift; sourceTree = "<group>"; };
 		EF5A8A19297C6382000962E5 /* GeorgeRoundedSemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GeorgeRoundedSemiboldItalic.otf; sourceTree = "<group>"; };
 		EF5A8A1B297C680A000962E5 /* GeorgeRoundedBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GeorgeRoundedBoldItalic.otf; sourceTree = "<group>"; };
+		EF7BFFD92986E808001D3A34 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		EF7EF0742971FFE700AA6344 /* Country Descriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country Descriptions.swift"; sourceTree = "<group>"; };
 		EF92AB072977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCountryChildTableViewController.swift; sourceTree = "<group>"; };
 		EFD21BC1297171EF000C0F11 /* Table View Controller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Table View Controller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +79,7 @@
 				EFD21BD82971720E000C0F11 /* Secondary Files */,
 				EFD21BC8297171EF000C0F11 /* DetailViewController.swift */,
 				EFD21BCA297171EF000C0F11 /* Main.storyboard */,
+				EF7BFFD92986E808001D3A34 /* CollectionViewCell.swift */,
 				EF578C2F2980026400146346 /* NewCustomCell.swift */,
 				EF578C2D2980022600146346 /* NewCustomViewController.swift */,
 				EF1D83092976E9A00084B7B9 /* AddNewCountryParentViewController.swift */,
@@ -185,6 +188,7 @@
 				EF578C2E2980022700146346 /* NewCustomViewController.swift in Sources */,
 				EF7EF0752971FFE700AA6344 /* Country Descriptions.swift in Sources */,
 				EF578C302980026400146346 /* NewCustomCell.swift in Sources */,
+				EF7BFFDA2986E808001D3A34 /* CollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

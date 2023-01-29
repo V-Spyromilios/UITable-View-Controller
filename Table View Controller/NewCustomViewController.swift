@@ -11,6 +11,7 @@ import UIKit
 class NewCustomViewController: UIViewController {
 	
 	@IBOutlet weak var table: UITableView!
+	@IBOutlet weak var collection: UICollectionView!
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return countries[section].count
@@ -37,6 +38,9 @@ class NewCustomViewController: UIViewController {
 		
 		table.delegate = self
 		table.dataSource = self
+
+		collection.delegate = self
+		collection.dataSource = self
 
 		self.navigationItem.title = "Countries!"
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCountry))
@@ -118,4 +122,28 @@ extension NewCustomViewController: reloadTableProtocol {
 	func reloadTable() {
 		table.reloadData()
 	}
+}
+
+extension NewCustomViewController: UICollectionViewDelegate {
+	
+}
+
+extension NewCustomViewController: UICollectionViewDataSource {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return countries[section].count
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let country = countries[indexPath.section][indexPath.row]
+		let cell = collection.dequeueReusableCell(withReuseIdentifier: "CollectionCellIdentifier", for: indexPath) as! CollectionViewCell
+
+		cell.configure(with: country)
+		return cell
+	}
+	
+	
+}
+
+extension NewCustomViewController: UICollectionViewDelegateFlowLayout {
+	
 }
