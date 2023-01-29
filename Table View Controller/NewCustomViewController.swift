@@ -46,6 +46,15 @@ class NewCustomViewController: UIViewController {
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCountry))
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleMovingRowEdit))
 		table.rowHeight = 135
+//
+		let layout = UICollectionViewFlowLayout()
+		layout.scrollDirection = .horizontal
+		layout.itemSize = CGSize(width: 130, height: 150) //more like zoom 
+		collection.collectionViewLayout = layout
+		print("Collection height: \(String(describing: collection.visibleCells.first?.frame.height))")
+		print("Collection width: \(String(describing: collection.visibleCells.first?.frame.width))")
+//		collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+////		collection.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
 	}
 	
 	@objc func toggleMovingRowEdit() {
@@ -129,19 +138,22 @@ extension NewCustomViewController: UICollectionViewDelegate {
 }
 
 extension NewCustomViewController: UICollectionViewDataSource {
+
+	func numberOfSections(in collectionView: UICollectionView) -> Int {
+		2
+	}
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return countries[section].count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let country = countries[indexPath.section][indexPath.row]
-		let cell = collection.dequeueReusableCell(withReuseIdentifier: "CollectionCellIdentifier", for: indexPath) as! CollectionViewCell
-
+		let cell = collection.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
+		cell.backgroundColor = .green
 		cell.configure(with: country)
 		return cell
 	}
-	
-	
+
 }
 
 extension NewCustomViewController: UICollectionViewDelegateFlowLayout {
