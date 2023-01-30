@@ -12,17 +12,46 @@ class CollectionViewCell: UICollectionViewCell {
 	
 	@IBOutlet weak var labelView: UILabel!
 	static let identifier = "CollectionCellIdentifier"
-
-	func configure(with country: CountryModel) {
+	@IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
 	
-		imageView.image = country.flagName
-		//imageView.clipsToBounds = false
-//		imageView.layer.cornerRadius = imageView.frame.height / 2
-		print("Image height: \(String(describing: imageView.image?.size.height))")
-		print("Image Width: \(String(describing: imageView.image?.size.width))")
-		labelView.text = country.name
-		labelView.font = UIFont(name: "Gill Sans Light Italic", size: 9)
+	override func awakeFromNib() {
+		super.awakeFromNib()
 		
+		imageView.clipsToBounds = true
+		imageView.layer.cornerRadius = 25
 	}
 	
+	func configure(with country: CountryModel) {
+		
+		imageView.image = country.flagName
+		
+		labelView.text = country.name
+		labelView.font = UIFont(name: "Gill Sans Light Italic", size: 9)
+	}
 }
+
+/*
+ func createLayout() -> UICollectionViewCompositionalLayout {
+ 
+ let spacing: CGFloat = 30
+ //  Item
+ let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
+ widthDimension: .fractionalWidth(1),
+ heightDimension: .fractionalHeight(1)))
+ item.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: 0, trailing: spacing)
+ print("Diamensions: \(item.layoutSize.heightDimension.dimension), \(item.layoutSize.widthDimension.dimension)")
+ 
+ //  Group
+ let horizontalGroup = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(
+ widthDimension: .fractionalWidth(1 / 4),
+ heightDimension: .fractionalWidth(1 / 4)),
+ repeatingSubitem: item,
+ count: 4)
+ 
+ // Sections
+ let section = NSCollectionLayoutSection(group: horizontalGroup)
+ 
+ // Return
+ return UICollectionViewCompositionalLayout(section: section)
+ }
+ */

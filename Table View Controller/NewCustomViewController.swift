@@ -11,7 +11,8 @@ import UIKit
 class NewCustomViewController: UIViewController {
 	
 	@IBOutlet weak var table: UITableView!
-	@IBOutlet weak var collection: UICollectionView!
+	@IBOutlet weak var collectionView: UICollectionView!
+	@IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return countries[section].count
@@ -38,23 +39,19 @@ class NewCustomViewController: UIViewController {
 		
 		table.delegate = self
 		table.dataSource = self
-
-		collection.delegate = self
-		collection.dataSource = self
-
+		
+		collectionView.delegate = self
+		collectionView.dataSource = self
+		// SOS imageView.image found nil !
+		//		collection.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
+		
+		//		collectionView.collectionViewLayout = createLayout()
+		
 		self.navigationItem.title = "Countries!"
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCountry))
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleMovingRowEdit))
 		table.rowHeight = 135
-//
-		let layout = UICollectionViewFlowLayout()
-		layout.scrollDirection = .horizontal
-		layout.itemSize = CGSize(width: 130, height: 150) //more like zoom 
-		collection.collectionViewLayout = layout
-		print("Collection height: \(String(describing: collection.visibleCells.first?.frame.height))")
-		print("Collection width: \(String(describing: collection.visibleCells.first?.frame.width))")
-//		collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-////		collection.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
+		
 	}
 	
 	@objc func toggleMovingRowEdit() {
@@ -116,29 +113,38 @@ class NewCustomViewController: UIViewController {
 				let selectedRow = indexPath.row
 				destinationDetailViewController.countryData = countries[indexPath.section][selectedRow]
 			}
+		} else if let destinationAddNewCountryParentViewController = segue.destination as? AddNewCountryParentViewController {
+			destinationAddNewCountryParentViewController.onNewCountryAdded = {
+				[weak self] in
+				self?.table.reloadData()
+			}
 		}
-		guard let destinationAddNewCountryParentViewController = segue.destination as? AddNewCountryParentViewController  else { return }
-		destinationAddNewCountryParentViewController.delegate = self
 	}
+	
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+		
+		return CGSize(width: 80, height: 80)
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+		
+		return 30
+	}
+	
 }
 
 extension NewCustomViewController: UITableViewDelegate, UITableViewDataSource {
-
-}
-
-extension NewCustomViewController: reloadTableProtocol {
 	
-	func reloadTable() {
-		table.reloadData()
-	}
 }
 
+
+//MARK: - CollectionViewDelegate
 extension NewCustomViewController: UICollectionViewDelegate {
 	
 }
 
 extension NewCustomViewController: UICollectionViewDataSource {
-
+	
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
 		2
 	}
@@ -147,15 +153,18 @@ extension NewCustomViewController: UICollectionViewDataSource {
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		
 		let country = countries[indexPath.section][indexPath.row]
-		let cell = collection.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
-		cell.backgroundColor = .green
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
+		
 		cell.configure(with: country)
 		return cell
 	}
-
+	
 }
 
 extension NewCustomViewController: UICollectionViewDelegateFlowLayout {
 	
 }
+
+
