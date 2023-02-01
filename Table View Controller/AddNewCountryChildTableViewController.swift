@@ -60,10 +60,10 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		
 		if parentController?.newCountry.euMember == true {
 			sortedCountries[0].append(parentController!.newCountry)
-			sortedCountries = sortCountries(section: 0)
+			sortedCountries = sortCountries(for: 0)
 		} else {
 			sortedCountries[1].append(parentController!.newCountry)
-			sortedCountries = sortCountries(section: 1)
+			sortedCountries = sortCountries(for: 1)
 		}
 		dismiss(animated: true)
 	}

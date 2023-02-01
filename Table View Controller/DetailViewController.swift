@@ -30,10 +30,9 @@ class DetailViewController: UIViewController {
 		countryNameLabel.text = countryData.name.uppercased()
 		guard let customFont = UIFont(name: "George Rounded Bold Italic", size: 25) else {
 			fatalError("""
-	Failed to load the "George Rounded Semibold Italic" font.
-	Make sure the font file is included in the project and the font name is spelled correctly.
-	"""
-			)
+ Failed to load the "George Rounded Semibold Italic" font.
+ Make sure the font file is included in the project and the font name is spelled correctly.
+ """)
 		}
 		countryNameLabel.font = UIFontMetrics.default.scaledFont(for: customFont)
 		countryNameLabel.adjustsFontForContentSizeCategory = true

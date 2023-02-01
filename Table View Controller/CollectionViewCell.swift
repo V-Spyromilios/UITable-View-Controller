@@ -18,7 +18,7 @@ class CollectionViewCell: UICollectionViewCell {
 		super.awakeFromNib()
 		
 		imageView.clipsToBounds = true
-		imageView.layer.cornerRadius = 25
+		imageView.layer.cornerRadius = 30
 	}
 	
 	func configure(with country: CountryModel) {
@@ -26,8 +26,9 @@ class CollectionViewCell: UICollectionViewCell {
 		imageView.image = country.flagName
 		
 		labelView.text = country.name
-		labelView.font = UIFont(name: "Gill Sans Light Italic", size: 9)
+		labelView.font = UIFont(name: "Gill Sans Light Italic", size: 10)
 	}
+
 }
 
 /*

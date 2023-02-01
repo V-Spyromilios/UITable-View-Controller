@@ -116,6 +116,81 @@
             </objects>
             <point key="canvasLocation" x="2431" y="575"/>
         </scene>
+        <!--Pop Up View Controller-->
+        <scene sceneID="mdh-dD-qI4">
+            <objects>
+                <viewController storyboardIdentifier="PopUpStoryboardID" id="i4a-CX-O9u" customClass="PopUpViewController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yvi-Ee-gnV">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6dw-8x-MPF">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ebR-qa-K6z">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIa-eb-qtp">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zdh-EI-4Km">
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="regular"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="dIa-eb-qtp" secondAttribute="bottom" id="F1F-wO-oBQ"/>
+                                        <constraint firstItem="dIa-eb-qtp" firstAttribute="top" secondItem="ebR-qa-K6z" secondAttribute="top" id="ROC-o8-bXb"/>
+                                        <constraint firstItem="dIa-eb-qtp" firstAttribute="leading" secondItem="ebR-qa-K6z" secondAttribute="leading" id="W9H-rx-q26"/>
+                                        <constraint firstAttribute="trailing" secondItem="dIa-eb-qtp" secondAttribute="trailing" id="WS2-8w-Xm7"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ik3-0t-cTb" userLabel="ContainerView">
+                                <rect key="frame" x="77" y="179" width="239" height="249"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYg-dy-6YG">
+                                        <rect key="frame" x="0.0" y="12" width="239" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="pYg-dy-6YG" secondAttribute="trailing" id="DJ5-Ok-57n"/>
+                                    <constraint firstItem="pYg-dy-6YG" firstAttribute="top" secondItem="Ik3-0t-cTb" secondAttribute="top" constant="12" id="HAc-CP-h5E"/>
+                                    <constraint firstItem="pYg-dy-6YG" firstAttribute="leading" secondItem="Ik3-0t-cTb" secondAttribute="leading" id="NmV-XA-852"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XOI-8i-4vX"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ik3-0t-cTb" firstAttribute="top" secondItem="XOI-8i-4vX" secondAttribute="top" constant="120" id="FJf-fF-GmZ"/>
+                            <constraint firstItem="Ik3-0t-cTb" firstAttribute="leading" secondItem="XOI-8i-4vX" secondAttribute="leading" constant="77" id="GUV-Ry-4Y0"/>
+                            <constraint firstItem="XOI-8i-4vX" firstAttribute="trailing" secondItem="Ik3-0t-cTb" secondAttribute="trailing" constant="77" id="HuB-wL-Nto"/>
+                            <constraint firstItem="6dw-8x-MPF" firstAttribute="top" secondItem="XOI-8i-4vX" secondAttribute="top" id="TQO-0T-YEm"/>
+                            <constraint firstItem="XOI-8i-4vX" firstAttribute="bottom" secondItem="6dw-8x-MPF" secondAttribute="bottom" id="Tck-Hb-vXh"/>
+                            <constraint firstItem="6dw-8x-MPF" firstAttribute="leading" secondItem="XOI-8i-4vX" secondAttribute="leading" id="XF7-1v-SKJ"/>
+                            <constraint firstItem="XOI-8i-4vX" firstAttribute="bottom" secondItem="Ik3-0t-cTb" secondAttribute="bottom" constant="390" id="yrZ-My-6X2"/>
+                            <constraint firstItem="XOI-8i-4vX" firstAttribute="trailing" secondItem="6dw-8x-MPF" secondAttribute="trailing" id="zdi-ig-lte"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="lT2-49-goU"/>
+                    <connections>
+                        <outlet property="containerView" destination="Ik3-0t-cTb" id="IaX-lL-EsT"/>
+                        <outlet property="countryNameLabel" destination="pYg-dy-6YG" id="tHE-41-VSe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a3p-IW-9cq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2381" y="-987"/>
+        </scene>
         <!--Add New Country Parent View Controller-->
         <scene sceneID="Pwb-dg-fai">
             <objects>
@@ -324,10 +399,10 @@
             </objects>
             <point key="canvasLocation" x="4213.740458015267" y="-186.61971830985917"/>
         </scene>
-        <!--New Custom View Controller-->
+        <!--Table And Collection View Controller-->
         <scene sceneID="E3l-tV-TNz">
             <objects>
-                <viewController id="02D-SR-a8E" customClass="NewCustomViewController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="02D-SR-a8E" customClass="TableAndCollectionViewController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VbI-cl-E9N">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

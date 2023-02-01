@@ -7,8 +7,7 @@
 
 import UIKit
 
-///Delegate and DataSource into extension!!!
-class NewCustomViewController: UIViewController {
+class TableAndCollectionViewController: UIViewController, UIPopoverPresentationControllerDelegate {
 	
 	@IBOutlet weak var table: UITableView!
 	@IBOutlet weak var collectionView: UICollectionView!
@@ -99,17 +98,16 @@ class NewCustomViewController: UIViewController {
 		}
 	}
 	
-	//MARK: - didSelectRow -> Segue to DetailView
+	//MARK: - TableView didSelectRow -> Segues
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		
 		performSegue(withIdentifier: "seguetoDetailView", sender: self) // self = the tableView. (who performed segue). could be nil
+		self.table.deselectRow(at: indexPath, animated: true)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let destinationDetailViewController = segue.destination as? DetailViewController {
 			if let indexPath = table.indexPathForSelectedRow {
-				let selectedRow = indexPath.row
-				destinationDetailViewController.countryData = sortedCountries[indexPath.section][selectedRow]
+				destinationDetailViewController.countryData = sortedCountries[indexPath.section][indexPath.row]
 			}
 		} else if let destinationAddNewCountryParentViewController = segue.destination as? AddNewCountryParentViewController {
 			destinationAddNewCountryParentViewController.onNewCountryAdded = {
@@ -117,6 +115,7 @@ class NewCustomViewController: UIViewController {
 				self?.table.reloadData()
 			}
 		}
+
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -131,17 +130,41 @@ class NewCustomViewController: UIViewController {
 	
 }
 
-extension NewCustomViewController: UITableViewDelegate, UITableViewDataSource {
+extension TableAndCollectionViewController: UITableViewDelegate, UITableViewDataSource {
 	
 }
 
 
 //MARK: - CollectionViewDelegate
-extension NewCustomViewController: UICollectionViewDelegate {
-	
+extension TableAndCollectionViewController: UICollectionViewDelegate {
+
+	//MARK: -Collection didSelectItemAt -> PerformSegue
+
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let cell = collectionView.cellForItem(at: indexPath)
+//		let countryAtCell = sortedCountries[indexPath.section][indexPath.row]
+//		let popupViewController = PopUpViewController()
+		let popupViewController =  self.storyboard?.instantiateViewController(withIdentifier: "PopUpStoryboardID") as! PopUpViewController
+		popupViewController.countryData = sortedCountries[indexPath.section][indexPath.row]
+//		let label = UILabel()
+//		popupViewController.view.addSubview(label)
+//		label.frame = view.bounds
+//		label.text = popupViewController.countryData?.name
+//		label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+//		popupViewController.countryData = sortedCountries[indexPath.section][indexPath.row]
+		
+		popupViewController.modalPresentationStyle = .overCurrentContext
+		popupViewController.modalTransitionStyle = .coverVertical
+		popupViewController.popoverPresentationController?.delegate = self
+		popupViewController.popoverPresentationController?.sourceView = cell
+		popupViewController.popoverPresentationController?.sourceRect = cell!.bounds
+		present(popupViewController, animated: true, completion: nil )
+		//performSegue(withIdentifier: "popUpSegue", sender: cell)
+	}
+
 }
 
-extension NewCustomViewController: UICollectionViewDataSource {
+extension TableAndCollectionViewController: UICollectionViewDataSource {
 	
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
 		2
@@ -161,6 +184,7 @@ extension NewCustomViewController: UICollectionViewDataSource {
 	
 }
 
-extension NewCustomViewController: UICollectionViewDelegateFlowLayout {
+extension TableAndCollectionViewController: UICollectionViewDelegateFlowLayout {
 	
 }
+
