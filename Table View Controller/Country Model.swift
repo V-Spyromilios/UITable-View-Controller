@@ -31,7 +31,7 @@ struct CountryModel {
 let descriptions = CountryDescriptions()
 
 var countries : [[CountryModel]] = [ [
-
+	
 	CountryModel(name: "Greece", description: descriptions.greece, flagName: UIImage(named: "Flag_of_Greece") , euMember: true, gdp: 12_000_000),
 	
 	CountryModel(name: "Italy", description: descriptions.italy, flagName: UIImage(named: "Flag_of_Italy"), euMember: true, gdp: 12_000_000),
@@ -86,24 +86,58 @@ var countries : [[CountryModel]] = [ [
 	
 	CountryModel(name: "Netherlands", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_the_Netherlands"), euMember: true, gdp: 12_000_000),
 ],
+									 
+									 [
+										CountryModel(name: "Brazil", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Brazil"), euMember: false, gdp: 12_000_000),
+										
+										CountryModel(name: "Chile", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Chile"), euMember: false, gdp: 12_000_000),
+										
+										CountryModel(name: "Colombia", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Colombia"), euMember: false, gdp: 12_000_000),
+										
+										CountryModel(name: "Costa Rica", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Costa_Rica"), euMember: false, gdp: 12_000_000),
+										
+										CountryModel(name: "Equador", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Equador"), euMember: false, gdp: 12_000_000),
+										
+										CountryModel(name: "Haiti", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Haiti"), euMember: false, gdp: 12_000_000),
+										
+										CountryModel(name: "Mexico", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Mexico"), euMember: false, gdp: 12_000_000),
+										
+										CountryModel(name: "Argentina", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Argentina"), euMember: false, gdp: 12_000_000),
+										
+										CountryModel(name: "Bolivia", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Bolivia"), euMember: false, gdp: 12_000_000)
+									 ]]
 
-[
+
+var sortedEuCountries = countries[0].sorted { $0.name < $1.name }
+
+var sortedLatinCountries = countries[1].sorted { $0.name < $1.name }
+
+var sortedCountries = [sortedEuCountries, sortedLatinCountries]
+
+
+func sortCountries(section: Int) -> [[CountryModel]] {
 	
-	CountryModel(name: "Argentina", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Argentina"), euMember: false, gdp: 12_000_000),
-	
-	CountryModel(name: "Bolivia", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Bolivia"), euMember: false, gdp: 12_000_000),
-	
-	CountryModel(name: "Brazil", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Brazil"), euMember: false, gdp: 12_000_000),
-	
-	CountryModel(name: "Chile", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Chile"), euMember: false, gdp: 12_000_000),
-	
-	CountryModel(name: "Colombia", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Colombia"), euMember: false, gdp: 12_000_000),
-	
-	CountryModel(name: "Costa Rica", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Costa_Rica"), euMember: false, gdp: 12_000_000),
-	
-	CountryModel(name: "Equador", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Equador"), euMember: false, gdp: 12_000_000),
-	
-	CountryModel(name: "Haiti", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Haiti"), euMember: false, gdp: 12_000_000),
-	
-	CountryModel(name: "Mexico", description: "Wonderfull Country", flagName: UIImage(named: "Flag_of_Mexico"), euMember: false, gdp: 12_000_000),
-]]
+	if section == 0 {
+
+		let newSortedEuCountries = sortedCountries[0].sorted { $0.name < $1.name }
+		return [newSortedEuCountries, sortedCountries[1]]
+	} else if section == 1 {
+
+		let newSortedLatinCountries = sortedCountries[1].sorted { $0.name < $1.name }
+		return [sortedCountries[0], newSortedLatinCountries]
+	}
+	else { return [[]] }
+}
+//}.sorted { (firstSection, secondSection) -> Bool in
+//
+//	return secondSection[0].name < secondSection[1].name
+//}.sorted { (firstSection, secondSection) -> Bool in
+//
+//	return firstSection[0].euMember && !secondSection[0].euMember
+//}
+//	}.sorted { (firstSection, secondSection) -> Bool in
+//		print("SECOND SECTION: \(secondSection.description)")
+//
+//		return secondSection[0].name < secondSection[1].name
+//	}
+

@@ -15,14 +15,14 @@ class NewCustomViewController: UIViewController {
 	@IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return countries[section].count
+		return sortedCountries[section].count
 	}
 	
 	//MARK: - cellForRowAt, dequeueReusable
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "NewCustomCell", for: indexPath) as! NewCustomCell
-		let country = countries[indexPath.section][indexPath.row]
+		let country = sortedCountries[indexPath.section][indexPath.row]
 		cell.updateCustomCell(with: country)
 		
 		return cell
@@ -42,9 +42,7 @@ class NewCustomViewController: UIViewController {
 		
 		collectionView.delegate = self
 		collectionView.dataSource = self
-		// SOS imageView.image found nil !
 		//		collection.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
-		
 		//		collectionView.collectionViewLayout = createLayout()
 		
 		self.navigationItem.title = "Countries!"
@@ -73,12 +71,12 @@ class NewCustomViewController: UIViewController {
 	func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 		
 		if sourceIndexPath.section == 0 && destinationIndexPath.section == 0 {
-			let selectedCountry = countries[0].remove(at: (sourceIndexPath.row))
-			countries[destinationIndexPath.section].insert(selectedCountry, at: destinationIndexPath.row)
+			let selectedCountry = sortedCountries[0].remove(at: (sourceIndexPath.row))
+			sortedCountries[destinationIndexPath.section].insert(selectedCountry, at: destinationIndexPath.row)
 		}
 		else if sourceIndexPath.section == 1 && destinationIndexPath.section == 1 {
-			let selectedCountry = countries[1].remove(at: (sourceIndexPath.row))
-			countries[1].insert(selectedCountry, at: destinationIndexPath.row)
+			let selectedCountry = sortedCountries[1].remove(at: (sourceIndexPath.row))
+			sortedCountries[1].insert(selectedCountry, at: destinationIndexPath.row)
 		}
 		else {
 			return
@@ -96,7 +94,7 @@ class NewCustomViewController: UIViewController {
 	//MARK: - Delete row, reloadData
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
-			countries[indexPath.section].remove(at: indexPath.row)
+			sortedCountries[indexPath.section].remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: .automatic)
 		}
 	}
@@ -111,7 +109,7 @@ class NewCustomViewController: UIViewController {
 		if let destinationDetailViewController = segue.destination as? DetailViewController {
 			if let indexPath = table.indexPathForSelectedRow {
 				let selectedRow = indexPath.row
-				destinationDetailViewController.countryData = countries[indexPath.section][selectedRow]
+				destinationDetailViewController.countryData = sortedCountries[indexPath.section][selectedRow]
 			}
 		} else if let destinationAddNewCountryParentViewController = segue.destination as? AddNewCountryParentViewController {
 			destinationAddNewCountryParentViewController.onNewCountryAdded = {
@@ -149,12 +147,12 @@ extension NewCustomViewController: UICollectionViewDataSource {
 		2
 	}
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return countries[section].count
+		return sortedCountries[section].count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
-		let country = countries[indexPath.section][indexPath.row]
+		let country = sortedCountries[indexPath.section][indexPath.row]
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
 		
 		cell.configure(with: country)
@@ -166,5 +164,3 @@ extension NewCustomViewController: UICollectionViewDataSource {
 extension NewCustomViewController: UICollectionViewDelegateFlowLayout {
 	
 }
-
-

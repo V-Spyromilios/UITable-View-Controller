@@ -59,10 +59,11 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		parentController?.newCountry.gdp = Int(countryGdpField.text ?? "")
 		
 		if parentController?.newCountry.euMember == true {
-			countries[0].append(parentController!.newCountry)
-		}
-		else {
-			countries[1].append(parentController!.newCountry)
+			sortedCountries[0].append(parentController!.newCountry)
+			sortedCountries = sortCountries(section: 0)
+		} else {
+			sortedCountries[1].append(parentController!.newCountry)
+			sortedCountries = sortCountries(section: 1)
 		}
 		dismiss(animated: true)
 	}
