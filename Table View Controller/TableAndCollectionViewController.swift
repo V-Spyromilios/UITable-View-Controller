@@ -132,15 +132,15 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 
 //MARK: - CollectionViewDelegate
 extension TableAndCollectionViewController: UICollectionViewDelegate {
-
-//MARK: -Collection didSelectItemAt -> PerformSegue
-
+	
+	//MARK: -Collection didSelectItemAt -> PerformSegue
+	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+		
 		let cell = collectionView.cellForItem(at: indexPath)
 		let popupViewController =  self.storyboard?.instantiateViewController(withIdentifier: "PopUpStoryboardID") as! PopUpViewController
 		popupViewController.countryData = sortedCountries[indexPath.section][indexPath.row]
-
+		
 		popupViewController.modalTransitionStyle = .coverVertical
 		popupViewController.popoverPresentationController?.delegate = self
 		popupViewController.popoverPresentationController?.sourceView = cell
@@ -157,7 +157,7 @@ extension TableAndCollectionViewController: UICollectionViewDataSource {
 		2
 	}
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+		
 		return sortedCountries[section].count
 	}
 	

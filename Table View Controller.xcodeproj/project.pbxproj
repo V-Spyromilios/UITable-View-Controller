@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EF1D830A2976E9A00084B7B9 /* AddNewCountryParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D83092976E9A00084B7B9 /* AddNewCountryParentViewController.swift */; };
-		EF2962F2298ABBE500DB9E22 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2962F1298ABBE500DB9E22 /* PopUpView.swift */; };
 		EF2962F4298ACF8000DB9E22 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2962F3298ACF8000DB9E22 /* PopUpViewController.swift */; };
 		EF578C2E2980022700146346 /* TableAndCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF578C2D2980022600146346 /* TableAndCollectionViewController.swift */; };
 		EF578C302980026400146346 /* NewCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF578C2F2980026400146346 /* NewCustomCell.swift */; };
@@ -28,7 +27,6 @@
 
 /* Begin PBXFileReference section */
 		EF1D83092976E9A00084B7B9 /* AddNewCountryParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCountryParentViewController.swift; sourceTree = "<group>"; };
-		EF2962F1298ABBE500DB9E22 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		EF2962F3298ACF8000DB9E22 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		EF578C2D2980022600146346 /* TableAndCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableAndCollectionViewController.swift; sourceTree = "<group>"; };
 		EF578C2F2980026400146346 /* NewCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCustomCell.swift; sourceTree = "<group>"; };
@@ -86,7 +84,6 @@
 				EF578C2F2980026400146346 /* NewCustomCell.swift */,
 				EF578C2D2980022600146346 /* TableAndCollectionViewController.swift */,
 				EF1D83092976E9A00084B7B9 /* AddNewCountryParentViewController.swift */,
-				EF2962F1298ABBE500DB9E22 /* PopUpView.swift */,
 				EF92AB072977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift */,
 				EF7EF0742971FFE700AA6344 /* Country Descriptions.swift */,
 				EFD21BDB297172DC000C0F11 /* Country Model.swift */,
@@ -181,7 +178,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF2962F2298ABBE500DB9E22 /* PopUpView.swift in Sources */,
 				EF1D830A2976E9A00084B7B9 /* AddNewCountryParentViewController.swift in Sources */,
 				EFD21BC9297171EF000C0F11 /* DetailViewController.swift in Sources */,
 				EF92AB082977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift in Sources */,
