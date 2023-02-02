@@ -55,8 +55,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 		self.table.isEditing = !self.table.isEditing
 		if table.isEditing {
 			self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(toggleMovingRowEdit))
-		}
-		else {
+		} else {
 			self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleMovingRowEdit))
 		}
 	}
@@ -77,9 +76,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 			let selectedCountry = sortedCountries[1].remove(at: (sourceIndexPath.row))
 			sortedCountries[1].insert(selectedCountry, at: destinationIndexPath.row)
 		}
-		else {
-			return
-		}
+		else { return }
 		table.reloadData()
 	}
 	
@@ -90,7 +87,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 		else { return nil }
 	}
 	
-	//MARK: - Delete row, reloadData
+	//MARK: - Delete Table Row
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
 			sortedCountries[indexPath.section].remove(at: indexPath.row)
@@ -115,19 +112,17 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 				self?.table.reloadData()
 			}
 		}
-
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		
-		return CGSize(width: 80, height: 80)
+		return CGSize(width: 70, height: 70)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 		
 		return 30
 	}
-	
 }
 
 extension TableAndCollectionViewController: UITableViewDelegate, UITableViewDataSource {
@@ -138,30 +133,22 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 //MARK: - CollectionViewDelegate
 extension TableAndCollectionViewController: UICollectionViewDelegate {
 
-	//MARK: -Collection didSelectItemAt -> PerformSegue
+//MARK: -Collection didSelectItemAt -> PerformSegue
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
 		let cell = collectionView.cellForItem(at: indexPath)
-//		let countryAtCell = sortedCountries[indexPath.section][indexPath.row]
-//		let popupViewController = PopUpViewController()
 		let popupViewController =  self.storyboard?.instantiateViewController(withIdentifier: "PopUpStoryboardID") as! PopUpViewController
 		popupViewController.countryData = sortedCountries[indexPath.section][indexPath.row]
-//		let label = UILabel()
-//		popupViewController.view.addSubview(label)
-//		label.frame = view.bounds
-//		label.text = popupViewController.countryData?.name
-//		label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-//		popupViewController.countryData = sortedCountries[indexPath.section][indexPath.row]
-		
-		popupViewController.modalPresentationStyle = .overCurrentContext
+
 		popupViewController.modalTransitionStyle = .coverVertical
 		popupViewController.popoverPresentationController?.delegate = self
 		popupViewController.popoverPresentationController?.sourceView = cell
 		popupViewController.popoverPresentationController?.sourceRect = cell!.bounds
 		present(popupViewController, animated: true, completion: nil )
+		self.collectionView.deselectItem(at: indexPath, animated: true)
 		//performSegue(withIdentifier: "popUpSegue", sender: cell)
 	}
-
 }
 
 extension TableAndCollectionViewController: UICollectionViewDataSource {
@@ -170,6 +157,7 @@ extension TableAndCollectionViewController: UICollectionViewDataSource {
 		2
 	}
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
 		return sortedCountries[section].count
 	}
 	
@@ -181,10 +169,8 @@ extension TableAndCollectionViewController: UICollectionViewDataSource {
 		cell.configure(with: country)
 		return cell
 	}
-	
 }
 
 extension TableAndCollectionViewController: UICollectionViewDelegateFlowLayout {
 	
 }
-

@@ -12,13 +12,17 @@ class CollectionViewCell: UICollectionViewCell {
 	
 	@IBOutlet weak var labelView: UILabel!
 	static let identifier = "CollectionCellIdentifier"
-	@IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		
 		imageView.clipsToBounds = true
-		imageView.layer.cornerRadius = 30
+		imageView.layer.cornerRadius = imageView.frame.height / 2
+//		imageView.layer.shadowColor = UIColor.gray.cgColor
+//		imageView.layer.shadowRadius = 14
+//		imageView.layer.shadowOpacity = 1
+		imageView.layer.borderColor = UIColor.gray.cgColor
+		imageView.layer.borderWidth = 1
 	}
 	
 	func configure(with country: CountryModel) {
