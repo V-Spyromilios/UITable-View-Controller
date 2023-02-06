@@ -18,9 +18,6 @@ class CollectionViewCell: UICollectionViewCell {
 		
 		imageView.clipsToBounds = true
 		imageView.layer.cornerRadius = imageView.frame.height / 2
-//		imageView.layer.shadowColor = UIColor.gray.cgColor
-//		imageView.layer.shadowRadius = 14
-//		imageView.layer.shadowOpacity = 1
 		imageView.layer.borderColor = UIColor.gray.cgColor
 		imageView.layer.borderWidth = 1
 	}
@@ -32,7 +29,7 @@ class CollectionViewCell: UICollectionViewCell {
 		labelView.text = country.name
 		labelView.font = UIFont(name: "Gill Sans Light Italic", size: 10)
 	}
-
+	
 }
 
 /*

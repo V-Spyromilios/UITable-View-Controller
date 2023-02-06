@@ -23,6 +23,7 @@ class DetailViewController: UIViewController {
 		super.viewDidLoad()
 		
 		setUpDetailView()
+		self.view.backgroundColor = .white
 	}
 	
 	private func setUpDetailView() {
@@ -40,6 +41,11 @@ class DetailViewController: UIViewController {
 		countryGdpLabel.font = UIFont(name: "Gill Sans Light", size: 16)
 		countryFlagImage.image = countryData.flagName
 		countryDescriptionTextView.text = countryData.description
+
+		countryFlagImage.backgroundColor = .white
+		countryFlagImage.layer.shadowColor = UIColor.systemGray2.cgColor
+		countryFlagImage.clipsToBounds = false //to make shadow visible
+		countryFlagImage.layer.shadowOpacity = 1.0
 	}
 	
 }

@@ -28,13 +28,6 @@ struct CountryModel {
 	var gdp: Int?
 }
 
-extension CountryModel: Comparable {
-
-	static func < (lhs: CountryModel, rhs: CountryModel) -> Bool {
-		lhs.name < rhs.name
-	}
-}
-
 let descriptions = CountryDescriptions()
 
 var countries : [[CountryModel]] = [ [
@@ -132,21 +125,14 @@ func sortCountries(for section: Int) -> [[CountryModel]] {
 
 		let newSortedLatinCountries = sortedCountries[1].sorted { $0 < $1 }
 		return [sortedCountries[0], newSortedLatinCountries]
-	}
-	else {
+	} else {
 		print("ERORR: sortCountries(section: Int) returned ' [[]] '")
 		return [[]] }
 }
-//}.sorted { (firstSection, secondSection) -> Bool in
-//
-//	return secondSection[0].name < secondSection[1].name
-//}.sorted { (firstSection, secondSection) -> Bool in
-//
-//	return firstSection[0].euMember && !secondSection[0].euMember
-//}
-//	}.sorted { (firstSection, secondSection) -> Bool in
-//		print("SECOND SECTION: \(secondSection.description)")
-//
-//		return secondSection[0].name < secondSection[1].name
-//	}
 
+extension CountryModel: Comparable {
+
+	static func < (lhs: CountryModel, rhs: CountryModel) -> Bool {
+		lhs.name < rhs.name
+	}
+}

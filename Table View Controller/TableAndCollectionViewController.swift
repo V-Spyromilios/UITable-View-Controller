@@ -14,16 +14,17 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 	@IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
 		return sortedCountries[section].count
 	}
 	
-	//MARK: - cellForRowAt, dequeueReusable
+	//MARK: - Table cellForRowAt
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "NewCustomCell", for: indexPath) as! NewCustomCell
 		let country = sortedCountries[indexPath.section][indexPath.row]
 		cell.updateCustomCell(with: country)
-		
+
 		return cell
 	}
 	
@@ -47,8 +48,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 		self.navigationItem.title = "Countries!"
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCountry))
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleMovingRowEdit))
-		table.rowHeight = 135
-		
+		table.rowHeight = 135		
 	}
 	
 	@objc func toggleMovingRowEdit() {
@@ -87,7 +87,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 		else { return nil }
 	}
 	
-	//MARK: - Delete Table Row
+	//MARK:  Delete Table Row
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
 			sortedCountries[indexPath.section].remove(at: indexPath.row)
@@ -95,12 +95,13 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 		}
 	}
 	
-	//MARK: - TableView didSelectRow -> Segues
+	//MARK: - Table didSelectRow
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		performSegue(withIdentifier: "seguetoDetailView", sender: self) // self = the tableView. (who performed segue). could be nil
 		self.table.deselectRow(at: indexPath, animated: true)
 	}
-	
+
+	//MARK: - PrepareForSegue
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let destinationDetailViewController = segue.destination as? DetailViewController {
 			if let indexPath = table.indexPathForSelectedRow {
@@ -113,12 +114,14 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 			}
 		}
 	}
-	
+
+	// MARK: Collection sizeForItemAt
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		
 		return CGSize(width: 70, height: 70)
 	}
-	
+
+	//MARK: Collection Interim Spacing
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 		
 		return 30
@@ -130,10 +133,11 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 }
 
 
-//MARK: - CollectionViewDelegate
+//MARK:  CollectionViewDelegate
 extension TableAndCollectionViewController: UICollectionViewDelegate {
+
 	
-	//MARK: -Collection didSelectItemAt -> PerformSegue
+//MARK: Collection didSelectItemAt
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		
@@ -142,15 +146,18 @@ extension TableAndCollectionViewController: UICollectionViewDelegate {
 		popupViewController.countryData = sortedCountries[indexPath.section][indexPath.row]
 		
 		popupViewController.modalTransitionStyle = .coverVertical
+		popupViewController.modalPresentationStyle = .overCurrentContext
 		popupViewController.popoverPresentationController?.delegate = self
 		popupViewController.popoverPresentationController?.sourceView = cell
 		popupViewController.popoverPresentationController?.sourceRect = cell!.bounds
-		present(popupViewController, animated: true, completion: nil )
+
+		present(popupViewController, animated: true, completion: nil)
 		self.collectionView.deselectItem(at: indexPath, animated: true)
 		//performSegue(withIdentifier: "popUpSegue", sender: cell)
 	}
 }
 
+//MARK: Collection DataSource
 extension TableAndCollectionViewController: UICollectionViewDataSource {
 	
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -160,7 +167,8 @@ extension TableAndCollectionViewController: UICollectionViewDataSource {
 		
 		return sortedCountries[section].count
 	}
-	
+
+//MARK: Collection CellForItemAt
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
 		let country = sortedCountries[indexPath.section][indexPath.row]

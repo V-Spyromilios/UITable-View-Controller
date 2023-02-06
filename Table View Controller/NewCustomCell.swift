@@ -19,7 +19,12 @@ class NewCustomCell: UITableViewCell {
 
 		self.countryNameLabel.font = UIFont(name: "George Rounded Bold Italic", size: 27)
 		self.countryGdpLabel.font = UIFont(name: "Gill Sans Italic", size: 15)
-		
+
+		self.countryImageView.layer.shadowColor = UIColor.gray.cgColor
+		self.countryImageView.layer.shadowOpacity = 1.0
+		self.countryImageView.clipsToBounds = true
+		self.countryImageView.backgroundColor = .white
+
 	}
 	
 	override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,10 +33,11 @@ class NewCustomCell: UITableViewCell {
 	}
 	
 	func updateCustomCell(with country: CountryModel) {
-		//remove self
 		countryNameLabel.text = country.name
 		countryDescriptionLabel.text = country.description
+
 		countryImageView.image = country.flagName
+
 		if let countryGdp = country.gdp { // Right Way to handle Optionals !
 			countryGdpLabel.text = "$ \(countryGdp)"
 		} else {
