@@ -17,19 +17,17 @@ class tabBarController: UITabBarController {
     }
 
 	func setUpTabBar() {
-		tabBar.tintColor = .yellow
-		tabBar.backgroundColor = .opaqueSeparator
+
+		tabBar.tintColor = .orange
 	}
 
 	func setUpItems() {
 
 		tabBar.items?[0].image = UIImage(systemName: "globe.europe.africa.fill")
-		tabBar.items?[0].image?.withTintColor(.yellow)
+		tabBar.items?[0].badgeValue = String(sortedCountries[0].count + sortedCountries[1].count)
 		tabBar.items?[1].image = UIImage(systemName: "dollarsign.circle")
-		tabBar.items?[1].image?.withTintColor(.yellow)
 //		tabBar.items?[2].image = UIImage(systemName: "carbon.dioxide.cloud.fill")
 
 	}
-
 	
 }

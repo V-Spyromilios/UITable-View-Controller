@@ -115,6 +115,7 @@ var sortedLatinCountries = countries[1].sorted { $0.name < $1.name }
 var sortedCountries = [sortedEuCountries, sortedLatinCountries]
 
 
+
 func sortCountries(for section: Int) -> [[CountryModel]] {
 	
 	if section == 0 {

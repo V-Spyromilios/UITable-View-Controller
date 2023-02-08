@@ -24,6 +24,9 @@ class AddNewCountryParentViewController: UIViewController {
 	//MARK: - Reload Table Data at viewWillDisappear
 	override func viewWillDisappear(_ animated: Bool) {
 		onNewCountryAdded?()
+
+		let grandpa = self.presentingViewController as? tabBarController
+		grandpa?.tabBar.items?[0].badgeValue = String(sortedCountries[0].count + sortedCountries[1].count)
 		//delegate?.reloadTable()
 	}
 }

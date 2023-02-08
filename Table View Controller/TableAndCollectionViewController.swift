@@ -45,9 +45,11 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 		//		collection.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
 		//		collectionView.collectionViewLayout = createLayout()
 		
-		self.navigationItem.title = "Countries!"
+		self.navigationItem.title = "Countries"
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCountry))
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleMovingRowEdit))
+		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.orange
+		self.navigationItem.rightBarButtonItem?.tintColor = UIColor.orange
 		table.rowHeight = 135		
 	}
 	
@@ -55,8 +57,10 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 		self.table.isEditing = !self.table.isEditing
 		if table.isEditing {
 			self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(toggleMovingRowEdit))
-		} else {
+			self.navigationItem.leftBarButtonItem?.tintColor = UIColor.orange
+			} else {
 			self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleMovingRowEdit))
+			self.navigationItem.leftBarButtonItem?.tintColor = UIColor.orange
 		}
 	}
 	
@@ -93,6 +97,8 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 			sortedCountries[indexPath.section].remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: .automatic)
 		}
+		let grandpa = self.parent?.parent as? tabBarController
+		grandpa?.tabBar.items?[0].badgeValue = String(sortedCountries[0].count + sortedCountries[1].count)
 	}
 	
 	//MARK: - Table didSelectRow
@@ -177,7 +183,10 @@ extension TableAndCollectionViewController: UICollectionViewDataSource {
 		cell.configure(with: country)
 		return cell
 	}
+
 }
+
+
 
 extension TableAndCollectionViewController: UICollectionViewDelegateFlowLayout {
 	
