@@ -36,7 +36,7 @@ class NewCustomCell: UITableViewCell {
 		countryNameLabel.text = country.name
 		countryDescriptionLabel.text = country.description
 
-		countryImageView.image = country.flagName
+		countryImageView.image = country.flag
 
 		if let countryGdp = country.gdp { // Right Way to handle Optionals !
 			countryGdpLabel.text = "$ \(countryGdp)"

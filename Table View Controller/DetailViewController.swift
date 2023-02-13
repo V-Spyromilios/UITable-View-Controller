@@ -39,7 +39,7 @@ class DetailViewController: UIViewController {
 		countryNameLabel.adjustsFontForContentSizeCategory = true
 		countryGdpLabel.text = "Gross Domestic Product: $\(countryData.gdp!)"
 		countryGdpLabel.font = UIFont(name: "Gill Sans Light", size: 16)
-		countryFlagImage.image = countryData.flagName
+		countryFlagImage.image = countryData.flag
 		countryDescriptionTextView.text = countryData.description
 
 		countryFlagImage.backgroundColor = .white

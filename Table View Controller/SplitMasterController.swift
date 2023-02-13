@@ -7,18 +7,22 @@
 
 import UIKit
 
-class GdpTableController: UITableViewController {
+class SplitMasterController: UITableViewController {
 	
 	@IBOutlet var table: UITableView!
+
+	static var delegate: splitCountryProtocol?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		table.delegate = self
 		table.dataSource = self
-		
+
 		//		self.navigationItem.title = "GDP"
 		self.navigationItem.style = .browser
+		self.title = "Countries List"
+
 	}
 	
 	// MARK: - Table view data source
@@ -44,7 +48,7 @@ class GdpTableController: UITableViewController {
 		
 		let country = sortedCountries[indexPath.section][indexPath.row]
 		
-		let cell = tableView.dequeueReusableCell(withIdentifier: GdpTableCell.identifier, for: indexPath) as!GdpTableCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: SplitMasterTableCell.identifier, for: indexPath) as!SplitMasterTableCell
 		
 		cell.updateCustomCell(with: country)
 		
@@ -54,10 +58,15 @@ class GdpTableController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
-		
+		let selectedCountry = sortedCountries[indexPath.section][indexPath.row]
 //		let detailViewController = storyboard?.instantiateViewController(withIdentifier: "splitDetail") as! SplitSecondaryViewController
 
-		performSegue(withIdentifier: "splitDetail", sender: nil)
+		if let detailViewController = SplitMasterController.delegate as? SplitDetailController {
+			splitViewController?.showDetailViewController(detailViewController, sender: self)
+			SplitMasterController.delegate?.sendCountryToDetailView(country: selectedCountry)
+		}
+
+//		performSegue(withIdentifier: "splitDetail", sender: nil)
 //		splitViewController?.setViewController(detailViewController, for: .secondary)
 //		splitViewController?.showDetailViewController(detailViewController, sender: nil)
 	}
@@ -66,15 +75,15 @@ class GdpTableController: UITableViewController {
 	// MARK: - Navigation
 	
 	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		
-		if let indexPath = table.indexPathForSelectedRow {
-			let selectedCountry = sortedCountries[indexPath.section][indexPath.row]
-			
-			if let navigationController = segue.destination as? UINavigationController {
-				let detailController = navigationController.topViewController as? SplitSecondaryViewController
-				detailController?.country = selectedCountry
-			}
-		}
-	}
+//	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//		if let indexPath = table.indexPathForSelectedRow {
+//			let selectedCountry = sortedCountries[indexPath.section][indexPath.row]
+//
+//			if let navigationController = segue.destination as? UINavigationController {
+//				let detailController = navigationController.topViewController as? SplitSecondaryViewController
+//				detailController?.country = selectedCountry
+//			}
+//		}
+//	}
 }

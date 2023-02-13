@@ -99,6 +99,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 		}
 		let grandpa = self.parent?.parent as? tabBarController
 		grandpa?.tabBar.items?[0].badgeValue = String(sortedCountries[0].count + sortedCountries[1].count)
+		saveDataToJson()
 	}
 	
 	//MARK: - Table didSelectRow
@@ -191,3 +192,6 @@ extension TableAndCollectionViewController: UICollectionViewDataSource {
 extension TableAndCollectionViewController: UICollectionViewDelegateFlowLayout {
 	
 }
+
+//MARK: ViewWillAppear (JSON)
+

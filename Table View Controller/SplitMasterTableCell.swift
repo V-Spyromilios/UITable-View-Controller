@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GdpTableCell: UITableViewCell {
+class SplitMasterTableCell: UITableViewCell {
 	@IBOutlet weak var countryName: UILabel!
 	
 	static let identifier: String = "SplitViewTableCell"

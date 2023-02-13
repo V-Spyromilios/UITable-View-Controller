@@ -11,7 +11,7 @@ import UIKit
 class AddNewCountryParentViewController: UIViewController {
 	
 	@IBOutlet weak var OkButton: UIButton!
-	var newCountry = CountryModel(name: "", description: "", euMember: false)
+	var newCountry = CountryModel(name: "", description: "", flag: nil, euMember: false, gdp: nil, location: defaultLocation)
 	
 	var onNewCountryAdded: (() -> ())?
 	
@@ -24,6 +24,7 @@ class AddNewCountryParentViewController: UIViewController {
 	//MARK: - Reload Table Data at viewWillDisappear
 	override func viewWillDisappear(_ animated: Bool) {
 		onNewCountryAdded?()
+		saveDataToJson()
 
 		let grandpa = self.presentingViewController as? tabBarController
 		grandpa?.tabBar.items?[0].badgeValue = String(sortedCountries[0].count + sortedCountries[1].count)

@@ -24,7 +24,7 @@ class CollectionViewCell: UICollectionViewCell {
 	
 	func configure(with country: CountryModel) {
 		
-		imageView.image = country.flagName
+		imageView.image = country.flag
 		
 		labelView.text = country.name
 		labelView.font = UIFont(name: "Gill Sans Light Italic", size: 10)
