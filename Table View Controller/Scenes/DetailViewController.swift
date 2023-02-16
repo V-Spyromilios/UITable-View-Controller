@@ -32,20 +32,21 @@ class DetailViewController: UIViewController {
 		guard let customFont = UIFont(name: "George Rounded Bold Italic", size: 25) else {
 			fatalError("""
  Failed to load the "George Rounded Semibold Italic" font.
- Make sure the font file is included in the project and the font name is spelled correctly.
+ Make sure the font file is included in the project and the font name is correct.
  """)
 		}
 		countryNameLabel.font = UIFontMetrics.default.scaledFont(for: customFont)
 		countryNameLabel.adjustsFontForContentSizeCategory = true
+
 		countryGdpLabel.text = "Gross Domestic Product: $\(countryData.gdp!)"
 		countryGdpLabel.font = UIFont(name: "Gill Sans Light", size: 16)
-		countryFlagImage.image = countryData.flag
+
 		countryDescriptionTextView.text = countryData.description
 
+		countryFlagImage.image = countryData.flag
 		countryFlagImage.backgroundColor = .white
 		countryFlagImage.layer.shadowColor = UIColor.systemGray2.cgColor
 		countryFlagImage.clipsToBounds = false //to make shadow visible
 		countryFlagImage.layer.shadowOpacity = 1.0
-	}
-	
+	}	
 }

@@ -4,8 +4,7 @@
 //
 //  Created by Evangelos Spyromilios on 17.01.23.
 //
-/// Delegate and Closure for below,
-/// Std Collection Views!! like Ikea: Countries. PopUp instead of DetailView. To be shrink according to data.
+
 import UIKit
 
 class AddNewCountryParentViewController: UIViewController {
@@ -20,14 +19,11 @@ class AddNewCountryParentViewController: UIViewController {
 		
 		OkButton.isEnabled = false
 	}
-	
+
 	//MARK: - Reload Table Data at viewWillDisappear
 	override func viewWillDisappear(_ animated: Bool) {
+	
 		onNewCountryAdded?()
 		saveDataToJson()
-
-		let grandpa = self.presentingViewController as? tabBarController
-		grandpa?.tabBar.items?[0].badgeValue = String(sortedCountries[0].count + sortedCountries[1].count)
-		//delegate?.reloadTable()
 	}
 }

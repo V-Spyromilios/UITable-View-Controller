@@ -7,13 +7,13 @@
 
 import UIKit
 
-class NewCustomCell: UITableViewCell {
+class CustomTableCell: UITableViewCell {
 	
 	@IBOutlet weak var countryDescriptionLabel: UILabel!
 	@IBOutlet weak var countryGdpLabel: UILabel!
 	@IBOutlet weak var countryNameLabel: UILabel!
 	@IBOutlet weak var countryImageView: UIImageView!
-	
+		
 	override func awakeFromNib() {
 		super.awakeFromNib()
 

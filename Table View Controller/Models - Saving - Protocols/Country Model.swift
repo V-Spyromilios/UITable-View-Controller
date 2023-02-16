@@ -106,7 +106,7 @@ var sortedLatinCountries = countries[1].sorted { $0 < $1 }
 var sortedCountries = [sortedEuCountries, sortedLatinCountries]
 
 
-
+//MARK: sortCountries()
 func sortCountries(for section: Int) -> [[CountryModel]] {
 	
 	if section == 0 {
@@ -122,7 +122,7 @@ func sortCountries(for section: Int) -> [[CountryModel]] {
 		return [[]] }
 }
 
-// why needed?
+//MARK: extension Comparable
 extension CountryModel: Comparable {
 	static func == (lhs: CountryModel, rhs: CountryModel) -> Bool {
 		lhs.gdp == rhs.gdp

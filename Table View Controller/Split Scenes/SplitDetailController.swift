@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class SplitDetailController: UIViewController, MKMapViewDelegate {
+class SplitDetailController: UIViewController, MKMapViewDelegate, UISplitViewControllerDelegate {
 	
 	var country: CountryModel?
 	
@@ -20,17 +20,14 @@ class SplitDetailController: UIViewController, MKMapViewDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.navigationItem.title = "Paparies2"
 		
-		SplitMasterController.delegate = self
-		
-		countryNameLabel.text = "Choose a Country"
+		//SplitViewController.delegate = self
 		
 		mapView.delegate = self
 		mapView.layer.cornerRadius = 9.0
 		mapView.layer.borderColor = UIColor.orange.cgColor
 		mapView.layer.borderWidth = 5
-		
-		
 	}
 }
 
@@ -48,31 +45,28 @@ extension SplitDetailController: splitCountryProtocol {
 		}
 		else { annotation.title = "NO DATA"}
 		annotation.coordinate = CLLocationCoordinate2D(latitude: country.location.latitude, longitude: country.location.longitude)
-		
+
 		self.mapView.addAnnotation(annotation)
 	}
 	
 	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-		
+
 		guard annotation is MKPointAnnotation else { return nil }
-		
+
 		let identifier = "Annotation"
 		var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
 		if annotationView == nil {
 			annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
 			annotationView!.canShowCallout = true
-		} else {
-			annotationView!.annotation = annotation }
+		} else { annotationView!.annotation = annotation }
 		return annotationView
 	}
 }
 
 extension MKMapView {
-	
+
 	func centerToLocation(location: CLLocation, regionRadius: CLLocationDistance = 50000) {
 		let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
 		setRegion(coordinateRegion, animated: true)
 	}
-	
-	
 }

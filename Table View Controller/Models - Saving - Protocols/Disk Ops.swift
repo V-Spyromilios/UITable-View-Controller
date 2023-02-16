@@ -42,13 +42,13 @@ func saveDataToJson() {
 	if let countriesData = try? encoder.encode(sortedCountries) {
 		do {
 			try countriesData.write(to: countriesFileURL, options: .completeFileProtection)
-		} catch { print("ERROR: APP WILL RESIGN countriesData -> \(error)") }
+		} catch { print("PANIC: saveDataToJson: countriesData -> \\n\(error)") }
 	}
 	
 	if let locationsData = try? encoder.encode(locations) {
 		do {
 			try locationsData.write(to: locationsFileURL, options: .completeFileProtection)
 		}
-		catch { print("ERROR APP WILL RESIGN locationsData -> \(error)") }
+		catch { print("PANIC  saveDataToJson: locationsData -> \\n\(error)") }
 	}
 }

@@ -42,7 +42,6 @@ class PopUpViewController: UIViewController {
 		imageView.layer.shadowRadius = 10
 		imageView.layer.borderWidth = 1
 		imageView.layer.borderColor = UIColor.gray.cgColor
-		
 		imageView.layer.shadowOffset = CGSize(width: 4, height: 4)
 		
 		countryNameLabel.text = countryData?.name
