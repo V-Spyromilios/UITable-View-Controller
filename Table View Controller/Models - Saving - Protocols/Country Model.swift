@@ -162,6 +162,7 @@ extension CountryModel: Codable {
 		var container = encoder.container(keyedBy: CodingKeys.self)
 		try container.encode(name, forKey: .name)
 		try container.encode(description, forKey: .description)
+
 		let flagData = flag?.pngData()
 		try container.encode(flagData, forKey: .flag)
 		try container.encode(euMember, forKey: .euMember)

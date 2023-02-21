@@ -155,9 +155,7 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 		else if section == 1 { return "LATIN AMERICA" }
 		else { return nil }
 	}
-	
 }
-
 
 //MARK:  Collection Extensions
 extension TableAndCollectionViewController: UICollectionViewDelegate {
@@ -171,7 +169,8 @@ extension TableAndCollectionViewController: UICollectionViewDelegate {
 		let popupViewController =  self.storyboard?.instantiateViewController(withIdentifier: "PopUpStoryboardID") as! PopUpViewController
 		popupViewController.countryData = sortedCountries[indexPath.section][indexPath.row]
 		
-		popupViewController.modalTransitionStyle = .coverVertical
+		popupViewController.modalTransitionStyle = .crossDissolve
+		popupViewController.view.backgroundColor = UIColor(displayP3Red: 60, green: 60, blue: 60, alpha: 0.7)
 		popupViewController.modalPresentationStyle = .overCurrentContext
 		popupViewController.popoverPresentationController?.delegate = self
 		popupViewController.popoverPresentationController?.sourceView = cell
@@ -190,7 +189,7 @@ extension TableAndCollectionViewController: UICollectionViewDelegate {
 	//MARK: Collection interimSpacingForSectionAt()
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 		
-		return 30
+		return 10
 	}
 }
 

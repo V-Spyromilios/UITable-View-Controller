@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol splitCountryProtocol {
+protocol SplitMasterDetailDelegate: AnyObject {
 
-	func sendCountryToDetailView(country: CountryModel)
+	func didSelectCountry(country: CountryModel)
 }
