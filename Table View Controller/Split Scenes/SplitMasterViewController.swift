@@ -48,10 +48,9 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 		if let detailVC = SplitMasterViewController.delegate as? SplitDetailController {
 			detailVC.didSelectCountry(country: selectedCountry)
 			splitViewController?.showDetailViewController(detailVC, sender: nil)
-
+			
 		}
 		tableView.deselectRow(at: indexPath, animated: true)
-		
 	}
 	
 	override func viewDidLoad() {
@@ -60,25 +59,17 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 		tableView.delegate = self
 		tableView.dataSource = self
 	}
-	
-	//MARK: Collapse Secondary
-	
-	//	func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-	//
-	//		if let detailViewController = secondaryViewController as? SplitDetailController {
-	//			if detailViewController.country == nil {
-	//				return true
-	//			}
-	//		}
-	//		return false
-	//	}
 }
 
 extension SplitMasterViewController: UISplitViewControllerDelegate {
 	
 	func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-		
-		return true
+		if let detailVC = secondaryViewController as? SplitDetailController {
+			if detailVC.country == nil {
+				return true
+			}
+		}
+		return false
 	}
 }
 

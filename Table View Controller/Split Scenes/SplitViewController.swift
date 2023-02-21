@@ -22,10 +22,9 @@ class SplitViewController: UISplitViewController {
 		
 		self.presentsWithGesture = true
 		self.preferredDisplayMode = .oneBesideSecondary
-//		let actualMode = self.displayMode
-//		print("\(actualMode.rawValue)")
+//		let _ = self.displayMode
 
-		self.delegate = self.viewControllers.first as? SplitMasterViewController
+		self.delegate = self.viewControllers.first?.children.first as? SplitMasterViewController
 	}
 }
 
