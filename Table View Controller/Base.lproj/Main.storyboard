@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxe-OH-f49">
-                                <rect key="frame" x="12" y="167" width="361" height="28"/>
+                                <rect key="frame" x="12" y="167" width="361" height="29.666666666666657"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Label">
                                         <attributes>
@@ -30,13 +30,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WfC-lj-0En" userLabel="Gdp Label">
-                                <rect key="frame" x="20" y="203" width="361" height="19.333333333333343"/>
+                                <rect key="frame" x="20" y="204.66666666666666" width="361" height="19.333333333333343"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7kD-M4-Omn">
-                                <rect key="frame" x="100" y="234.33333333333337" width="193" height="128"/>
+                                <rect key="frame" x="100" y="236" width="193" height="128"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Ds-Mn-QQp">
                                         <rect key="frame" x="0.0" y="0.0" width="193" height="128"/>
@@ -52,10 +52,10 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2sF-SQ-xW8" userLabel="ParentView">
-                                <rect key="frame" x="20" y="382.33333333333326" width="353" height="374.66666666666674"/>
+                                <rect key="frame" x="20" y="384" width="353" height="373"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2iT-9j-Ksm">
-                                        <rect key="frame" x="0.0" y="0.0" width="353" height="374.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="373"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SbU-g3-Wfh" userLabel="ContainerView">
                                                 <rect key="frame" x="0.0" y="0.0" width="353" height="264.33333333333331"/>
@@ -595,7 +595,7 @@
         <!--Split Detail Controller-->
         <scene sceneID="6cb-IW-CkU">
             <objects>
-                <viewController id="Uwm-5q-OUS" customClass="SplitDetailController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="Uwm-5q-OUS" customClass="SplitDetailController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k6t-Cg-NJP">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -631,6 +631,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yZ1-ky-H6Q"/>
+                    <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="countryNameLabel" destination="DXz-gg-oUF" id="vK0-GO-eTL"/>
                         <outlet property="mapView" destination="I9x-j2-WGX" id="k8E-du-FLu"/>
@@ -649,7 +650,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rd8-sz-cWr">
-                                <rect key="frame" x="12" y="115" width="369" height="642"/>
+                                <rect key="frame" x="12" y="115" width="369" height="691"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SplitViewTableCell" textLabel="pcm-aL-8VP" style="IBUITableViewCellStyleDefault" id="tqK-8g-a6C" customClass="SplitMasterTableCell" customModule="Table_View_Controller" customModuleProvider="target">
@@ -685,6 +686,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Countries List" id="dGM-bQ-deT"/>
+                    <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="rd8-sz-cWr" id="TDQ-sZ-S3L"/>
                     </connections>
@@ -693,10 +695,10 @@
             </objects>
             <point key="canvasLocation" x="2291" y="673"/>
         </scene>
-        <!--Split Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="ZS1-aK-8jC">
             <objects>
-                <navigationController id="1ee-xv-1GA" customClass="SplitNavigationController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="1ee-xv-1GA" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Cw1-r4-1FV">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -712,11 +714,11 @@
         <!--Item-->
         <scene sceneID="zh0-Yd-j9w">
             <objects>
-                <splitViewController allowDoubleColumnStyle="YES" presentsWithGesture="NO" primaryBackgroundStyle="sidebar" id="CZX-No-mYQ" customClass="SplitViewController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController behavior="tile" primaryBackgroundStyle="sidebar" id="CZX-No-mYQ" customClass="SplitViewController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="ddK-hU-4H9"/>
                     <connections>
                         <segue destination="1ee-xv-1GA" kind="relationship" relationship="masterViewController" id="oK1-8G-nge"/>
-                        <segue destination="bIU-qh-PYL" kind="relationship" relationship="detailViewController" id="JPK-qT-lfV"/>
+                        <segue destination="Uwm-5q-OUS" kind="relationship" relationship="detailViewController" id="KOO-fG-fvq"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="675-Z6-84b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -744,24 +746,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bV4-ne-I7Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1254" y="-485"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="mEX-Dw-qFQ">
-            <objects>
-                <navigationController storyboardIdentifier="DetailNavigationControllerID" automaticallyAdjustsScrollViewInsets="NO" id="bIU-qh-PYL" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="96O-Et-mgw">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Uwm-5q-OUS" kind="relationship" relationship="rootViewController" id="b5k-W5-1kr"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vmb-Wg-jmP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1525.9541984732823" y="1543.661971830986"/>
         </scene>
     </scenes>
     <resources>

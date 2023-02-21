@@ -11,6 +11,7 @@ class SplitViewController: UISplitViewController {
 	
 	var country: CountryModel? {
 		didSet {
+
 			let detailView = self.viewControllers.last as? SplitDetailController
 			detailView?.country = country
 		}
@@ -21,16 +22,17 @@ class SplitViewController: UISplitViewController {
 		
 		self.presentsWithGesture = true
 		self.preferredDisplayMode = .oneBesideSecondary
-		preferredSplitBehavior = .tile
-		if self.displayMode == .secondaryOnly {
-			show(.primary)
-		}
+//		let actualMode = self.displayMode
+//		print("\(actualMode.rawValue)")
+
+		self.delegate = self.viewControllers.first as? SplitMasterViewController
 	}
 }
 
 extension SplitViewController: SplitMasterDetailDelegate {
 	
 	func didSelectCountry(country: CountryModel) {
+
 		let secondaryViewController = SplitDetailController()
 		secondaryViewController.country = country
 	}
