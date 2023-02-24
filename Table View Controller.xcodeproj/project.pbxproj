@@ -10,7 +10,7 @@
 		EF1D830A2976E9A00084B7B9 /* AddNewCountryParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D83092976E9A00084B7B9 /* AddNewCountryParentViewController.swift */; };
 		EF2962F4298ACF8000DB9E22 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2962F3298ACF8000DB9E22 /* PopUpViewController.swift */; };
 		EF40A6C72993BDFE003AD14C /* SplitMasterTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF40A6C62993BDFE003AD14C /* SplitMasterTableCell.swift */; };
-		EF40A6CD2993CC32003AD14C /* SplitDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF40A6CC2993CC32003AD14C /* SplitDetailController.swift */; };
+		EF40A6CD2993CC32003AD14C /* SplitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF40A6CC2993CC32003AD14C /* SplitDetailViewController.swift */; };
 		EF40A6D12993E232003AD14C /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF40A6D02993E232003AD14C /* SplitViewController.swift */; };
 		EF4C91A62992A0450094452C /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4C91A52992A0450094452C /* tabBarController.swift */; };
 		EF578C2E2980022700146346 /* TableAndCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF578C2D2980022600146346 /* TableAndCollectionViewController.swift */; };
@@ -37,7 +37,7 @@
 		EF1D83092976E9A00084B7B9 /* AddNewCountryParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCountryParentViewController.swift; sourceTree = "<group>"; };
 		EF2962F3298ACF8000DB9E22 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		EF40A6C62993BDFE003AD14C /* SplitMasterTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitMasterTableCell.swift; sourceTree = "<group>"; };
-		EF40A6CC2993CC32003AD14C /* SplitDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitDetailController.swift; sourceTree = "<group>"; };
+		EF40A6CC2993CC32003AD14C /* SplitDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitDetailViewController.swift; sourceTree = "<group>"; };
 		EF40A6D02993E232003AD14C /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		EF4C91A52992A0450094452C /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
 		EF578C2D2980022600146346 /* TableAndCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableAndCollectionViewController.swift; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		EF5BED12299E39E4001D77FD /* Split Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				EF40A6CC2993CC32003AD14C /* SplitDetailController.swift */,
+				EF40A6CC2993CC32003AD14C /* SplitDetailViewController.swift */,
 				EF79405A299CFB1F00A6E64E /* SplitMasterViewController.swift */,
 				EF40A6D02993E232003AD14C /* SplitViewController.swift */,
 				EF40A6C62993BDFE003AD14C /* SplitMasterTableCell.swift */,
@@ -243,7 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFD85414299A7F9F005CA030 /* Locations.swift in Sources */,
-				EF40A6CD2993CC32003AD14C /* SplitDetailController.swift in Sources */,
+				EF40A6CD2993CC32003AD14C /* SplitDetailViewController.swift in Sources */,
 				EF1D830A2976E9A00084B7B9 /* AddNewCountryParentViewController.swift in Sources */,
 				EF4C91A62992A0450094452C /* tabBarController.swift in Sources */,
 				EFD21BC9297171EF000C0F11 /* DetailViewController.swift in Sources */,

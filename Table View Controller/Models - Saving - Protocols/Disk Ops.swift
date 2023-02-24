@@ -25,13 +25,13 @@ func loadDatafromJson() {
 	if let locationsJsonData = try? Data(contentsOf: locationsFileURL) {
 		
 		do { locations = try decoder.decode([String:Location].self, from: locationsJsonData)
-		} catch { print("ERROR: locationsJsonData -> \(error)") }
+		} catch { print("PANIC: loadDatafromJson: locationsJsonData ->\\n \(error)") }
 	}
 	
 	if let sortedCountriesJsonData = try? Data(contentsOf: countriesFileURL) {
 		do {
 			sortedCountries = try decoder.decode([[CountryModel]]?.self, from: sortedCountriesJsonData)!
-		} catch { print("ERROR: sortedCountriesJsonData -> \(error)") }
+		} catch { print("PANIC: loadDatafromJson: sortedCountriesJsonData ->\\n \(error)") }
 	}
 }
 

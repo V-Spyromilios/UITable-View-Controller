@@ -45,7 +45,7 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 		
 		let selectedCountry = sortedCountries[indexPath.section][indexPath.row]
 		
-		if let detailVC = SplitMasterViewController.delegate as? SplitDetailController {
+		if let detailVC = SplitMasterViewController.delegate as? SplitDetailViewController {
 			detailVC.didSelectCountry(country: selectedCountry)
 			splitViewController?.showDetailViewController(detailVC, sender: nil)
 			
@@ -64,12 +64,17 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 extension SplitMasterViewController: UISplitViewControllerDelegate {
 	
 	func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-		if let detailVC = secondaryViewController as? SplitDetailController {
+
+		if let detailVC = secondaryViewController as? SplitDetailViewController {
 			if detailVC.country == nil {
 				return true
 			}
 		}
 		return false
 	}
+	
+	func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {
+		
+		return .secondary
+	}
 }
-

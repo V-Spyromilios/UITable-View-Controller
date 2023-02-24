@@ -9,13 +9,13 @@ import UIKit
 
 class SplitViewController: UISplitViewController {
 	
-	var country: CountryModel? {
-		didSet {
-
-			let detailView = self.viewControllers.last as? SplitDetailController
-			detailView?.country = country
-		}
-	}
+//	var country: CountryModel? {
+//		didSet {
+//
+//			let detailView = self.viewControllers.last as? SplitDetailViewController
+//			detailView?.country = country
+//		}
+//	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -25,14 +25,5 @@ class SplitViewController: UISplitViewController {
 //		let _ = self.displayMode
 
 		self.delegate = self.viewControllers.first?.children.first as? SplitMasterViewController
-	}
-}
-
-extension SplitViewController: SplitMasterDetailDelegate {
-	
-	func didSelectCountry(country: CountryModel) {
-
-		let secondaryViewController = SplitDetailController()
-		secondaryViewController.country = country
 	}
 }

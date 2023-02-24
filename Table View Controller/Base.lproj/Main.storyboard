@@ -592,15 +592,15 @@
             </objects>
             <point key="canvasLocation" x="2159.5419847328244" y="-294.36619718309862"/>
         </scene>
-        <!--Split Detail Controller-->
+        <!--Split Detail View Controller-->
         <scene sceneID="6cb-IW-CkU">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="Uwm-5q-OUS" customClass="SplitDetailController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="Uwm-5q-OUS" customClass="SplitDetailViewController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k6t-Cg-NJP">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sample Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXz-gg-oUF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXz-gg-oUF">
                                 <rect key="frame" x="12" y="113" width="369" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="fRL-yy-TwV"/>
@@ -639,7 +639,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0gW-c0-7Bu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2452.6717557251909" y="1543.661971830986"/>
+            <point key="canvasLocation" x="1407" y="1361"/>
         </scene>
         <!--Countries List-->
         <scene sceneID="pc9-G4-GwQ">
@@ -714,7 +714,7 @@
         <!--Item-->
         <scene sceneID="zh0-Yd-j9w">
             <objects>
-                <splitViewController behavior="tile" primaryBackgroundStyle="sidebar" id="CZX-No-mYQ" customClass="SplitViewController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController preferredDisplayMode="beside" behavior="tile" presentsWithGesture="NO" primaryBackgroundStyle="sidebar" id="CZX-No-mYQ" customClass="SplitViewController" customModule="Table_View_Controller" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="ddK-hU-4H9"/>
                     <connections>
                         <segue destination="1ee-xv-1GA" kind="relationship" relationship="masterViewController" id="oK1-8G-nge"/>

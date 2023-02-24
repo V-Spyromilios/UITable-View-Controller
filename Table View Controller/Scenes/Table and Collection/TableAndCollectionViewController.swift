@@ -120,7 +120,7 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 		self.collectionView.reloadData()
 		updateMasterTable()
 		saveDataToJson()
-		
+
 	}
 	
 	//MARK: Table moveRowAt()

@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class SplitDetailController: UIViewController, MKMapViewDelegate {
+class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	
 	var country: CountryModel? {
 		didSet {
@@ -31,7 +31,6 @@ class SplitDetailController: UIViewController, MKMapViewDelegate {
 		mapView.layer.borderWidth = 5
 		
 		SplitMasterViewController.delegate = self
-		
 	}
 	
 	
@@ -64,16 +63,16 @@ class SplitDetailController: UIViewController, MKMapViewDelegate {
 
 extension MKMapView {
 	
-	func centerToLocation(location: CLLocation, regionRadius: CLLocationDistance = 50000) {
+	func centerToLocation(location: CLLocation, regionRadius: CLLocationDistance = 60000) {
 		let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
 		setRegion(coordinateRegion, animated: true)
 	}
 }
 
-extension SplitDetailController: SplitMasterDetailDelegate {
-	
+extension SplitDetailViewController: SplitMasterDetailDelegate {
+
 	func didSelectCountry(country: CountryModel) {
 		self.country = country
 	}
-	
+
 }
