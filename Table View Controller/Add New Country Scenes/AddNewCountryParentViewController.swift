@@ -8,9 +8,10 @@
 import UIKit
 
 class AddNewCountryParentViewController: UIViewController {
+	let context = (UIApplication.shared.delegate as? AppDelegate)?.getCoreDataContext()
 	
 	@IBOutlet weak var OkButton: UIButton!
-	var newCountry = CountryModel(name: "", description: "", flag: nil, euMember: false, gdp: nil, location: defaultLocation)
+	lazy var newCountry = Country(context: context!)
 	
 	var onNewCountryAdded: (() -> ())?
 	
@@ -20,10 +21,8 @@ class AddNewCountryParentViewController: UIViewController {
 		OkButton.isEnabled = false
 	}
 
-	//MARK: - Reload Table Data at viewWillDisappear
 	override func viewWillDisappear(_ animated: Bool) {
 	
 		onNewCountryAdded?()
-		saveDataToJson()
 	}
 }

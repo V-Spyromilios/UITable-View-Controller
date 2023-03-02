@@ -9,7 +9,7 @@ import UIKit
 
 class PopUpViewController: UIViewController {
 	
-	var countryData: CountryModel?
+	var countryData: Country?
 	
 	@IBOutlet weak var countryNameLabel: UILabel!
 	
@@ -34,8 +34,9 @@ class PopUpViewController: UIViewController {
 		view.addGestureRecognizer(tapRecogniser)
 		view.addGestureRecognizer(swipeRecogniser)
 		view.backgroundColor = .clear
-		
-		imageView.image = countryData?.flag
+
+		let flagImage = UIImage(contentsOfFile: (countryData?.flagPath)!)
+		imageView.image = flagImage
 		imageView.layer.cornerRadius = imageView.frame.height / 2
 		imageView.layer.shadowColor = UIColor.black.cgColor
 		imageView.layer.shadowOpacity = 0.9
@@ -47,7 +48,7 @@ class PopUpViewController: UIViewController {
 		countryNameLabel.text = countryData?.name
 		countryNameLabel.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
 		
-		gdpLabel.text = "GDP:\n \(countryData!.gdp!)"
+		gdpLabel.text = "GDP:\n \(countryData!.gdp)"
 		gdpLabel.font = UIFont(name: "Gill Sans Light", size: 22)
 	}
 	

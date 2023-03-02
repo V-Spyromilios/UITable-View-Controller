@@ -32,17 +32,18 @@ class CustomTableCell: UITableViewCell {
 
 	}
 	
-	func updateCustomCell(with country: CountryModel) {
+	func updateCustomCell(with country: Country) {
 		countryNameLabel.text = country.name
 		countryDescriptionLabel.text = country.description
 
-		countryImageView.image = country.flag
-
-		if let countryGdp = country.gdp { // Right Way to handle Optionals !
-			countryGdpLabel.text = "$ \(countryGdp)"
+		if let flagPath = country.flagPath {
+			let flagImage = UIImage(contentsOfFile: flagPath)
+			self.countryImageView.image = flagImage
 		} else {
-			countryGdpLabel.text = "-"
+			self.countryImageView.image = nil
 		}
+		
+		countryGdpLabel.text = "\(country.gdp)"
 		
 	}
 }

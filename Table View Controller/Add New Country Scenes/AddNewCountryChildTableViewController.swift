@@ -20,11 +20,11 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		}
 	}
 	@IBOutlet weak var countryGdpField: UITextField!
-
+	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+		
 		//MARK: - Add Gesture Rec. to Image for PHPicker
 		let tapRecogniser = UITapGestureRecognizer(target: self, action: #selector(choosePhoto))
 		imageView.addGestureRecognizer(tapRecogniser)
@@ -39,7 +39,9 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 	//MARK: - Change Button visibility
 	@objc func changeButtonStatus() {
 		let parentViewController = self.parent as? AddNewCountryParentViewController
-		if countryNameField.text?.count ?? "".count < 5 || countryDescriptionField.text?.count ?? "".count < 5 || countryGdpField.text?.count ?? "".count < 5 {
+		if countryNameField.text?.count ?? "".count < 5 || countryDescriptionField.text?.count ?? "".count < 5 ||
+			imageView.image == nil ||
+			countryGdpField.text?.count ?? "".count < 5 {
 			return
 		}
 		parentViewController?.OkButton.isEnabled = true
@@ -51,20 +53,15 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 	
 	// MARK: - Save Country with UnwindAction
 	@IBAction func UnwindAction(unwindSegue: UIStoryboardSegue) {
+
 		let parentController = self.parent as? AddNewCountryParentViewController
+
 		parentController?.newCountry.name = countryNameField.text ?? ""
-		parentController?.newCountry.description = countryDescriptionField.text ?? ""
+		parentController?.newCountry.countryDescription = countryDescriptionField.text ?? ""
 		parentController?.newCountry.euMember = isEuMemberSwitch.isOn
-		parentController?.newCountry.flag = imageView.image
-		parentController?.newCountry.gdp = Int(countryGdpField.text ?? "")
-		
-		if parentController?.newCountry.euMember == true {
-			sortedCountries[0].append(parentController!.newCountry)
-			sortedCountries = sortCountries(for: 0)
-		} else {
-			sortedCountries[1].append(parentController!.newCountry)
-			sortedCountries = sortCountries(for: 1)
-		}
+		parentController?.newCountry.gdp = Int64(Int(countryGdpField.text ?? "")!)
+		saveImage(image: imageView.image!)
+
 		dismiss(animated: true)
 	}
 	
@@ -86,10 +83,30 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 			result.itemProvider.loadObject(ofClass: UIImage.self, completionHandler: { (object, error) in
 				if let image = object as? UIImage {
 					DispatchQueue.main.async {
-							self.imageView.image = image
+						self.imageView.image = image
 					}
 				}
 			})
 		}
 	}
+
+
+	private func saveImage(image: UIImage) {
+		
+		let parent = self.parent as! AddNewCountryParentViewController
+		let newCountryName = parent.newCountry.name!
+		
+		let imagePath = FileAssistant.shared.flagsDirectory?.appendingPathComponent("\(newCountryName).png")
+		guard let imageData = image.pngData() else {
+			print("PANIC: AddNewCountryChildTableViewController :: saveImage() failed to convert image to .png")
+			return
+		}
+	
+		if let ipath = imagePath {
+			FileManager.default.createFile(atPath: ipath.path(), contents: imageData)
+			FileAssistant.shared.saveFlagPath(for: newCountryName, imagePath: ipath.path())
+		}
+		
+	}
+
 }

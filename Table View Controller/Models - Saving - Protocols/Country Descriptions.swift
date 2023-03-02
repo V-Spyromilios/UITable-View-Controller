@@ -9,7 +9,7 @@ import Foundation
 
 
 struct CountryDescriptions {
-	let greece: String = """
+	let greece = """
 Greece, officially the Hellenic Republic, is a country in Southeast Europe. It is situated on the southern tip of the Balkan Peninsula, and is located at the crossroads of Europe, Asia, and Africa. Greece shares land borders with Albania to the northwest, North Macedonia and Bulgaria to the north, and Turkey to the northeast. The Aegean Sea lies to the east of the mainland, the Ionian Sea to the west, and the Sea of Crete and the Mediterranean Sea to the south. Greece has the longest coastline on the Mediterranean Basin, featuring thousands of islands. The country consists of nine traditional geographic regions, and has a population of approximately 10.4 million. Athens is the nation's capital and largest city, followed by Thessaloniki and Patras.
 """
 

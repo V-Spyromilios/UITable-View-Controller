@@ -18,7 +18,7 @@ class SplitMasterTableCell: UITableViewCell {
 		self.countryNameLabel.font = UIFont(name: "George Rounded Bold Italic", size: 18)
     }
 
-	func updateCustomCell(with country: CountryModel) {
+	func updateCustomCell(with country: Country) {
 
 		countryNameLabel.text = country.name
 	}

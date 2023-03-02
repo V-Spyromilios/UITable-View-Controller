@@ -6,49 +6,98 @@
 //
 
 import Foundation
+import UIKit
+import CoreData
 
-let countriesFileURL = getDocumentsDirectory().appending(path: "sortedCountries.json")
-
-let locationsFileURL = getDocumentsDirectory().appending(path: "locations.json")
-
-func getDocumentsDirectory() -> URL {
+/// Singleton of FileManager.default for  Flags Directory Operations
+class FileAssistant {
+	
+	static let shared = FileAssistant()
 	
 	let fileManager = FileManager.default
-	let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-	return urls[0]
-}
-
-func loadDatafromJson() {
+	var flagsDirectory: URL?
+	var flagPaths: [String: String] = [:]
 	
-	let decoder = JSONDecoder()
-	
-	if let locationsJsonData = try? Data(contentsOf: locationsFileURL) {
+	private init() {
 		
-		do { locations = try decoder.decode([String:Location].self, from: locationsJsonData)
-		} catch { print("PANIC: loadDatafromJson: locationsJsonData ->\\n \(error)") }
+		createFlagsDirectory()
+		loadFlagPaths()
 	}
 	
-	if let sortedCountriesJsonData = try? Data(contentsOf: countriesFileURL) {
+	private func createFlagsDirectory() {
+		guard let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+			print("PANIC:  FileAssistant :: createFlagsDirectory() :: while getting documentDirectory")
+			return
+		}
+		let flagsDirectory = documentDirectory.appendingPathComponent("Flags", isDirectory: true)
+		self.flagsDirectory = flagsDirectory
+		
 		do {
-			sortedCountries = try decoder.decode([[CountryModel]]?.self, from: sortedCountriesJsonData)!
-		} catch { print("PANIC: loadDatafromJson: sortedCountriesJsonData ->\\n \(error)") }
+			if !fileManager.fileExists(atPath: flagsDirectory.path()) {
+				try fileManager.createDirectory(at: flagsDirectory, withIntermediateDirectories: true, attributes: nil)
+			}
+		} catch {
+			print("PANIC: FileAssistant :: createFlagsDirectory() while creating 'flagsDirectory' directory")
+		}
 	}
+	
+	private func loadFlagPaths() {
+		
+		let flagPathsFile = flagsDirectory?.appendingPathComponent("flagPaths.plist")
+		if let flagPaths = NSDictionary(contentsOf: flagPathsFile!) as? [String: String] {
+			self.flagPaths = flagPaths
+		}
+	}
+	
+	func saveFlagPath(for country: String, imagePath: String) {
+		
+		flagPaths[country] = imagePath
+		
+		let flagPathsFile = flagsDirectory?.appendingPathComponent("flagPaths.plist")
+		let plistData = flagPaths as NSDictionary
+		plistData.write(to: flagPathsFile!, atomically: true)
+	}
+	
 }
 
-func saveDataToJson() {
+///Singeton of CoreData for NSFetchedResultController .
+class CoreDataAssistant {
 	
-	let encoder = JSONEncoder()
+	static let shared = CoreDataAssistant()
 	
-	if let countriesData = try? encoder.encode(sortedCountries) {
+	var fetchedResultsController : NSFetchedResultsController<Country>?
+	
+	lazy var context : NSManagedObjectContext = {
+		return ((UIApplication.shared.delegate) as! AppDelegate).persistentContainer.viewContext
+	}()
+	
+	var euFetchedResultsController: NSFetchedResultsController<EuCountries>!
+	var nonEuFetchedResultsController: NSFetchedResultsController<OtherCountries>!
+	
+	private init() {
+		// Set up the fetched results controller for EuCountries
+		let euRequest: NSFetchRequest<EuCountries> = EuCountries.fetchRequest()
+		let euSort = NSSortDescriptor(key: "name", ascending: true)
+		euRequest.sortDescriptors = [euSort]
+		euFetchedResultsController = NSFetchedResultsController(fetchRequest: euRequest,
+																managedObjectContext: context,
+																sectionNameKeyPath: nil,
+																cacheName: nil)
+
+		// Set up the fetched results controller for OtherCountries
+		let otherRequest: NSFetchRequest<OtherCountries> = OtherCountries.fetchRequest()
+		let otherSort = NSSortDescriptor(key: "name", ascending: true)
+		otherRequest.sortDescriptors = [otherSort]
+		nonEuFetchedResultsController = NSFetchedResultsController(fetchRequest: otherRequest,
+																   managedObjectContext: context,
+																   sectionNameKeyPath: nil,
+																   cacheName: nil)
+
 		do {
-			try countriesData.write(to: countriesFileURL, options: .completeFileProtection)
-		} catch { print("PANIC: saveDataToJson: countriesData -> \\n\(error)") }
-	}
-	
-	if let locationsData = try? encoder.encode(locations) {
-		do {
-			try locationsData.write(to: locationsFileURL, options: .completeFileProtection)
+			try euFetchedResultsController.performFetch()
+			try nonEuFetchedResultsController.performFetch()
+		} catch {
+			print("Error fetching data: \(error.localizedDescription)")
 		}
-		catch { print("PANIC  saveDataToJson: locationsData -> \\n\(error)") }
 	}
 }

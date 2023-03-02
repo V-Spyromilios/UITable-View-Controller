@@ -22,11 +22,13 @@ class CustomCollectionCell: UICollectionViewCell {
 		imageView.layer.borderWidth = 1
 	}
 	
-	func configure(with country: CountryModel) {
+	func configure(with country: Country) {
 		
-		imageView.image = country.flag
-		
-		labelView.text = country.name
-		labelView.font = UIFont(name: "Gill Sans Light Italic", size: 10)
+		if let flagImage = UIImage(contentsOfFile: country.flagPath!) {
+			imageView.image = flagImage
+
+			labelView.text = country.name
+			labelView.font = UIFont(name: "Gill Sans Light Italic", size: 10)
+		}
 	}
 }

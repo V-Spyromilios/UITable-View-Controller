@@ -22,7 +22,13 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
-		return sortedCountries[section].count
+		if section == 0 {
+			return fetchedResultsController.sections?[0].numberOfObjects ?? 0
+		}
+		else if section == 1 {
+			return fetchedResultsController.sections?[0].numberOfObjects ?? 0
+		}
+		return 0
 	}
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

@@ -10,7 +10,7 @@ import MapKit
 
 class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	
-	var country: CountryModel? {
+	var country: CountryTemp? {
 		didSet {
 			setUpDetailView()
 		}
@@ -71,7 +71,7 @@ extension MKMapView {
 
 extension SplitDetailViewController: SplitMasterDetailDelegate {
 
-	func didSelectCountry(country: CountryModel) {
+	func didSelectCountry(country: CountryTemp) {
 		self.country = country
 	}
 
