@@ -9,19 +9,20 @@ import Foundation
 import CoreData
 import UIKit
 
-// OR somehow assign directly to degeue reusable cell
-var euCountries : [EuCountries] = []
-var otherCountries : [OtherCountries] = []
-
 
 func initCoreData(context: NSManagedObjectContext) {
+	
+//	if FileAssistant.shared.flagPaths["Flag_of_Lithuania"] != nil {
+//		return
+//	}
 
-	let flagsDirectory = FileAssistant.shared.flagsDirectory
+
+//	let flagsDirectory = FileAssistant.shared.flagsDirectory
 	let flagPaths = FileAssistant.shared.flagPaths
 	let assistant = FileAssistant.shared
 	
 	// Get the list of image names in the Assets catalog
-	let imageNames = ["Flag_of_Greece", "Flag_of_Spain", "Flag_of_Italy", "Flag_of_Portugal", "Flag_of_France", "Flag_of_Luxembourg", "Flag_of_Austria", "Flag_of_Belgium", "Flag_of_Bulgaria", "Flag_of_Croatia", "Flag_of_Cyprus", "Flag_of_Denmark", "Flag_of_Estonia", "Flag_of_Finland", "Flag_of_Malta", "Flag_of_Poland"," Flag_of_Romania", "Flag_of_Slovenia", "Flag_of_Sweden", "Flag_of_the_Czech_Republic", "Flag_of_the_Netherlands", "Flag_of_Germany", "Flag_of_Hungary", "Flag_of_Ireland", "Flag_of_Latvia", "Flag_of_Lithuania", "Flag_of_Argentina", "Flag_of_Bolivia", "Flag_of_Brazil", "Flag_of_Chile", "Flag_of_Colombia", "Flag_of_Costa_Rica", "Flag_of_Equador", "Flag_of_Haiti", "Flag_of_Mexico", "Flag_of_Lithuania"]
+	let imageNames = ["Flag_of_Greece", "Flag_of_Spain", "Flag_of_Italy", "Flag_of_Portugal", "Flag_of_France", "Flag_of_Luxembourg", "Flag_of_Austria", "Flag_of_Belgium", "Flag_of_Bulgaria", "Flag_of_Croatia", "Flag_of_Cyprus", "Flag_of_Denmark", "Flag_of_Estonia", "Flag_of_Finland", "Flag_of_Malta", "Flag_of_Poland","Flag_of_Romania", "Flag_of_Slovenia", "Flag_of_Sweden", "Flag_of_the_Czech_Republic", "Flag_of_the_Netherlands", "Flag_of_Germany", "Flag_of_Hungary", "Flag_of_Ireland", "Flag_of_Latvia", "Flag_of_Lithuania", "Flag_of_Argentina", "Flag_of_Bolivia", "Flag_of_Brazil", "Flag_of_Chile", "Flag_of_Colombia", "Flag_of_Costa_Rica", "Flag_of_Equador", "Flag_of_Haiti", "Flag_of_Mexico", "Flag_of_Lithuania"]
 	
 
 	for imageName in imageNames {
@@ -41,9 +42,9 @@ func initCoreData(context: NSManagedObjectContext) {
 		} else { print("PANIC: initCoreData() :: Check ipath, failed to Unwrap Optional") }
 	}
 
-	let euCountries = [
+	let countries = [
 		
-		["name": "Greece", "countryDescription": descriptions.greece, "flagPath": flagPaths["Flag_of_Greece"]! , "euMember": true, "gdp": 12_000_000, "latitude": locations["greece"]!.latitude, "longitude": locations["greece"]!.longitude ],
+		["name": "Greece", "countryDescription": descriptions.greece, "flagPath": flagPaths["Flag_of_Greece"]!, "euMember": true, "gdp": 12_000_000, "latitude": locations["greece"]!.latitude, "longitude": locations["greece"]!.longitude ],
 		
 		["name": "Spain", "countryDescription": "description of Spain", "flagPath": flagPaths["Flag_of_Spain"]! , "euMember": true, "gdp": 12_000_000, "latitude": locations["spain"]!.latitude, "longitude": locations["spain"]!.longitude ],
 		
@@ -57,7 +58,7 @@ func initCoreData(context: NSManagedObjectContext) {
 		
 		["name": "Austria", "countryDescription": descriptions.austria, "flagPath": flagPaths["Flag_of_Austria"]! , "euMember": true, "gdp": 12_000_000, "latitude": locations["austria"]!.latitude, "longitude": locations["austria"]!.longitude ],
 		
-		["name": "Belgium", "countryDescription": descriptions.belgium, "flagPath": flagPaths["Flag_of_Belgium"]! , "euMember": true, "gdp": 12_000_000, "latitude": locations["belgium"]!.latitude, "longitude": locations["Belgium"]!.longitude ],
+		["name": "Belgium", "countryDescription": descriptions.belgium, "flagPath": flagPaths["Flag_of_Belgium"]! , "euMember": true, "gdp": 12_000_000, "latitude": locations["belgium"]!.latitude, "longitude": locations["belgium"]!.longitude ],
 		
 		["name": "Bulgaria", "countryDescription": descriptions.bulgaria, "flagPath": flagPaths["Flag_of_Bulgaria"]! , "euMember": true, "gdp": 12_000_000, "latitude": locations["bulgaria"]!.latitude, "longitude": locations["bulgaria"]!.longitude ],
 		
@@ -94,11 +95,8 @@ func initCoreData(context: NSManagedObjectContext) {
 		
 		["name": "Latvia", "countryDescription": "description of latvia", "flagPath": flagPaths["Flag_of_Latvia"]! , "euMember": true, "gdp": 12_000_000, "latitude": locations["latvia"]!.latitude, "longitude": locations["latvia"]!.longitude ],
 		
-		["name": "Lithuania", "countryDescription": "description of lithuania", "flagPath": flagPaths["Flag_of_Lithuania"]!, "euMember": true, "gdp": 12_000_000, "latitude": locations["lithuania"]!.latitude, "longitude": locations["lithuania"]!.longitude ]
-	]
+		["name": "Lithuania", "countryDescription": "description of lithuania", "flagPath": flagPaths["Flag_of_Lithuania"]!, "euMember": true, "gdp": 12_000_000, "latitude": locations["lithuania"]!.latitude, "longitude": locations["lithuania"]!.longitude ],
 
-	let otherCountries = [
-	
 		["name": "Brazil", "countryDescription": "description of Brazil", "flagPath": flagPaths["Flag_of_Brazil"]! , "euMember": false, "gdp": 12_000_000, "latitude": locations["brazil"]!.latitude, "longitude": locations["brazil"]!.longitude ],
 		
 		["name": "Bolivia", "countryDescription": "description of Bolivia", "flagPath": flagPaths["Flag_of_Bolivia"]! , "euMember": false, "gdp": 12_000_000, "latitude": locations["bolivia"]!.latitude, "longitude": locations["bolivia"]!.longitude ],
@@ -107,7 +105,7 @@ func initCoreData(context: NSManagedObjectContext) {
 		
 		["name": "Colombia", "countryDescription": "description of Colombia", "flagPath": flagPaths["Flag_of_Colombia"]! , "euMember": false, "gdp": 12_000_000, "latitude": locations["colombia"]!.latitude, "longitude": locations["colombia"]!.longitude ],
 		
-		["name": "Costa Rica", "countryDescription": "Costa_Rica!", "flagPath": flagPaths["Flag_Of_Costa_Rica"]! , "euMember": false, "gdp": 12_000_000, "latitude": locations["costaRica"]!.latitude, "longitude": locations["costaRica"]!.longitude ],
+		["name": "Costa Rica", "countryDescription": "Costa_Rica!", "flagPath": flagPaths["Flag_of_Costa_Rica"]! , "euMember": false, "gdp": 12_000_000, "latitude": locations["costaRica"]!.latitude, "longitude": locations["costaRica"]!.longitude ],
 		
 		["name": "Equador", "countryDescription": "description of Equador", "flagPath": flagPaths["Flag_of_Equador"]! , "euMember": false, "gdp": 12_000_000, "latitude": locations["equador"]!.latitude, "longitude": locations["equador"]!.longitude ],
 		
@@ -115,33 +113,33 @@ func initCoreData(context: NSManagedObjectContext) {
 		
 		["name": "Mexico", "countryDescription": "description of Mexico!", "flagPath": flagPaths["Flag_of_Mexico"]! , "euMember": false, "gdp": 12_000_000, "latitude": locations["mexico"]!.latitude, "longitude": locations["mexico"]!.longitude]
 	]
+
 	
-	let batchInsert = NSBatchInsertRequest(entity: EuCountries.entity(), objects: euCountries)
-	let batchInsert2 = NSBatchInsertRequest(entity: OtherCountries.entity(), objects: otherCountries)
+	let batchInsert = NSBatchInsertRequest(entity: Country.entity(), objects: countries)
+	
 	do {
 		try context.execute(batchInsert)
-		try context.execute(batchInsert2)
 	} catch {
-		print("PANIC: initCoreData :: context.execute batch")
+		print("PANIC: initCoreData :: try context.execute(batchInsert)")
 	}
 }
-
-func loadData(context: NSManagedObjectContext) {
-	do {
-		let request = EuCountries.fetchRequest()
-		let sort = NSSortDescriptor(key: "name", ascending: true)
-		request.sortDescriptors = [sort]
-		euCountries = try context.fetch(request)
-	} catch {
-		print("PANIC: loadData(context) :: EuCountries")
-	}
-
-	do {
-		let request = OtherCountries.fetchRequest()
-		let sort = NSSortDescriptor(key: "name", ascending: true)
-		request.sortDescriptors = [sort]
-		otherCountries = try context.fetch(request)
-	} catch {
-		print("PANIC: loadData(context) :: OtherCountries")
-	}
-}
+//
+//func loadData(context: NSManagedObjectContext) {
+//	do {
+//		let request = Country.fetchRequest()
+//		let sort = NSSortDescriptor(key: "name", ascending: true)
+//		request.sortDescriptors = [sort]
+//		euCountries = try context.fetch(request)
+//	} catch {
+//		print("PANIC: loadData(context) :: EuCountries")
+//	}
+//
+//	do {
+//		let request = OtherCountries.fetchRequest()
+//		let sort = NSSortDescriptor(key: "name", ascending: true)
+//		request.sortDescriptors = [sort]
+//		otherCountries = try context.fetch(request)
+//	} catch {
+//		print("PANIC: loadData(context) :: OtherCountries")
+//	}
+//}

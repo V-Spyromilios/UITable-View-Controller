@@ -10,7 +10,7 @@ import MapKit
 
 class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	
-	var country: CountryTemp? {
+	var country: Country? {
 		didSet {
 			setUpDetailView()
 		}
@@ -36,14 +36,14 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	
 	private func setUpDetailView() {
 		self.countryNameLabel.text = (self.country?.name.uppercased())! + " GDP"
-		self.location = self.country?.location.cllocation ?? CLLocation(latitude: 0.0, longitude: 0.0)
+		self.location = CLLocation(latitude: country?.latitude ?? 0.0, longitude: country?.longitude ?? 0.0)
 		self.mapView.centerToLocation(location: location)
 		let annotation = MKPointAnnotation()
 		if let gdp = self.country?.gdp {
 			annotation.title = "$ \(gdp)"
 		}
 		else { annotation.title = "NO DATA"}
-		annotation.coordinate = CLLocationCoordinate2D(latitude: country?.location.latitude ?? 0.0, longitude: country?.location.longitude ?? 0.0)
+		annotation.coordinate = CLLocationCoordinate2D(latitude: country?.latitude ?? 0.0, longitude: country?.longitude ?? 0.0)
 		self.mapView.addAnnotation(annotation)
 		
 	}
@@ -71,7 +71,7 @@ extension MKMapView {
 
 extension SplitDetailViewController: SplitMasterDetailDelegate {
 
-	func didSelectCountry(country: CountryTemp) {
+	func didSelectCountry(country: Country) {
 		self.country = country
 	}
 

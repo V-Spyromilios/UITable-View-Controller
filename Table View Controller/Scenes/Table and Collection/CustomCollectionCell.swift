@@ -24,7 +24,7 @@ class CustomCollectionCell: UICollectionViewCell {
 	
 	func configure(with country: Country) {
 		
-		if let flagImage = UIImage(contentsOfFile: country.flagPath!) {
+		if let flagImage = UIImage(contentsOfFile: country.flagPath) {
 			imageView.image = flagImage
 
 			labelView.text = country.name

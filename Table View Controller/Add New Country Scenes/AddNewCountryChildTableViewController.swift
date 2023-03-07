@@ -21,10 +21,12 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 	}
 	@IBOutlet weak var countryGdpField: UITextField!
 	
-	
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+
+		countryGdpField.keyboardType = .numberPad
+
 		//MARK: - Add Gesture Rec. to Image for PHPicker
 		let tapRecogniser = UITapGestureRecognizer(target: self, action: #selector(choosePhoto))
 		imageView.addGestureRecognizer(tapRecogniser)
@@ -53,18 +55,30 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 	
 	// MARK: - Save Country with UnwindAction
 	@IBAction func UnwindAction(unwindSegue: UIStoryboardSegue) {
+		
+//		let father = self.parent as? AddNewCountryParentViewController
 
-		let parentController = self.parent as? AddNewCountryParentViewController
-
-		parentController?.newCountry.name = countryNameField.text ?? ""
-		parentController?.newCountry.countryDescription = countryDescriptionField.text ?? ""
-		parentController?.newCountry.euMember = isEuMemberSwitch.isOn
-		parentController?.newCountry.gdp = Int64(Int(countryGdpField.text ?? "")!)
-		saveImage(image: imageView.image!)
-
+		let country = Country(context: CoreDataAssistant.context)
+		country.name = countryNameField.text ?? ""
+		country.countryDescription = countryDescriptionField.text ?? ""
+		country.euMember =  isEuMemberSwitch.isOn
+		country.gdp =  Int64(Int(countryGdpField.text ?? "")!)
+		
+		let imagePath = FileAssistant.shared.flagsDirectory?.appendingPathComponent("\(country.name).png")
+		guard let imageData = imageView.image?.pngData() else {
+			print("PANIC: AddNewCountryChildTableViewController :: saveImage() failed to convert image to .png")
+			return
+		}
+		
+		if let ipath = imagePath {
+			FileManager.default.createFile(atPath: ipath.path(), contents: imageData)
+			FileAssistant.shared.saveFlagPath(for: country.name, imagePath: ipath.path())
+		}
+//		CoreDataAssistant.saveContext()
 		dismiss(animated: true)
 	}
-	
+
+
 	//MARK: - PHPicker functions
 	private func openPHPicker() {
 		var configuration = PHPickerConfiguration()
@@ -89,24 +103,5 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 			})
 		}
 	}
-
-
-	private func saveImage(image: UIImage) {
-		
-		let parent = self.parent as! AddNewCountryParentViewController
-		let newCountryName = parent.newCountry.name!
-		
-		let imagePath = FileAssistant.shared.flagsDirectory?.appendingPathComponent("\(newCountryName).png")
-		guard let imageData = image.pngData() else {
-			print("PANIC: AddNewCountryChildTableViewController :: saveImage() failed to convert image to .png")
-			return
-		}
 	
-		if let ipath = imagePath {
-			FileManager.default.createFile(atPath: ipath.path(), contents: imageData)
-			FileAssistant.shared.saveFlagPath(for: newCountryName, imagePath: ipath.path())
-		}
-		
-	}
-
 }

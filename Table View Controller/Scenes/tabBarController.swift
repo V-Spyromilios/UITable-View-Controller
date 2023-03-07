@@ -9,11 +9,10 @@ import UIKit
 import CoreData
 
 class tabBarController: UITabBarController {
-
-	var fetchedResultsController: NSFetchedResultsController<Country>!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
 		setUpItems()
 		setUpTabBar()
 	}
@@ -26,8 +25,7 @@ class tabBarController: UITabBarController {
 	func setUpItems() {
 		
 		tabBar.items?[0].image = UIImage(systemName: "globe.europe.africa.fill")
-		tabBar.items?[0].badgeValue = String((fetchedResultsController.sections?[0].numberOfObjects ?? 0) +
-											 (fetchedResultsController.sections?[1].numberOfObjects ?? 0))
+//		tabBar.items?[0].badgeValue = String(())
 		tabBar.items?[1].image = UIImage(systemName: "map.fill")
 		//		tabBar.items?[2].image = UIImage(systemName: "carbon.dioxide.cloud.fill")
 		

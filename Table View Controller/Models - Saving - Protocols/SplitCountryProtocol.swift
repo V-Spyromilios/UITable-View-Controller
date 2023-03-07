@@ -9,5 +9,5 @@ import Foundation
 
 protocol SplitMasterDetailDelegate: AnyObject {
 
-	func didSelectCountry(country: CountryTemp)
+	func didSelectCountry(country: Country)
 }

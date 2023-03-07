@@ -28,7 +28,7 @@ class DetailViewController: UIViewController {
 	
 	private func setUpDetailView() {
 		guard let countryData = countryData else { return } //just checking if  'countryData'  is nil
-		countryNameLabel.text = countryData.name!.uppercased()
+		countryNameLabel.text = countryData.name.uppercased()
 		guard let customFont = UIFont(name: "George Rounded Bold Italic", size: 25) else {
 			fatalError("""
  Failed to load the "George Rounded Semibold Italic" font.
@@ -41,9 +41,9 @@ class DetailViewController: UIViewController {
 		countryGdpLabel.text = "Gross Domestic Product: $\(countryData.gdp)"
 		countryGdpLabel.font = UIFont(name: "Gill Sans Light", size: 16)
 
-		countryDescriptionTextView.text = countryData.description
+		countryDescriptionTextView.text = countryData.countryDescription
 
-		let flagImage = UIImage(contentsOfFile: countryData.flagPath!)
+		let flagImage = UIImage(contentsOfFile: countryData.flagPath)
 		countryFlagImage.image = flagImage
 		countryFlagImage.backgroundColor = .white
 		countryFlagImage.layer.shadowColor = UIColor.systemGray2.cgColor

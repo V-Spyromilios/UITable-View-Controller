@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import CoreData
 
 
 class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+	
+	var countries = [[Country]]()
 	
 	@IBOutlet weak var tableView: UITableView!
 	
@@ -23,10 +26,10 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
 		if section == 0 {
-			return fetchedResultsController.sections?[0].numberOfObjects ?? 0
+			return self.countries[0].count
 		}
 		else if section == 1 {
-			return fetchedResultsController.sections?[0].numberOfObjects ?? 0
+			return self.countries[1].count
 		}
 		return 0
 	}
@@ -34,24 +37,26 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		
 		if section == 0 { return "EU" }
-		else if section == 1 { return "LATIN AMERICA" }
+		else if section == 1 { return "NON EU" }
 		else { return nil }
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let country = sortedCountries[indexPath.section][indexPath.row]
 		let cell = tableView.dequeueReusableCell(withIdentifier: SplitMasterTableCell.identifier, for: indexPath) as!SplitMasterTableCell
-		cell.updateCustomCell(with: country)
+		let selectedCountry = countries[indexPath.section][indexPath.row]
+		
+		cell.updateCustomCell(with: selectedCountry)
 		
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
-		let selectedCountry = sortedCountries[indexPath.section][indexPath.row]
+		let selectedCountry = countries[indexPath.section][indexPath.row]
 		
 		if let detailVC = SplitMasterViewController.delegate as? SplitDetailViewController {
+			
 			detailVC.didSelectCountry(country: selectedCountry)
 			splitViewController?.showDetailViewController(detailVC, sender: nil)
 			
@@ -62,15 +67,18 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		self.countries = CoreDataAssistant.fetch()
+		
 		tableView.delegate = self
 		tableView.dataSource = self
 	}
 }
 
+
 extension SplitMasterViewController: UISplitViewControllerDelegate {
 	
 	func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-
+		
 		if let detailVC = secondaryViewController as? SplitDetailViewController {
 			if detailVC.country == nil {
 				return true
@@ -84,3 +92,4 @@ extension SplitMasterViewController: UISplitViewControllerDelegate {
 		return .secondary
 	}
 }
+

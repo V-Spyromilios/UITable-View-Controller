@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import CoreData
+
 
 class SplitViewController: UISplitViewController {
-	
+
+
 //	var country: CountryModel? {
 //		didSet {
 //
@@ -19,7 +22,7 @@ class SplitViewController: UISplitViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+
 		self.presentsWithGesture = true
 		self.preferredDisplayMode = .oneBesideSecondary
 //		let _ = self.displayMode

@@ -6,12 +6,11 @@
 //
 
 import UIKit
+import CoreData
 
 class AddNewCountryParentViewController: UIViewController {
-	let context = (UIApplication.shared.delegate as? AppDelegate)?.getCoreDataContext()
 	
 	@IBOutlet weak var OkButton: UIButton!
-	lazy var newCountry = Country(context: context!)
 	
 	var onNewCountryAdded: (() -> ())?
 	

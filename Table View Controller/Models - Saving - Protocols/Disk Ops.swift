@@ -25,6 +25,7 @@ class FileAssistant {
 	}
 	
 	private func createFlagsDirectory() {
+
 		guard let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
 			print("PANIC:  FileAssistant :: createFlagsDirectory() :: while getting documentDirectory")
 			return
@@ -42,7 +43,8 @@ class FileAssistant {
 	}
 	
 	private func loadFlagPaths() {
-		
+
+		//MARK: CHECK fileExists(atPath:isDirectory:)
 		let flagPathsFile = flagsDirectory?.appendingPathComponent("flagPaths.plist")
 		if let flagPaths = NSDictionary(contentsOf: flagPathsFile!) as? [String: String] {
 			self.flagPaths = flagPaths
@@ -52,7 +54,9 @@ class FileAssistant {
 	func saveFlagPath(for country: String, imagePath: String) {
 		
 		flagPaths[country] = imagePath
-		
+//		for flag in flagPaths {
+//			print(flag)
+//		}
 		let flagPathsFile = flagsDirectory?.appendingPathComponent("flagPaths.plist")
 		let plistData = flagPaths as NSDictionary
 		plistData.write(to: flagPathsFile!, atomically: true)
@@ -61,43 +65,92 @@ class FileAssistant {
 }
 
 ///Singeton of CoreData for NSFetchedResultController .
-class CoreDataAssistant {
+final class CoreDataAssistant {
 	
-	static let shared = CoreDataAssistant()
+	private init() { }
 	
-	var fetchedResultsController : NSFetchedResultsController<Country>?
+	//	static let shared = CoreDataAssistant()
 	
-	lazy var context : NSManagedObjectContext = {
-		return ((UIApplication.shared.delegate) as! AppDelegate).persistentContainer.viewContext
+	//lazy var context = CoreDataAssistant.persistentContainer.viewContext
+	
+	static var context: NSManagedObjectContext {
+		return persistentContainer.viewContext
+	}
+	
+	static var persistentContainer: NSPersistentContainer = {
+		
+		let container = NSPersistentContainer(name: "TableViewController")
+		container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+			if let error = error as NSError? {
+				fatalError("PANIC: Unresolved error from AppDelegate :: persistentContainer -> \(error), \(error.userInfo)")
+			}
+		})
+		return container
 	}()
 	
-	var euFetchedResultsController: NSFetchedResultsController<EuCountries>!
-	var nonEuFetchedResultsController: NSFetchedResultsController<OtherCountries>!
-	
-	private init() {
-		// Set up the fetched results controller for EuCountries
-		let euRequest: NSFetchRequest<EuCountries> = EuCountries.fetchRequest()
-		let euSort = NSSortDescriptor(key: "name", ascending: true)
-		euRequest.sortDescriptors = [euSort]
-		euFetchedResultsController = NSFetchedResultsController(fetchRequest: euRequest,
-																managedObjectContext: context,
-																sectionNameKeyPath: nil,
-																cacheName: nil)
-
-		// Set up the fetched results controller for OtherCountries
-		let otherRequest: NSFetchRequest<OtherCountries> = OtherCountries.fetchRequest()
-		let otherSort = NSSortDescriptor(key: "name", ascending: true)
-		otherRequest.sortDescriptors = [otherSort]
-		nonEuFetchedResultsController = NSFetchedResultsController(fetchRequest: otherRequest,
-																   managedObjectContext: context,
-																   sectionNameKeyPath: nil,
-																   cacheName: nil)
-
-		do {
-			try euFetchedResultsController.performFetch()
-			try nonEuFetchedResultsController.performFetch()
-		} catch {
-			print("Error fetching data: \(error.localizedDescription)")
+	static func saveContext() {
+		
+		if CoreDataAssistant.context.hasChanges {
+			do {
+				try CoreDataAssistant.context.save()
+			} catch {
+				let nserror = error as NSError
+				fatalError("PANIC: Unresolved error from saveContext(): \(nserror), \(nserror.userInfo)")
+			}
 		}
 	}
+	
+	static func fetch() -> [[Country]] {
+		
+		let fetchRequest = Country.fetchRequest()
+		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+		let fetchedObjects = try? CoreDataAssistant.context.fetch(fetchRequest)
+		
+		guard let countries = fetchedObjects else {
+			return [[Country]]()
+		}
+		
+		let euCountries = countries.filter { $0.euMember == true }.sorted { $0.name < $1.name }
+		let nonEuCountries = countries.filter { $0.euMember == false }.sorted { $0.name < $1.name }
+		
+		return [euCountries, nonEuCountries]
+	}
 }
+	
+	// Should be here? Check the NameKeyPath??
+//	lazy var fetchedResultsController: NSFetchedResultsController<Country> = {
+//
+//		let fetchRequest: NSFetchRequest<Country> = Country.fetchRequest()
+//		fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+//		let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
+//													managedObjectContext: context,
+//													sectionNameKeyPath: "isEu = YES", cacheName: nil)
+//		return controller
+//	}()
+	
+	
+	//	func fetch<T: NSManagedObject>(_ objectType: T.Type) -> [T] {
+	//
+	//		let entityName = String(describing: objectType)
+	//		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+	//
+	//		do {
+	//			let fetchedObjects = try context.fetch(fetchRequest) as? [T]
+	//			return fetchedObjects ?? [T]()
+	//
+	//		} catch {
+	//			print("PANIC: fetch<T: NSManagedObject> -> \(error)")
+	//			return [T]()
+	//		}
+	//	}
+	//}
+	//
+	//
+	//func getCountries(context: NSManagedObjectContext) -> [Country] {
+	//
+	//	let countries = CoreDataAssistant.shared.fetch(Country.self)
+	//
+	//	return countries
+	//}
+	
+
