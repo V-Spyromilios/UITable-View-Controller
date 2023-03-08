@@ -67,7 +67,7 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.countries = CoreDataAssistant.fetch()
+//		self.countries = CoreDataAssistant.fetchedResultsController.performFetch()
 		
 		tableView.delegate = self
 		tableView.dataSource = self

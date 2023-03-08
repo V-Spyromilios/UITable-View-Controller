@@ -19,12 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //	}
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-		
-		initCoreData(context: CoreDataAssistant.context)
+		FileAssistant.shared.loadFlagPaths()
+		let isEnabled = CoreDataAssistant.userDefaults.value(forKey: "CountriesAreInitialised") as? Bool
+		if isEnabled != true {
+			initCoreData(context: CoreDataAssistant.context)
+		}
 
 		return true
 	}
-	
+
+
 	// MARK: UISceneSession Lifecycle
 	
 	func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

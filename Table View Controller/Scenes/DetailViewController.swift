@@ -27,7 +27,9 @@ class DetailViewController: UIViewController {
 	}
 	
 	private func setUpDetailView() {
+
 		guard let countryData = countryData else { return } //just checking if  'countryData'  is nil
+	
 		countryNameLabel.text = countryData.name.uppercased()
 		guard let customFont = UIFont(name: "George Rounded Bold Italic", size: 25) else {
 			fatalError("""
@@ -43,8 +45,16 @@ class DetailViewController: UIViewController {
 
 		countryDescriptionTextView.text = countryData.countryDescription
 
-		let flagImage = UIImage(contentsOfFile: countryData.flagPath)
-		countryFlagImage.image = flagImage
+		print("FLAGPATH: \(countryData.flagPath)")
+		let imagePath = countryData.flagPath
+		if let imageData = FileManager.default.contents(atPath: imagePath) {
+			if let flagImage = UIImage(data: imageData) {
+				countryFlagImage.image = flagImage	
+			}
+		} else {
+			print("PANIC: DetailViewController :: flagPath seems to be wrong :) ")
+		}
+
 		countryFlagImage.backgroundColor = .white
 		countryFlagImage.layer.shadowColor = UIColor.systemGray2.cgColor
 		countryFlagImage.clipsToBounds = false //to make shadow visible

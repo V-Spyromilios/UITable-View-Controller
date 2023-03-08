@@ -72,7 +72,7 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		
 		if let ipath = imagePath {
 			FileManager.default.createFile(atPath: ipath.path(), contents: imageData)
-			FileAssistant.shared.saveFlagPath(for: country.name, imagePath: ipath.path())
+			FileAssistant.shared.saveFlagPath(for: country.name, imagePath: ipath)
 		}
 //		CoreDataAssistant.saveContext()
 		dismiss(animated: true)

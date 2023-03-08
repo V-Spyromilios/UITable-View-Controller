@@ -51,6 +51,7 @@
 		EF5A8A19297C6382000962E5 /* GeorgeRoundedSemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GeorgeRoundedSemiboldItalic.otf; sourceTree = "<group>"; };
 		EF5A8A1B297C680A000962E5 /* GeorgeRoundedBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GeorgeRoundedBoldItalic.otf; sourceTree = "<group>"; };
 		EF66193429965583004922A4 /* SplitCountryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitCountryProtocol.swift; sourceTree = "<group>"; };
+		EF667D5829B8C22C0079D978 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EF6BB24829ACA4DB00A1E66A /* flags */ = {isa = PBXFileReference; lastKnownFileType = folder; path = flags; sourceTree = "<group>"; };
 		EF79405A299CFB1F00A6E64E /* SplitMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitMasterViewController.swift; sourceTree = "<group>"; };
 		EF7BFFD92986E808001D3A34 /* CustomCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionCell.swift; sourceTree = "<group>"; };
@@ -186,6 +187,7 @@
 				EF6BB24829ACA4DB00A1E66A /* flags */,
 				EFD21BC4297171EF000C0F11 /* AppDelegate.swift */,
 				EFD21BC6297171EF000C0F11 /* SceneDelegate.swift */,
+				EF667D5829B8C22C0079D978 /* README.md */,
 				EFD21BCD297171F1000C0F11 /* Assets.xcassets */,
 				EFD21BCF297171F1000C0F11 /* LaunchScreen.storyboard */,
 			);

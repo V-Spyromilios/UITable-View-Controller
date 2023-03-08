@@ -14,15 +14,28 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
 
-	lazy var fetchedResultsController: NSFetchedResultsController<Country> = {
-			let fetchRequest: NSFetchRequest<Country> = Country.fetchRequest()
-			fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-			let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
-														managedObjectContext: CoreDataAssistant.context,
-														sectionNameKeyPath: "euMember",
-														cacheName: nil)
-			return controller
-		}()
+//	lazy var fetchedResultsController: NSFetchedResultsController<Country> = {
+//		let fetchRequest: NSFetchRequest<Country> = Country.fetchRequest()
+//		fetchRequest.sortDescriptors = [
+//			NSSortDescriptor(key: "euMember", ascending: false),
+//			NSSortDescriptor(key: "name", ascending: true)
+//		]
+//
+//		// Use a custom keyPath to group the countries into two sections based on euMember attribute
+//		let sectionKeyPath = #keyPath(Country.euMember)
+//		let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
+//													managedObjectContext: CoreDataAssistant.context,
+//													sectionNameKeyPath: sectionKeyPath,
+//													cacheName: nil)
+//		do {
+//			try controller.performFetch()
+//		} catch {
+//			print("PANIC: Fetch Request Failed: \(error)")
+//		}
+//		return controller
+//	}()
+
+
 	
 	var countries = [[Country]]() //Empty instead of = [[]]
 	
@@ -30,17 +43,15 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.countries = CoreDataAssistant.fetch()
+		do {
+			try CoreDataAssistant.fetchedResultsController.performFetch()
+		} catch { print("PANIC: viewDidLoad :: performFetch() Failed -> \(error)") }
 		self.table.reloadData()
 
-
-		if let tabController = self.tabBarController as? tabBarController {
-			tabController.tabBar.items?.first?.badgeValue = String((self.countries[0].count) + (self.countries[1].count))
-		}
 		table.delegate = self
 		table.dataSource = self
 		
-		fetchedResultsController.delegate = self
+		CoreDataAssistant.fetchedResultsController.delegate = self
 		
 		collectionView.delegate = self
 		collectionView.dataSource = self
@@ -79,7 +90,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 			guard let indexPath = table.indexPathForSelectedRow else { return }
 			
 			//			let country = self.shared.fetchedResultsController.object(at: indexPath)
-			let selectedCountry = countries[indexPath.section][indexPath.row]
+			let selectedCountry = CoreDataAssistant.fetchedResultsController.object(at: indexPath)
 			
 			destinationDetailViewController.countryData = selectedCountry
 			
@@ -88,16 +99,9 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 			destinationAddNewCountryParentViewController.onNewCountryAdded = {
 				[weak self] in
 				if let tabController = self?.tabBarController as? tabBarController {
-					//				   let splitController = tabController.viewControllers?.first(where: { $0 is UISplitViewController }) as? UISplitViewController,
-					//				   let navigationController = splitController.viewControllers.first(where: { $0 is UINavigationController }) as? UINavigationController,
-					//				   let masterYoda = navigationController.viewControllers.first(where: { $0 is SplitMasterViewController}) as? SplitMasterViewController {
 					
-					tabController.tabBar.items?.first?.badgeValue = String((self?.countries[0].count ?? 0) +
-																		   (self?.countries[1].count ?? 0))
-					
-					//					self?.table.reloadData()
-					//					self?.collectionView.reloadData()
-					//					masterYoda.tableView?.reloadData()
+					tabController.tabBar.items?.first?.badgeValue = String((CoreDataAssistant.fetchedResultsController.sections?[0].numberOfObjects)! +
+																		   (CoreDataAssistant.fetchedResultsController.sections?[1].numberOfObjects)!)
 				}
 			}
 		}
@@ -119,12 +123,13 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 //MARK: Table Extensions...
 
 extension TableAndCollectionViewController: UITableViewDelegate, UITableViewDataSource {
+
 	
 	//MARK: - Table cellForRowAt
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "NewCustomCell", for: indexPath) as! CustomTableCell
-		let selectedCountry = fetchedResultsController.object(at: indexPath)
+		let selectedCountry = CoreDataAssistant.fetchedResultsController.object(at: indexPath)
 		cell.updateCustomCell(with: selectedCountry)
 		
 		return cell
@@ -140,11 +145,11 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 	//MARK:  Table Delete Row
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		
-		let selectedCountry = self.countries[indexPath.section][indexPath.row]
+		let selectedCountry = CoreDataAssistant.fetchedResultsController.object(at: indexPath)
 		
 		if editingStyle == .delete {
 			countries.remove(at: [indexPath.section][indexPath.row])
-			self.table.reloadData()
+			
 			CoreDataAssistant.context.delete(selectedCountry)
 		}
 		do {
@@ -153,8 +158,8 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 			print("PANIC: UITable DeleteRow :: context.save() Failed: \(error)")
 		}
 		let grandpa = self.parent?.parent as? tabBarController
-		grandpa?.tabBar.items?.first?.badgeValue = String((self.countries[0].count) +
-														  (self.countries[1].count))
+		grandpa?.tabBar.items?.first?.badgeValue = String((CoreDataAssistant.fetchedResultsController.sections?[0].numberOfObjects)! +
+														  (CoreDataAssistant.fetchedResultsController.sections?[1].numberOfObjects)!)
 		self.collectionView.reloadData()
 		//updateMasterTable()
 	}
@@ -163,13 +168,11 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 	func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 		
 		guard sourceIndexPath.section == destinationIndexPath.section else { return }
-		
-		//		let intIndex = [sourceIndexPath.section][sourceIndexPath.row]
-		let selectedCountry = countries[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-//		let selectedCountryID = selectedCountry.objectID
-		
+
+		let selectedCountry = CoreDataAssistant.fetchedResultsController.object(at: sourceIndexPath)
+
 		CoreDataAssistant.context.delete(selectedCountry)
-		//			let selectedCountryAsObject = try CoreDataAssistant.context.existingObject(with: selectedCountryID)
+
 		let newCountry = Country(context: CoreDataAssistant.context)
 		newCountry.name = selectedCountry.name
 		newCountry.countryDescription = selectedCountry.countryDescription
@@ -184,26 +187,26 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 		} catch {
 			print("PANIC: tableView moveRowAt Failed to save(): \(error)")
 		}
-		self.table.reloadData()
+		self.table.reloadData() //?
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
-		return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+		return CoreDataAssistant.fetchedResultsController.sections?[section].numberOfObjects ?? 0
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		
-		return fetchedResultsController.sections?.count ?? 0
+		return CoreDataAssistant.fetchedResultsController.sections?.count ?? 0
 	}
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		
-		if let sectionInfo = fetchedResultsController.sections?[section] {
-			if sectionInfo.name == "1" {
-				return "EU Countries"
-			} else {
+		if let sectionInfo = CoreDataAssistant.fetchedResultsController.sections?[section] {
+			if sectionInfo.name == "0" {
 				return "Non EU Countries"
+			} else {
+				return "EU Countries"
 			}
 		}
 		return nil
@@ -219,7 +222,7 @@ extension TableAndCollectionViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		
 		let cell = collectionView.cellForItem(at: indexPath)
-		let selectedCountry = self.countries[indexPath.section][indexPath.row]
+		let selectedCountry = CoreDataAssistant.fetchedResultsController.object(at: indexPath)
 		let popupViewController =  self.storyboard?.instantiateViewController(withIdentifier: "PopUpStoryboardID") as! PopUpViewController
 		popupViewController.countryData = selectedCountry
 		
@@ -253,19 +256,19 @@ extension TableAndCollectionViewController: UICollectionViewDataSource {
 	
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
 		
-		return fetchedResultsController.sections?.count ?? 0
+		return CoreDataAssistant.fetchedResultsController.sections?.count ?? 0
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		
-		return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+		return CoreDataAssistant.fetchedResultsController.sections?[section].numberOfObjects ?? 0
 	}
 	
 	
 	//MARK: Collection CellForItemAt
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
-		let selectedCountry = fetchedResultsController.object(at: indexPath)
+		let selectedCountry = CoreDataAssistant.fetchedResultsController.object(at: indexPath)
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCollectionCell.identifier, for: indexPath) as! CustomCollectionCell
 		
 		cell.configure(with: selectedCountry)
