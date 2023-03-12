@@ -69,11 +69,15 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 			print("PANIC: AddNewCountryChildTableViewController :: saveImage() failed to convert image to .png")
 			return
 		}
+		guard let imagePath = imagePath else {
+			print("PANIC: AddNewCountryChildTableViewController :: saveImage() ::Unrwrapping of URL Failed")
+			return }
+		let success = FileAssistant.shared.fileManager.createFile(atPath: imagePath.path, contents: imageData)
+
+			var paths = FileAssistant.shared.flagPaths
+			paths[country.name] = imagePath
+			FileAssistant.shared.savePathsDictionary(dictionary: paths)
 		
-		if let ipath = imagePath {
-			FileManager.default.createFile(atPath: ipath.path(), contents: imageData)
-			FileAssistant.shared.saveFlagPath(for: country.name, imagePath: ipath)
-		}
 //		CoreDataAssistant.saveContext()
 		dismiss(animated: true)
 	}

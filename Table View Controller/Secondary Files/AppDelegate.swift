@@ -19,10 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //	}
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-		FileAssistant.shared.loadFlagPaths()
-		let isEnabled = CoreDataAssistant.userDefaults.value(forKey: "CountriesAreInitialised") as? Bool
+
+		
+		let isEnabled = UserDefaults.standard.value(forKey: "CountriesAreInitialised") as? Bool
 		if isEnabled != true {
+
+			FileAssistant.shared.createFlagsDirectories()
 			initCoreData(context: CoreDataAssistant.context)
+//			FileAssistant.shared.loadFlagPaths()
+		}
+		else {
+//			let uDFlagsUrl = FileAssistant.shared.userDefaults.url(forKey: "storedFlagsDirectory")
+//			print("\(String(describing: uDFlagsUrl))")
+			FileAssistant.shared.loadFlagPaths()
 		}
 
 		return true

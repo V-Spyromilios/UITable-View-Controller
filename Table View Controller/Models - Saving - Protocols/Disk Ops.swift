@@ -16,94 +16,134 @@ class FileAssistant {
 	
 	let fileManager = FileManager.default
 	var flagsDirectory: URL?
+	var plistUrl : URL?
 	var flagPaths: [String: URL] = [:]
 	
-	private init() {
-		createFlagsDirectory()
-	}
 	
-	private func createFlagsDirectory() {
-		guard let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-			print("PANIC:  FileAssistant :: createFlagsDirectory() :: documentDirectory")
+
+	/// Creates empty 'flagPaths.plist' inside  ../documents/Flags/
+	/// sets the self.flagsDirectory
+	func createFlagsDirectories() {
+
+		// find and return the documents directory as URL
+		guard let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first?.absoluteURL else {
+			print("PANIC: FileAssistant :: createFlagsDirectory() :: documentDirectory")
 			return
 		}
-		let flagsDirectory = documentDirectory.appendingPathComponent("Flags", isDirectory: true)
+
+		//create the URL of ../documents/Flags, save to FileAssistant & to userDefaults
+		let flagsDirectory = documentDirectory.appendingPathComponent("Flags", isDirectory: true).absoluteURL
 		self.flagsDirectory = flagsDirectory
+		UserDefaults.standard.set(flagsDirectory, forKey: "storedFlagsDirectory")
 		
-		do {
-			if !fileManager.fileExists(atPath: flagsDirectory.path) {
-				try fileManager.createDirectory(at: flagsDirectory, withIntermediateDirectories: true, attributes: nil)
-			}
-			
-			// Create flagPaths.plist file
-			let flagPathsFile = flagsDirectory.appendingPathComponent("flagPaths.plist", isDirectory: false)
-			if !fileManager.fileExists(atPath: flagPathsFile.path) {
-				let initialData = NSDictionary() // Empty dictionary
-				let success = initialData.write(to: flagPathsFile, atomically: true)
-				if !success {
-					print("Failed to create flagPaths.plist file.")
+		
+		if let flagsDirectoryUrl = self.flagsDirectory {
+				do {
+					// create the actual folder 'Flags' from the URL
+					try fileManager.createDirectory(at: flagsDirectoryUrl, withIntermediateDirectories: true, attributes: nil)
+					print("Disk Ops :: createDirectory :: 'Flag Images' at: \(flagsDirectoryUrl.path())")
+				} catch {
+					print("PANIC: FileAssistant :: createFlagsDirectory() while creating 'flagsDirectoryUrl' directory")
 				}
-			}
-		} catch {
-			print("PANIC: FileAssistant :: createFlagsDirectory() while creating 'flagsDirectory' directory")
-		}
+				// create the URL for the plist, save to FileAssistant & to userDefaults
+			let plistUrl = flagsDirectoryUrl.appendingPathComponent("flagPaths.plist", isDirectory: false).absoluteURL
+				self.plistUrl = plistUrl
+			UserDefaults.standard.set(plistUrl, forKey: "plistUrl")
+
+				//Write  the actual Dictionary to plistURL
+				if !fileManager.fileExists(atPath: plistUrl.path) {
+					let nsDictionary = NSDictionary()
+					// write an empty dictionary to the 'flagPathsPlistUrl' 'URL
+					let success = nsDictionary.write(to: plistUrl, atomically: true)
+					print("flagPathsPlistUrl: \(plistUrl)")
+					if !success {
+						print("Failed to create 'flagPaths.plist' file.")
+					}
+				}
+			
+		} else { print("createFlagsDirectory() :: flagsDirectoryUrl is nil!") }
 	}
+
+
 	
 	func loadFlagPaths() {
-		let check = self.flagPaths
-		// self.flagPaths is nil !!
-		guard let flagPathsFile = flagsDirectory?.appendingPathComponent("flagPaths.plist", isDirectory: false),
-			  let savedFlagPaths = NSDictionary(contentsOf: flagPathsFile) as? [String: String] else {
-			print("File Assistant :: loadFlagPaths() :: guard let")
+		
+		// create the url to the .plist  (../documents/flagPaths.plist - load the plist as NSDictionary and downcast it to [String : String]
+		// use it for subsequent runs ! so load the dir, self.flagsDirectory? is nil in subsequent runs TRY userDefaults to save the flagsDirectory in order to build after this. First save it at the end of initCoreData!
+		//		if let savedFlagsDirectoryString = FileAssistant.shared.userDefaults.string(forKey: "storedFlagsDirectory") {
+		//			print("savedFlagsDirectoryString: \(savedFlagsDirectoryString)")
+		//			if let savedFlagsDirectory = URL(string: savedFlagsDirectoryString) {
+		//				print(savedFlagsDirectory)
+		
+		//				self.flagsDirectory = savedFlagsDirectory
+		guard let flagsDirectoryUrl = UserDefaults.standard.url(forKey: "storedFlagsDirectory")?.absoluteURL else {
+			print("laodFlagPaths :: userDefaults:forKey 'storedFlagsDirectory' is nil!")
 			return
 		}
-		for (country, path) in savedFlagPaths {
-			let flagPath = flagsDirectory?.appendingPathComponent(path, isDirectory: false)
-			if fileManager.fileExists(atPath: flagPath!.path) {
+		
+		guard let savedDictionaryUrl = UserDefaults.standard.url(forKey: "plistUrl")?.absoluteURL else {
+			print("loadFlagPaths :: plistUlrl is nil.")
+			return
+		}
+		
+		guard let savedDictionary = NSDictionary(contentsOf: savedDictionaryUrl) as? [String: String] else {
+			print("PANIC: File Assistant :: loadFlagPaths() :: guard 'savedFlagDictionary' failed.")
+			return
+		}
+		
+		self.flagsDirectory = flagsDirectoryUrl
+		self.plistUrl = savedDictionaryUrl
+
+		for (country, path) in savedDictionary {
+			let flagPath = flagsDirectoryUrl.appendingPathComponent(path, isDirectory: false).absoluteURL
+			if fileManager.fileExists(atPath: flagPath.path) {
 				self.flagPaths[country] = flagPath
-				print("Loaded flag path for \(country): \(flagPath!)")
+				print("Loaded flag path for: \(country)")
 			} else {
-				print("Flag file does not exist for \(country)")
+				print("loadFlagPaths :: !fileManager.fileExists")
+				return
 			}
 		}
 	}
 
+	func savePathsDictionary(dictionary: [String: URL]) {
 
-	func saveFlagPath(for country: String, imagePath: URL) {
-		self.flagPaths[country] = imagePath
-		let flagPathsFile = flagsDirectory?.appendingPathComponent("flagPaths.plist")
-		
+		guard let plistUrl = self.plistUrl else {
+			print("saveFlagPaths :: self.plistUrl is nil.")
+			return
+		}
+
 		// Convert [String: URL] dictionary to [String: String] dictionary
-		let stringPaths = flagPaths.reduce(into: [String: String]()) { dict, tuple in
-			dict[tuple.key] = tuple.value.relativePath
+		let dictionaryWithStrings = dictionary.reduce(into: [String: String]()) { dict, tuple in
+			dict[tuple.key] = tuple.value.absoluteString
 		}
-		
-		// Write dictionary to plist file
-		let plistData = stringPaths as NSDictionary
-		let success = plistData.write(to: flagPathsFile!, atomically: true)
-		if !success {
-			print("Failed to save flagPath to plist file.")
-		}
-		print("\(flagPaths)")
-	}
 
+		// Write dictionary to plist file
+		let nsDictionary = NSDictionary(dictionary: dictionaryWithStrings)
+		let success = nsDictionary.write(to: plistUrl, atomically: true)
+//		self.flagPaths = dictionary // initCoreData writes this
+		if !success {
+			print("Failed to save flagpaths to plist file.")
+		}
+		print("flagPaths from saveFlagPaths(): \(flagPaths)")
+	}
 }
 
 
 
-///Singeton of CoreData for NSFetchedResultController .
+
 final class CoreDataAssistant {
-	
+
 	private init() { }
+
 	
-	static var userDefaults = UserDefaults()
-	
+
 	static var context: NSManagedObjectContext {
 		return persistentContainer.viewContext
 	}
-	
+
 	static var persistentContainer: NSPersistentContainer = {
-		
+
 		let container = NSPersistentContainer(name: "TableViewController")
 		container.loadPersistentStores(completionHandler: { (storeDescription, error) in
 			if let error = error as NSError? {
@@ -112,8 +152,6 @@ final class CoreDataAssistant {
 		})
 		return container
 	}()
-
-
 
 	static var fetchedResultsController: NSFetchedResultsController<Country> = {
 		let fetchRequest: NSFetchRequest<Country> = Country.fetchRequest()
@@ -136,20 +174,18 @@ final class CoreDataAssistant {
 		return controller
 	}()
 
-	
-	
 	static func saveContext() {
-		
+
 		if CoreDataAssistant.context.hasChanges {
 			do {
 				try CoreDataAssistant.context.save()
 			} catch {
-				let nserror = error as NSError
-				fatalError("PANIC: Unresolved error from saveContext(): \(nserror), \(nserror.userInfo)")
+				print("PANIC: Unresolved error from saveContext(): \(error)")
 			}
 		}
 	}
 }
+
 	// Should be here? Check the NameKeyPath??
 	//	lazy var fetchedResultsController: NSFetchedResultsController<Country> = {
 	//

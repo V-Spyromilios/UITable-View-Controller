@@ -25,13 +25,7 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
-		if section == 0 {
-			return self.countries[0].count
-		}
-		else if section == 1 {
-			return self.countries[1].count
-		}
-		return 0
+		return CoreDataAssistant.fetchedResultsController.sections?[section].numberOfObjects ?? 0
 	}
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
