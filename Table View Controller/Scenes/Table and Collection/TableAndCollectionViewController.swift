@@ -4,7 +4,7 @@
 //
 //  Created by Evangelos Spyromilios on 24.01.23.
 //
-	
+
 import UIKit
 import CoreData
 
@@ -13,7 +13,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 	@IBOutlet weak var table: UITableView!
 	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
-
+	
 	
 	var countries = [[Country]]() //Empty instead of = [[]]
 	
@@ -25,7 +25,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 			try CoreDataAssistant.fetchedResultsController.performFetch()
 		} catch { print("PANIC: viewDidLoad :: performFetch() Failed -> \(error)") }
 		self.table.reloadData()
-
+		
 		table.delegate = self
 		table.dataSource = self
 		
@@ -88,7 +88,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 //MARK: Table Extensions...
 
 extension TableAndCollectionViewController: UITableViewDelegate, UITableViewDataSource {
-
+	
 	
 	//MARK: - Table cellForRowAt
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -133,11 +133,11 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 	func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 		
 		guard sourceIndexPath.section == destinationIndexPath.section else { return }
-
+		
 		let selectedCountry = CoreDataAssistant.fetchedResultsController.object(at: sourceIndexPath)
-
+		
 		CoreDataAssistant.context.delete(selectedCountry)
-
+		
 		let newCountry = Country(context: CoreDataAssistant.context)
 		newCountry.name = selectedCountry.name
 		newCountry.countryDescription = selectedCountry.countryDescription
@@ -146,7 +146,7 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 		newCountry.longitude = selectedCountry.longitude
 		newCountry.latitude = selectedCountry.latitude
 		newCountry.flagData = selectedCountry.flagData
-
+		
 		do {
 			try CoreDataAssistant.context.save()
 		} catch {
@@ -245,7 +245,7 @@ extension TableAndCollectionViewController: UICollectionViewDataSource {
 //MARK: NSFetchedResultsController
 
 extension TableAndCollectionViewController: NSFetchedResultsControllerDelegate {
-
+	
 	func controller(_controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeObject anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
 		
 		switch type {
@@ -271,8 +271,8 @@ extension TableAndCollectionViewController: NSFetchedResultsControllerDelegate {
 	}
 	
 	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-
+		
 		self.table.reloadData()
 	}
-
+	
 }

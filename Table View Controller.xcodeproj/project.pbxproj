@@ -23,6 +23,7 @@
 		EF7627B529BF357B00E719A2 /* UIImage Compress Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7627B429BF357B00E719A2 /* UIImage Compress Extension.swift */; };
 		EF7627B829BF40C600E719A2 /* Country+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7627B629BF40C600E719A2 /* Country+CoreDataClass.swift */; };
 		EF7627B929BF40C600E719A2 /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7627B729BF40C600E719A2 /* Country+CoreDataProperties.swift */; };
+		EF7627BB29BF559200E719A2 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7627BA29BF559200E719A2 /* CoreData.swift */; };
 		EF79405B299CFB1F00A6E64E /* SplitMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF79405A299CFB1F00A6E64E /* SplitMasterViewController.swift */; };
 		EF7BFFDA2986E808001D3A34 /* CustomCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7BFFD92986E808001D3A34 /* CustomCollectionCell.swift */; };
 		EF7EF0752971FFE700AA6344 /* Country Descriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7EF0742971FFE700AA6344 /* Country Descriptions.swift */; };
@@ -55,6 +56,7 @@
 		EF7627B429BF357B00E719A2 /* UIImage Compress Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage Compress Extension.swift"; sourceTree = "<group>"; };
 		EF7627B629BF40C600E719A2 /* Country+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EF7627B729BF40C600E719A2 /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EF7627BA29BF559200E719A2 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		EF79405A299CFB1F00A6E64E /* SplitMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitMasterViewController.swift; sourceTree = "<group>"; };
 		EF7BFFD92986E808001D3A34 /* CustomCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionCell.swift; sourceTree = "<group>"; };
 		EF7EF0742971FFE700AA6344 /* Country Descriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country Descriptions.swift"; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				EF7EF0742971FFE700AA6344 /* Country Descriptions.swift */,
 				EF66193429965583004922A4 /* SplitCountryProtocol.swift */,
+				EF7627BA29BF559200E719A2 /* CoreData.swift */,
 				EFF0860929AB7646000F7881 /* Core Data Init.swift */,
 				EF7627B429BF357B00E719A2 /* UIImage Compress Extension.swift */,
 				EFD85413299A7F9F005CA030 /* Locations.swift */,
@@ -286,6 +289,7 @@
 				EF7627B929BF40C600E719A2 /* Country+CoreDataProperties.swift in Sources */,
 				EFF0860A29AB7646000F7881 /* Core Data Init.swift in Sources */,
 				EF0C127329A8FB1B005EB756 /* TableViewController.xcdatamodeld in Sources */,
+				EF7627BB29BF559200E719A2 /* CoreData.swift in Sources */,
 				EF40A6C72993BDFE003AD14C /* SplitMasterTableCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

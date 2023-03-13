@@ -30,7 +30,9 @@ class DetailViewController: UIViewController {
 
 		guard let countryData = countryData else { return } //just checking if  'countryData'  is nil
 	
-		countryNameLabel.text = countryData.name.uppercased()
+		if let name = countryData.name {
+			countryNameLabel.text = name
+		} else { countryNameLabel.text = "" }
 		guard let customFont = UIFont(name: "George Rounded Bold Italic", size: 25) else {
 			fatalError("""
  Failed to load the "George Rounded Semibold Italic" font.
@@ -45,14 +47,12 @@ class DetailViewController: UIViewController {
 
 		countryDescriptionTextView.text = countryData.countryDescription
 
-		print("FLAGPATH: \(countryData.flagPath)")
-		let imagePath = countryData.flagPath
-		if let imageData = FileManager.default.contents(atPath: imagePath) {
-			if let flagImage = UIImage(data: imageData) {
-				countryFlagImage.image = flagImage	
-			}
-		} else {
-			print("PANIC: DetailViewController :: flagPath seems to be wrong :) ")
+		
+		if let imageData = countryData.flagData,
+		   let image = UIImage(data: imageData) {
+				countryFlagImage.image = image
+			} else {
+			print("PANIC: DetailViewController :: setUpDetailView() :: failed to load Image.")
 		}
 
 		countryFlagImage.backgroundColor = .white

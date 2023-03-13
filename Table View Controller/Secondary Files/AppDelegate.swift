@@ -13,13 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	var window: UIWindow?
 	
-//	func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
-//		
-//		
-//	}
+	//	func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
+	//		
+	//		
+	//	}
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+		
 		let isEnabled = UserDefaults.standard.value(forKey: "CountriesAreInitialised") as? Bool
 		
 		if isEnabled != true {
@@ -27,8 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		}
 		return true
 	}
-
-
+	
+	
 	// MARK: UISceneSession Lifecycle
 	
 	func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
@@ -38,12 +38,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-
+		
 	}
 	
 	func applicationWillTerminate(_ application: UIApplication) {
-
+		
 		CoreDataAssistant.saveContext()
 	}
-
+	
 }
