@@ -55,30 +55,17 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 	
 	// MARK: - Save Country with UnwindAction
 	@IBAction func UnwindAction(unwindSegue: UIStoryboardSegue) {
-		
-//		let father = self.parent as? AddNewCountryParentViewController
 
 		let country = Country(context: CoreDataAssistant.context)
 		country.name = countryNameField.text ?? ""
 		country.countryDescription = countryDescriptionField.text ?? ""
 		country.euMember =  isEuMemberSwitch.isOn
 		country.gdp =  Int64(Int(countryGdpField.text ?? "")!)
-		
-		let imagePath = FileAssistant.shared.flagsDirectory?.appendingPathComponent("\(country.name).png")
-		guard let imageData = imageView.image?.pngData() else {
-			print("PANIC: AddNewCountryChildTableViewController :: saveImage() failed to convert image to .png")
-			return
-		}
-		guard let imagePath = imagePath else {
-			print("PANIC: AddNewCountryChildTableViewController :: saveImage() ::Unrwrapping of URL Failed")
-			return }
-		let success = FileAssistant.shared.fileManager.createFile(atPath: imagePath.path, contents: imageData)
 
-			var paths = FileAssistant.shared.flagPaths
-			paths[country.name] = imagePath
-			FileAssistant.shared.savePathsDictionary(dictionary: paths)
-		
-//		CoreDataAssistant.saveContext()
+		let imageData = imageView.image?.jpegData(compressionQuality: 0.8)
+		country.flagData = imageData
+
+		CoreDataAssistant.saveContext()
 		dismiss(animated: true)
 	}
 

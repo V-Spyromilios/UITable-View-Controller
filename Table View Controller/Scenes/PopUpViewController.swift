@@ -35,8 +35,10 @@ class PopUpViewController: UIViewController {
 		view.addGestureRecognizer(swipeRecogniser)
 		view.backgroundColor = .clear
 
-		let flagImage = UIImage(contentsOfFile: (countryData?.flagPath)!)
-		imageView.image = flagImage
+		if let imageData = countryData?.flagData,
+		let image = UIImage(data: imageData) {
+			imageView.image = image			
+		}
 		imageView.layer.cornerRadius = imageView.frame.height / 2
 		imageView.layer.shadowColor = UIColor.black.cgColor
 		imageView.layer.shadowOpacity = 0.9

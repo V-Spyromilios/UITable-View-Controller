@@ -2,7 +2,7 @@
 //  Country+CoreDataProperties.swift
 //  Table View Controller
 //
-//  Created by Evangelos Spyromilios on 06.03.23.
+//  Created by Evangelos Spyromilios on 13.03.23.
 //
 //
 
@@ -16,13 +16,13 @@ extension Country {
         return NSFetchRequest<Country>(entityName: "Country")
     }
 
-    @NSManaged public var countryDescription: String
+    @NSManaged public var countryDescription: String?
     @NSManaged public var euMember: Bool
-    @NSManaged public var flagPath: String
+    @NSManaged public var flagData: Data?
     @NSManaged public var gdp: Int64
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
-    @NSManaged public var name: String
+    @NSManaged public var name: String?
 
 }
 

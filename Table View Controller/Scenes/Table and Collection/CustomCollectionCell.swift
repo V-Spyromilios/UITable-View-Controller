@@ -23,12 +23,14 @@ class CustomCollectionCell: UICollectionViewCell {
 	}
 	
 	func configure(with country: Country) {
-		
-		if let flagImage = UIImage(contentsOfFile: country.flagPath) {
-			imageView.image = flagImage
 
-			labelView.text = country.name
-			labelView.font = UIFont(name: "Gill Sans Light Italic", size: 10)
+		if let imageData = country.flagData {
+			if let flagImage = UIImage(data: imageData) {
+				imageView.image = flagImage
+				
+				labelView.text = country.name
+				labelView.font = UIFont(name: "Gill Sans Light Italic", size: 10)
+			} else { print("PANIC: CustomCollectionCell configure() Failed to init UIImage(data: imageData") }
 		}
 	}
 }

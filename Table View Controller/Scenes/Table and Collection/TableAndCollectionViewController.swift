@@ -14,28 +14,6 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 	@IBOutlet weak var collectionView: UICollectionView!
 	@IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
 
-//	lazy var fetchedResultsController: NSFetchedResultsController<Country> = {
-//		let fetchRequest: NSFetchRequest<Country> = Country.fetchRequest()
-//		fetchRequest.sortDescriptors = [
-//			NSSortDescriptor(key: "euMember", ascending: false),
-//			NSSortDescriptor(key: "name", ascending: true)
-//		]
-//
-//		// Use a custom keyPath to group the countries into two sections based on euMember attribute
-//		let sectionKeyPath = #keyPath(Country.euMember)
-//		let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
-//													managedObjectContext: CoreDataAssistant.context,
-//													sectionNameKeyPath: sectionKeyPath,
-//													cacheName: nil)
-//		do {
-//			try controller.performFetch()
-//		} catch {
-//			print("PANIC: Fetch Request Failed: \(error)")
-//		}
-//		return controller
-//	}()
-
-
 	
 	var countries = [[Country]]() //Empty instead of = [[]]
 	
@@ -55,8 +33,6 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 		
 		collectionView.delegate = self
 		collectionView.dataSource = self
-		//				collection.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
-		//		collectionView.collectionViewLayout = createLayout()
 		
 		self.navigationItem.title = "Countries"
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCountry))
@@ -106,17 +82,6 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 			}
 		}
 	}
-	
-	//	func updateMasterTable() {
-	//		// ARC ????
-	//
-	//		if let tabController = self.tabBarController as? tabBarController,
-	//		   let splitController = tabController.viewControllers?.first(where: { $0 is UISplitViewController }) as? UISplitViewController,
-	//		   let navigationController = splitController.viewControllers.first(where: { $0 is UINavigationController }) as? UINavigationController,
-	//		   let masterYoda = navigationController.viewControllers.first(where: { $0 is SplitMasterViewController}) as? SplitMasterViewController {
-	//			masterYoda.tableView?.reloadData()
-	//		}
-	//	}
 }
 
 
@@ -180,8 +145,8 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 		newCountry.euMember = selectedCountry.euMember
 		newCountry.longitude = selectedCountry.longitude
 		newCountry.latitude = selectedCountry.latitude
-		newCountry.flagPath = selectedCountry.flagPath
-		
+		newCountry.flagData = selectedCountry.flagData
+
 		do {
 			try CoreDataAssistant.context.save()
 		} catch {

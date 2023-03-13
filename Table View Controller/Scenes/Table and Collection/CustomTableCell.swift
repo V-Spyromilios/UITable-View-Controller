@@ -36,17 +36,14 @@ class CustomTableCell: UITableViewCell {
 		countryNameLabel.text = country.name
 		countryDescriptionLabel.text = country.countryDescription
 		countryGdpLabel.text = "\(country.gdp)"
-		
-		let urlPath = URL(filePath: country.flagPath)
-//MARK: NO SUCH FILE OR DIR ! CHECK WHAT IS SAVED TO THE Attribute of the Entity !
+
 		do {
-			let imageData = try Data(contentsOf: urlPath)
-			let flagImage = UIImage(data: imageData)
-			self.countryImageView.image = flagImage
+			
+			let imageData = UIImage(data: country.flagData)
+			self.countryImageView.image = imageData
 		} catch {
 			print("Setting of Table Cell Image failed -> \(error)")
 			self.countryImageView.image = nil
 		}
-		
 	}
 }

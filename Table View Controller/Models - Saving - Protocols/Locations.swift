@@ -8,23 +8,6 @@
 import Foundation
 import MapKit
 
-//struct Location: Codable {
-//
-//	let latitude: Double
-//	let longitude: Double
-//	
-//	init(latitude: Double, longitude: Double) {
-//		self.latitude = latitude
-//		self.longitude = longitude
-//	}
-//
-//	var cllocation: CLLocation {
-//		return CLLocation(latitude: latitude, longitude: longitude)
-//	}
-//}
-//
-//let defaultLocation = Location(latitude: 0, longitude: 0)
-
 var locations: [String: (latitude: Double, longitude: Double)] = [
 
 	"greece" : (latitude: 37.9838, longitude: 23.7275),

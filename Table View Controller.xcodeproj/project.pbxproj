@@ -20,21 +20,20 @@
 		EF5A8A1C297C680F000962E5 /* GeorgeRoundedBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF5A8A1B297C680A000962E5 /* GeorgeRoundedBoldItalic.otf */; };
 		EF66193529965583004922A4 /* SplitCountryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF66193429965583004922A4 /* SplitCountryProtocol.swift */; };
 		EF6BB24929ACA4DB00A1E66A /* flags in Resources */ = {isa = PBXBuildFile; fileRef = EF6BB24829ACA4DB00A1E66A /* flags */; };
+		EF7627B529BF357B00E719A2 /* UIImage Compress Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7627B429BF357B00E719A2 /* UIImage Compress Extension.swift */; };
+		EF7627B829BF40C600E719A2 /* Country+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7627B629BF40C600E719A2 /* Country+CoreDataClass.swift */; };
+		EF7627B929BF40C600E719A2 /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7627B729BF40C600E719A2 /* Country+CoreDataProperties.swift */; };
 		EF79405B299CFB1F00A6E64E /* SplitMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF79405A299CFB1F00A6E64E /* SplitMasterViewController.swift */; };
 		EF7BFFDA2986E808001D3A34 /* CustomCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7BFFD92986E808001D3A34 /* CustomCollectionCell.swift */; };
 		EF7EF0752971FFE700AA6344 /* Country Descriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7EF0742971FFE700AA6344 /* Country Descriptions.swift */; };
 		EF92AB082977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF92AB072977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift */; };
-		EF94D3C229B63B1800B07897 /* Country+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF94D3C029B63B1800B07897 /* Country+CoreDataClass.swift */; };
-		EF94D3C329B63B1800B07897 /* Country+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF94D3C129B63B1800B07897 /* Country+CoreDataProperties.swift */; };
 		EFD21BC5297171EF000C0F11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC4297171EF000C0F11 /* AppDelegate.swift */; };
 		EFD21BC7297171EF000C0F11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC6297171EF000C0F11 /* SceneDelegate.swift */; };
 		EFD21BC9297171EF000C0F11 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC8297171EF000C0F11 /* DetailViewController.swift */; };
 		EFD21BCC297171EF000C0F11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFD21BCA297171EF000C0F11 /* Main.storyboard */; };
 		EFD21BCE297171F1000C0F11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD21BCD297171F1000C0F11 /* Assets.xcassets */; };
 		EFD21BD1297171F1000C0F11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFD21BCF297171F1000C0F11 /* LaunchScreen.storyboard */; };
-		EFD21BDC297172DC000C0F11 /* Country Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BDB297172DC000C0F11 /* Country Model.swift */; };
 		EFD85414299A7F9F005CA030 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD85413299A7F9F005CA030 /* Locations.swift */; };
-		EFD85416299AA60C005CA030 /* Disk Ops.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD85415299AA60C005CA030 /* Disk Ops.swift */; };
 		EFF0860A29AB7646000F7881 /* Core Data Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF0860929AB7646000F7881 /* Core Data Init.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,12 +52,13 @@
 		EF66193429965583004922A4 /* SplitCountryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitCountryProtocol.swift; sourceTree = "<group>"; };
 		EF667D5829B8C22C0079D978 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EF6BB24829ACA4DB00A1E66A /* flags */ = {isa = PBXFileReference; lastKnownFileType = folder; path = flags; sourceTree = "<group>"; };
+		EF7627B429BF357B00E719A2 /* UIImage Compress Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage Compress Extension.swift"; sourceTree = "<group>"; };
+		EF7627B629BF40C600E719A2 /* Country+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EF7627B729BF40C600E719A2 /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EF79405A299CFB1F00A6E64E /* SplitMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitMasterViewController.swift; sourceTree = "<group>"; };
 		EF7BFFD92986E808001D3A34 /* CustomCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionCell.swift; sourceTree = "<group>"; };
 		EF7EF0742971FFE700AA6344 /* Country Descriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country Descriptions.swift"; sourceTree = "<group>"; };
 		EF92AB072977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCountryChildTableViewController.swift; sourceTree = "<group>"; };
-		EF94D3C029B63B1800B07897 /* Country+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataClass.swift"; sourceTree = "<group>"; };
-		EF94D3C129B63B1800B07897 /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EFD21BC1297171EF000C0F11 /* Table View Controller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Table View Controller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFD21BC4297171EF000C0F11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFD21BC6297171EF000C0F11 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,9 +67,7 @@
 		EFD21BCD297171F1000C0F11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFD21BD0297171F1000C0F11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EFD21BD2297171F1000C0F11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EFD21BDB297172DC000C0F11 /* Country Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country Model.swift"; sourceTree = "<group>"; };
 		EFD85413299A7F9F005CA030 /* Locations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
-		EFD85415299AA60C005CA030 /* Disk Ops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Disk Ops.swift"; sourceTree = "<group>"; };
 		EFF0860929AB7646000F7881 /* Core Data Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Core Data Init.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,9 +98,8 @@
 			children = (
 				EF7EF0742971FFE700AA6344 /* Country Descriptions.swift */,
 				EF66193429965583004922A4 /* SplitCountryProtocol.swift */,
-				EFD21BDB297172DC000C0F11 /* Country Model.swift */,
 				EFF0860929AB7646000F7881 /* Core Data Init.swift */,
-				EFD85415299AA60C005CA030 /* Disk Ops.swift */,
+				EF7627B429BF357B00E719A2 /* UIImage Compress Extension.swift */,
 				EFD85413299A7F9F005CA030 /* Locations.swift */,
 				EF0C127129A8FB1B005EB756 /* TableViewController.xcdatamodeld */,
 			);
@@ -142,8 +139,8 @@
 		EF782D9029ACF4AD00654271 /* Core Data Classes */ = {
 			isa = PBXGroup;
 			children = (
-				EF94D3C029B63B1800B07897 /* Country+CoreDataClass.swift */,
-				EF94D3C129B63B1800B07897 /* Country+CoreDataProperties.swift */,
+				EF7627B629BF40C600E719A2 /* Country+CoreDataClass.swift */,
+				EF7627B729BF40C600E719A2 /* Country+CoreDataProperties.swift */,
 			);
 			path = "Core Data Classes";
 			sourceTree = "<group>";
@@ -272,25 +269,24 @@
 				EF40A6CD2993CC32003AD14C /* SplitDetailViewController.swift in Sources */,
 				EF1D830A2976E9A00084B7B9 /* AddNewCountryParentViewController.swift in Sources */,
 				EF4C91A62992A0450094452C /* tabBarController.swift in Sources */,
-				EF94D3C229B63B1800B07897 /* Country+CoreDataClass.swift in Sources */,
 				EFD21BC9297171EF000C0F11 /* DetailViewController.swift in Sources */,
 				EF92AB082977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift in Sources */,
-				EFD21BDC297172DC000C0F11 /* Country Model.swift in Sources */,
 				EFD21BC5297171EF000C0F11 /* AppDelegate.swift in Sources */,
 				EFD21BC7297171EF000C0F11 /* SceneDelegate.swift in Sources */,
 				EF2962F4298ACF8000DB9E22 /* PopUpViewController.swift in Sources */,
+				EF7627B529BF357B00E719A2 /* UIImage Compress Extension.swift in Sources */,
 				EF79405B299CFB1F00A6E64E /* SplitMasterViewController.swift in Sources */,
 				EF578C2E2980022700146346 /* TableAndCollectionViewController.swift in Sources */,
 				EF66193529965583004922A4 /* SplitCountryProtocol.swift in Sources */,
 				EF7EF0752971FFE700AA6344 /* Country Descriptions.swift in Sources */,
-				EFD85416299AA60C005CA030 /* Disk Ops.swift in Sources */,
 				EF578C302980026400146346 /* CustomTableCell.swift in Sources */,
 				EF7BFFDA2986E808001D3A34 /* CustomCollectionCell.swift in Sources */,
 				EF40A6D12993E232003AD14C /* SplitViewController.swift in Sources */,
+				EF7627B829BF40C600E719A2 /* Country+CoreDataClass.swift in Sources */,
+				EF7627B929BF40C600E719A2 /* Country+CoreDataProperties.swift in Sources */,
 				EFF0860A29AB7646000F7881 /* Core Data Init.swift in Sources */,
 				EF0C127329A8FB1B005EB756 /* TableViewController.xcdatamodeld in Sources */,
 				EF40A6C72993BDFE003AD14C /* SplitMasterTableCell.swift in Sources */,
-				EF94D3C329B63B1800B07897 /* Country+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
