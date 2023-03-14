@@ -88,7 +88,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 //MARK: Table Extensions...
 
 extension TableAndCollectionViewController: UITableViewDelegate, UITableViewDataSource {
-
+	
 	//MARK: - Table cellForRowAt
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
@@ -133,7 +133,6 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 		guard sourceIndexPath.section == destinationIndexPath.section else { return }
 		
 		let selectedCountry = intermediateCountries[sourceIndexPath.section][sourceIndexPath.row]
-		cell.updateCustomCell(with: selectedCountry)
 		
 		CoreDataAssistant.context.delete(selectedCountry)
 		
@@ -143,24 +142,27 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
-		return CoreDataAssistant.fetchedResultsController.sections?[section].numberOfObjects ?? 0
+		if section == 0 {
+			return intermediateCountries[0].count
+		}
+		else {
+			return intermediateCountries[1].count
+		}
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		
-		return CoreDataAssistant.fetchedResultsController.sections?.count ?? 0
+		return 2
 	}
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		
-		if let sectionInfo = CoreDataAssistant.fetchedResultsController.sections?[section] {
-			if sectionInfo.name == "0" {
-				return "Non EU Countries"
-			} else {
-				return "EU Countries"
-			}
+		
+		if section == 0 {
+			return "EU Countries"
+		} else {
+			return "Non EU Countries"
 		}
-		return nil
 	}
 }
 
@@ -175,10 +177,10 @@ extension TableAndCollectionViewController: UICollectionViewDelegate {
 		let cell = collectionView.cellForItem(at: indexPath)
 
 		let selectedCountry = intermediateCountries[indexPath.section][indexPath.row]
-		
-		cell.updateCustomCell(with: selectedCountry)
+
 
 		let popupViewController =  self.storyboard?.instantiateViewController(withIdentifier: "PopUpStoryboardID") as! PopUpViewController
+
 		popupViewController.countryData = selectedCountry
 		
 		popupViewController.modalTransitionStyle = .crossDissolve
@@ -211,12 +213,17 @@ extension TableAndCollectionViewController: UICollectionViewDataSource {
 	
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
 		
-		return CoreDataAssistant.fetchedResultsController.sections?.count ?? 0
+		return 2
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		
-		return CoreDataAssistant.fetchedResultsController.sections?[section].numberOfObjects ?? 0
+		if section == 0 {
+			return intermediateCountries[0].count
+		}
+		else {
+			return intermediateCountries[1].count
+		}
 	}
 	
 	
@@ -235,37 +242,37 @@ extension TableAndCollectionViewController: UICollectionViewDataSource {
 
 //MARK: NSFetchedResultsController
 
-extension TableAndCollectionViewController: NSFetchedResultsControllerDelegate {
-	
-	func controller(_controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeObject anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-		
-		switch type {
-		case .delete:
-			if let indexPath = indexPath {
-				self.table.deleteRows(at: [indexPath], with: .bottom)
-			}
-		case .insert:
-			table.insertRows(at: [newIndexPath!], with: .bottom)
-		case .update:
-			table.reloadRows(at: [indexPath!], with: .bottom)
-		case .move:
-			table.deleteRows(at: [indexPath!], with: .bottom)
-			table.insertRows(at: [indexPath!], with: .middle)
-		@unknown default:
-			fatalError("PANIC: didChangeObject: Unhandled 'case'! Check Documentation for Updates in possible cases.")
-		}
-	}
-	
-	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		
-		self.table.beginUpdates()
-		
-	}
-	
-	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-		
-		self.table.reloadData()
-		self.collectionView.reloadData()
-	}
-	
-}
+//extension TableAndCollectionViewController: NSFetchedResultsControllerDelegate {
+//
+//	func controller(_controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeObject anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//
+//		switch type {
+//		case .delete:
+//			if let indexPath = indexPath {
+//				self.table.deleteRows(at: [indexPath], with: .bottom)
+//			}
+//		case .insert:
+//			table.insertRows(at: [newIndexPath!], with: .bottom)
+//		case .update:
+//			table.reloadRows(at: [indexPath!], with: .bottom)
+//		case .move:
+//			table.deleteRows(at: [indexPath!], with: .bottom)
+//			table.insertRows(at: [indexPath!], with: .middle)
+//		@unknown default:
+//			fatalError("PANIC: didChangeObject: Unhandled 'case'! Check Documentation for Updates in possible cases.")
+//		}
+//	}
+//
+//	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//
+//		self.table.beginUpdates()
+//
+//	}
+//
+//	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//
+//		self.table.reloadData()
+//		self.collectionView.reloadData()
+//	}
+//
+//}
