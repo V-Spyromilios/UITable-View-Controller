@@ -16,8 +16,6 @@ final class CoreDataAssistant {
 		
 	}()
 	
-//	private init() { }
-	
 	static var context: NSManagedObjectContext = {
 		return persistentContainer.viewContext
 	}()
@@ -74,7 +72,6 @@ final class CoreDataAssistant {
 				var countriesInSection : [Country] = []
 				if let objects = section.objects as? [Country] {
 					for object in objects {
-						print(object.name!)
 						countriesInSection.append(object)
 					}
 				}
@@ -84,19 +81,4 @@ final class CoreDataAssistant {
 		return countries
 	}
 	
-	//MARK: sortCountries()
-//	static func sortCountries(for section: Int) -> [[Country]] {
-//		
-//		if section == 0 {
-//			
-//			let newSortedEuCountries = self.intermediateCountries[0].sorted { $0.name < $1.name }
-//			return [newSortedEuCountries, self.intermediateCountries[1]]
-//		} else if section == 1 {
-//			
-//			let newSortedNonEuCountries = self.intermediateCountries[1].sorted { $0."name" < $1."name" }
-//			return [self.intermediateCountries[0], newSortedNonEuCountries]
-//		} else {
-//			print("ERORR: sortCountries(section: Int) returned ' [[]] '")
-//			return [[]] }
-//	}
 }

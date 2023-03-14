@@ -32,7 +32,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.orange
 		self.navigationItem.rightBarButtonItem?.tintColor = UIColor.orange
 		table.rowHeight = 135
-
+		
 		let counter = CoreDataAssistant.intermediateCountries[0].count + (CoreDataAssistant.intermediateCountries[1].count)
 		print("ViewDidLoad COUNTER: \(counter)")
 		let grandpa = self.parent?.parent as? tabBarController
@@ -59,7 +59,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 	//MARK: - PrepareForSegue()
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
-
+		
 		if let destinationDetailViewController = segue.destination as? DetailViewController {
 			guard let indexPath = table.indexPathForSelectedRow else { return }
 			
@@ -120,7 +120,7 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 		CoreDataAssistant.intermediateCountries = CoreDataAssistant.loadCountries()
 		self.table.reloadData()
 		self.collectionView.reloadData()
-
+		
 		let grandpa = self.parent?.parent as? tabBarController
 		grandpa?.tabBar.items?.first?.badgeValue = String((CoreDataAssistant.intermediateCountries[0].count ) + (CoreDataAssistant.intermediateCountries[1].count))
 		//updateMasterTable()
@@ -241,40 +241,3 @@ extension TableAndCollectionViewController: UICollectionViewDataSource {
 	}
 	
 }
-
-//MARK: NSFetchedResultsController
-
-//extension TableAndCollectionViewController: NSFetchedResultsControllerDelegate {
-//
-//	func controller(_controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeObject anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//
-//		switch type {
-//		case .delete:
-//			if let indexPath = indexPath {
-//				self.table.deleteRows(at: [indexPath], with: .bottom)
-//			}
-//		case .insert:
-//			table.insertRows(at: [newIndexPath!], with: .bottom)
-//		case .update:
-//			table.reloadRows(at: [indexPath!], with: .bottom)
-//		case .move:
-//			table.deleteRows(at: [indexPath!], with: .bottom)
-//			table.insertRows(at: [indexPath!], with: .middle)
-//		@unknown default:
-//			fatalError("PANIC: didChangeObject: Unhandled 'case'! Check Documentation for Updates in possible cases.")
-//		}
-//	}
-//
-//	func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//
-//		self.table.beginUpdates()
-//
-//	}
-//
-//	func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//
-//		self.table.reloadData()
-//		self.collectionView.reloadData()
-//	}
-//
-//}

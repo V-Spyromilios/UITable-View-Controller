@@ -21,12 +21,12 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 	}
 	@IBOutlet weak var countryGdpField: UITextField!
 	
-
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+		
 		countryGdpField.keyboardType = .numberPad
-
+		
 		//MARK: - Add Gesture Rec. to Image for PHPicker
 		let tapRecogniser = UITapGestureRecognizer(target: self, action: #selector(choosePhoto))
 		imageView.addGestureRecognizer(tapRecogniser)
@@ -55,34 +55,32 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 	
 	// MARK: - Save Country with UnwindAction
 	@IBAction func UnwindAction(unwindSegue: UIStoryboardSegue) {
-
+		
 		let country = Country(context: CoreDataAssistant.context)
-
+		
 		country.name = countryNameField.text ?? ""
 		country.countryDescription = countryDescriptionField.text ?? ""
 		country.euMember =  isEuMemberSwitch.isOn
 		country.gdp =  Int64(Int(countryGdpField.text ?? "")!)
-
+		
 		
 		if let imageData = imageView.image?.jpegData(compressionQuality: 0.7) {
 			country.flagData = imageData
 		}
-
+		
 		if country.euMember == true {
 			CoreDataAssistant.intermediateCountries[0].append(country)
-//			CoreDataAssistant.intermediateCountries = CoreDataAssistant.sortCountries(for: 0)
-				} else {
-					CoreDataAssistant.intermediateCountries[1].append(country)
-//					CoreDataAssistant.intermediateCountries = CoreDataAssistant.sortCountries(for: 1)
-				}
+		} else {
+			CoreDataAssistant.intermediateCountries[1].append(country)
+		}
 		CoreDataAssistant.saveContext()
 		do {
 			try CoreDataAssistant.fetchedResultsController.performFetch()
 		} catch { print("PANIC: fetchedResultsController.performFetch() of AddNewCountryChild")}
 		dismiss(animated: true)
 	}
-
-
+	
+	
 	//MARK: - PHPicker functions
 	private func openPHPicker() {
 		var configuration = PHPickerConfiguration()
