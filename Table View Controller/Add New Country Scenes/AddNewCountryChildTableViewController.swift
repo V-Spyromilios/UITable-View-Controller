@@ -63,9 +63,13 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		country.euMember =  isEuMemberSwitch.isOn
 		country.gdp =  Int64(Int(countryGdpField.text ?? "")!)
 
-		let imageData = imageView.image?.jpegData(compressionQuality: 0.7)
-		country.flagData = imageData
-
+		
+		if let imageData = imageView.image?.jpegData(compressionQuality: 0.7) {
+			country.flagData = imageData
+		}
+		if country.euMember {
+			
+		}
 		CoreDataAssistant.saveContext()
 		dismiss(animated: true)
 	}

@@ -22,16 +22,12 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 		super.viewDidLoad()
 		
 		self.intermediateCountries = CoreDataAssistant.loadCountries()
-		CoreDataAssistant.fetchedResultsController.delegate = self
+
 		table.delegate = self
 		table.dataSource = self
 		collectionView.delegate = self
 		collectionView.dataSource = self
 
-//
-//		do {
-//			try CoreDataAssistant.fetchedResultsController.performFetch()
-//		} catch { print("PANIC: viewDidLoad :: performFetch() Failed -> \(error)") }
 		self.table.reloadData()
 
 		self.navigationItem.title = "Countries"
@@ -112,7 +108,7 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 		let selectedCountry = intermediateCountries[indexPath.section][indexPath.row]
 		
 		if editingStyle == .delete {
-			intermediateCountries.remove(at: [indexPath.section][indexPath.row])
+			intermediateCountries[indexPath.section].remove(at: indexPath.row)
 			
 			CoreDataAssistant.context.delete(selectedCountry)
 		}
@@ -130,14 +126,17 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 	//MARK: Table moveRowAt()
 	func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 		
-		guard sourceIndexPath.section == destinationIndexPath.section else { return }
-		
-		let selectedCountry = intermediateCountries[sourceIndexPath.section][sourceIndexPath.row]
-		
-		CoreDataAssistant.context.delete(selectedCountry)
-		
-		
-		self.table.reloadData() //?
+		if sourceIndexPath.section == 0 && destinationIndexPath.section == 0 {
+			let selectedCountry = intermediateCountries[0].remove(at: (sourceIndexPath.row))
+			intermediateCountries[destinationIndexPath.section].insert(selectedCountry, at: destinationIndexPath.row)
+		}
+		else if sourceIndexPath.section == 1 && destinationIndexPath.section == 1 {
+			let selectedCountry = intermediateCountries[1].remove(at: (sourceIndexPath.row))
+			intermediateCountries[1].insert(selectedCountry, at: destinationIndexPath.row)
+		}
+		else { return }
+
+		table.reloadData()
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
