@@ -7,8 +7,110 @@
 
 import Foundation
 
+struct EuDescriptions {
+	func getEuStatus(for countryName: String) -> Bool {
+
+		switch countryName {
+		case "greece":
+			return true
+		case "italy":
+			return true
+		case "austria":
+			return true
+		case "belgium":
+			return true
+		case "bulgaria":
+			return true
+		case "cyprus":
+			return true
+		case "denmark":
+			return true
+		case "estonia":
+			return true
+		case "finland":
+			return true
+		case "france":
+			return true
+		case "germany":
+			return true
+		case "hungary":
+			return true
+		case "ireland":
+			return true
+		case "spain":
+			return true
+		case "portugal":
+			return true
+		case "luxembourg":
+			return true
+		case "croatia":
+			return true
+		case "poland":
+			return true
+		case "romania":
+			return true
+		case "slovakia":
+			return true
+		case "malta":
+			return true
+		case "sweden":
+			return true
+		case "czech republic":
+			return true
+		case "netherlands":
+			return true
+		case "latvia":
+			return true
+		case "lithuania":
+			return true
+		case "slovenia":
+			return true
+		default:
+			return false
+		}
+	}
+}
 
 struct CountryDescriptions {
+	
+
+	func getCountryDescription(for countryName: String) -> String {
+
+		let countryName = countryName.lowercased()
+
+		switch countryName {
+		case "greece":
+			return greece
+		case "italy":
+			return italy
+		case "austria":
+			return austria
+		case "belgium":
+			return belgium
+		case "bulgaria":
+			return bulgaria
+		case "cyprus":
+			return cyprus
+		case "denmark":
+			return denmark
+		case "estonia":
+			return estonia
+		case "finland":
+			return finland
+		case "france":
+			return france
+		case "germany":
+			return germany
+		case "hungary":
+			return hungary
+		case "ireland":
+			return ireland
+		default:
+			return "\(countryName) is a trully wonderful country."
+		}
+	}
+
+
 	let greece = """
 Greece, officially the Hellenic Republic, is a country in Southeast Europe. It is situated on the southern tip of the Balkan Peninsula, and is located at the crossroads of Europe, Asia, and Africa. Greece shares land borders with Albania to the northwest, North Macedonia and Bulgaria to the north, and Turkey to the northeast. The Aegean Sea lies to the east of the mainland, the Ionian Sea to the west, and the Sea of Crete and the Mediterranean Sea to the south. Greece has the longest coastline on the Mediterranean Basin, featuring thousands of islands. The country consists of nine traditional geographic regions, and has a population of approximately 10.4 million. Athens is the nation's capital and largest city, followed by Thessaloniki and Patras.
 """

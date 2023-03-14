@@ -57,7 +57,7 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 	@IBAction func UnwindAction(unwindSegue: UIStoryboardSegue) {
 
 		let country = Country(context: CoreDataAssistant.context)
-		
+
 		country.name = countryNameField.text ?? ""
 		country.countryDescription = countryDescriptionField.text ?? ""
 		country.euMember =  isEuMemberSwitch.isOn
@@ -67,10 +67,18 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		if let imageData = imageView.image?.jpegData(compressionQuality: 0.7) {
 			country.flagData = imageData
 		}
-		if country.euMember {
-			
-		}
+
+		if country.euMember == true {
+			CoreDataAssistant.intermediateCountries[0].append(country)
+//			CoreDataAssistant.intermediateCountries = CoreDataAssistant.sortCountries(for: 0)
+				} else {
+					CoreDataAssistant.intermediateCountries[1].append(country)
+//					CoreDataAssistant.intermediateCountries = CoreDataAssistant.sortCountries(for: 1)
+				}
 		CoreDataAssistant.saveContext()
+		do {
+			try CoreDataAssistant.fetchedResultsController.performFetch()
+		} catch { print("PANIC: fetchedResultsController.performFetch() of AddNewCountryChild")}
 		dismiss(animated: true)
 	}
 

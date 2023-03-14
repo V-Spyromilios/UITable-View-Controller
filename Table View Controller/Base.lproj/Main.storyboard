@@ -471,7 +471,7 @@
                                 </cells>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="135" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hxu-SS-grB">
-                                <rect key="frame" x="12" y="193" width="369" height="546"/>
+                                <rect key="frame" x="12" y="237" width="369" height="502"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewCustomCell" rowHeight="165" id="AG3-0e-fMQ" customClass="CustomTableCell" customModule="Table_View_Controller" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="369" height="165"/>
@@ -543,12 +543,11 @@
                         <viewLayoutGuide key="safeArea" id="IC8-DQ-efi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="hxu-SS-grB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ww1-NP-X2S" secondAttribute="bottom" constant="-22" id="7wT-Aw-SOJ"/>
                             <constraint firstItem="hxu-SS-grB" firstAttribute="leading" secondItem="IC8-DQ-efi" secondAttribute="leading" constant="12" id="8jt-Fj-bXA"/>
                             <constraint firstItem="IC8-DQ-efi" firstAttribute="trailing" secondItem="hxu-SS-grB" secondAttribute="trailing" constant="12" id="8sN-qV-z8D"/>
                             <constraint firstItem="IC8-DQ-efi" firstAttribute="trailing" secondItem="Ww1-NP-X2S" secondAttribute="trailing" constant="5" id="AW9-y9-hWU"/>
                             <constraint firstItem="Ww1-NP-X2S" firstAttribute="leading" secondItem="IC8-DQ-efi" secondAttribute="leading" constant="12" id="Du2-Um-uyk"/>
-                            <constraint firstItem="hxu-SS-grB" firstAttribute="top" secondItem="Ww1-NP-X2S" secondAttribute="bottom" constant="-22" id="KGs-el-cB5"/>
+                            <constraint firstItem="hxu-SS-grB" firstAttribute="top" secondItem="Ww1-NP-X2S" secondAttribute="bottom" constant="22" id="KGs-el-cB5"/>
                             <constraint firstItem="Ww1-NP-X2S" firstAttribute="top" secondItem="IC8-DQ-efi" secondAttribute="top" constant="12" id="Uhi-tP-bn7"/>
                             <constraint firstItem="IC8-DQ-efi" firstAttribute="bottom" secondItem="hxu-SS-grB" secondAttribute="bottom" constant="30" id="WL5-FE-xhd"/>
                         </constraints>

@@ -28,11 +28,10 @@ class DetailViewController: UIViewController {
 	
 	private func setUpDetailView() {
 
-		guard let countryData = countryData else { return } //just checking if  'countryData'  is nil
-	
-		if let name = countryData.name {
-			countryNameLabel.text = name
-		} else { countryNameLabel.text = "" }
+		guard let countryData = countryData else { return } //just checking if  'countryData'  is
+		
+		countryNameLabel.text = countryData.name
+		
 		guard let customFont = UIFont(name: "George Rounded Bold Italic", size: 25) else {
 			fatalError("""
  Failed to load the "George Rounded Semibold Italic" font.
@@ -48,8 +47,8 @@ class DetailViewController: UIViewController {
 		countryDescriptionTextView.text = countryData.countryDescription
 
 		
-		if let imageData = countryData.flagData,
-		   let image = UIImage(data: imageData) {
+		if let data = countryData.flagData,
+		let image = UIImage(data: data) {
 				countryFlagImage.image = image
 			} else {
 			print("PANIC: DetailViewController :: setUpDetailView() :: failed to load Image.")

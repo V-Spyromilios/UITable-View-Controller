@@ -11,13 +11,16 @@ import CoreData
 
 final class CoreDataAssistant {
 	
-	private init() { }
+	static var intermediateCountries = {
+		return loadCountries()
+		
+	}()
 	
+//	private init() { }
 	
-	
-	static var context: NSManagedObjectContext {
+	static var context: NSManagedObjectContext = {
 		return persistentContainer.viewContext
-	}
+	}()
 	
 	static var persistentContainer: NSPersistentContainer = {
 		
@@ -40,7 +43,7 @@ final class CoreDataAssistant {
 		// Use a custom keyPath to group the countries into two sections based on euMember attribute
 		let sectionKeyPath = #keyPath(Country.euMember)
 		let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
-													managedObjectContext: CoreDataAssistant.context,
+													managedObjectContext: context,
 													sectionNameKeyPath: sectionKeyPath,
 													cacheName: nil)
 		do {
@@ -53,7 +56,7 @@ final class CoreDataAssistant {
 	
 	static func saveContext() {
 		
-		if CoreDataAssistant.context.hasChanges {
+		if self.context.hasChanges {
 			do {
 				try CoreDataAssistant.context.save()
 			} catch {
@@ -65,16 +68,35 @@ final class CoreDataAssistant {
 	static func loadCountries() -> [[Country]] {
 		
 		var countries = [[Country]]()
-		
+		print("loadCountries() CALLED:")
 		if let sections = CoreDataAssistant.fetchedResultsController.sections {
 			for section in sections {
-				var countriesInSection: [Country] = []
+				var countriesInSection : [Country] = []
 				if let objects = section.objects as? [Country] {
-					countriesInSection = objects.sorted(by: { $0.name < $1.name })
+					for object in objects {
+						print(object.name!)
+						countriesInSection.append(object)
+					}
 				}
 				countries.append(countriesInSection)
 			}
 		}
 		return countries
 	}
+	
+	//MARK: sortCountries()
+//	static func sortCountries(for section: Int) -> [[Country]] {
+//		
+//		if section == 0 {
+//			
+//			let newSortedEuCountries = self.intermediateCountries[0].sorted { $0.name < $1.name }
+//			return [newSortedEuCountries, self.intermediateCountries[1]]
+//		} else if section == 1 {
+//			
+//			let newSortedNonEuCountries = self.intermediateCountries[1].sorted { $0."name" < $1."name" }
+//			return [self.intermediateCountries[0], newSortedNonEuCountries]
+//		} else {
+//			print("ERORR: sortCountries(section: Int) returned ' [[]] '")
+//			return [[]] }
+//	}
 }

@@ -36,12 +36,11 @@ class CustomTableCell: UITableViewCell {
 		countryNameLabel.text = country.name
 		countryDescriptionLabel.text = country.countryDescription
 		countryGdpLabel.text = "\(country.gdp)"
-		
-		
-			if let imageData = country.flagData,
-			   let image = UIImage(data: imageData) {
-				self.countryImageView.image = image
-			} else {
+
+		if let data = country.flagData,
+		let image = UIImage(data: data) {
+			self.countryImageView.image = image
+		} else {
 			print("PANIC: CustomTableCell :: updateCustomCell() Failed to load Image.")
 			self.countryImageView.image = nil
 		}

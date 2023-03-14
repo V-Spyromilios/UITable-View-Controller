@@ -36,7 +36,7 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	
 	private func setUpDetailView() {
 		if let name = self.country?.name {
-			self.countryNameLabel.text = "\(name).uppercased())" + " GDP"
+			self.countryNameLabel.text = "\(name)".uppercased()
 		} else { self.countryNameLabel.text = "" }
 
 		self.location = CLLocation(latitude: country?.latitude ?? 0.0, longitude: country?.longitude ?? 0.0)

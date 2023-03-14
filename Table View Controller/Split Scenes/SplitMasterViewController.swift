@@ -11,8 +11,6 @@ import CoreData
 
 class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	var countries = [[Country]]()
-	
 	@IBOutlet weak var tableView: UITableView!
 	
 	static var delegate: SplitMasterDetailDelegate?
@@ -25,20 +23,25 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
-		return CoreDataAssistant.fetchedResultsController.sections?[section].numberOfObjects ?? 0
+		if section == 0 {
+			return CoreDataAssistant.intermediateCountries[0].count
+		}
+		else {
+			return CoreDataAssistant.intermediateCountries[1].count
+		}
 	}
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		
-		if section == 0 { return "EU" }
-		else if section == 1 { return "NON EU" }
+		if section == 0 { return "EU COUNTRIES" }
+		else if section == 1 { return "NON EU COUNTRIES" }
 		else { return nil }
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: SplitMasterTableCell.identifier, for: indexPath) as!SplitMasterTableCell
-		let selectedCountry = countries[indexPath.section][indexPath.row]
+		let selectedCountry = CoreDataAssistant.intermediateCountries[indexPath.section][indexPath.row]
 		
 		cell.updateCustomCell(with: selectedCountry)
 		
@@ -47,7 +50,7 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
-		let selectedCountry = countries[indexPath.section][indexPath.row]
+		let selectedCountry = CoreDataAssistant.intermediateCountries[indexPath.section][indexPath.row]
 		
 		if let detailVC = SplitMasterViewController.delegate as? SplitDetailViewController {
 			
@@ -59,8 +62,6 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-//		self.countries = CoreDataAssistant.fetchedResultsController.performFetch()
 		
 		tableView.delegate = self
 		tableView.dataSource = self
