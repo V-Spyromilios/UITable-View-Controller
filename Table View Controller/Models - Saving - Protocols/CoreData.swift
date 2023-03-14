@@ -61,4 +61,20 @@ final class CoreDataAssistant {
 			}
 		}
 	}
+	
+	static func loadCountries() -> [[Country]] {
+		
+		var countries = [[Country]]()
+		
+		if let sections = CoreDataAssistant.fetchedResultsController.sections {
+			for section in sections {
+				var countriesInSection: [Country] = []
+				if let objects = section.objects as? [Country] {
+					countriesInSection = objects.sorted(by: { $0.name < $1.name })
+				}
+				countries.append(countriesInSection)
+			}
+		}
+		return countries
+	}
 }

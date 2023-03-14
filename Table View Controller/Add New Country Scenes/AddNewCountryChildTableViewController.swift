@@ -57,12 +57,13 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 	@IBAction func UnwindAction(unwindSegue: UIStoryboardSegue) {
 
 		let country = Country(context: CoreDataAssistant.context)
+		
 		country.name = countryNameField.text ?? ""
 		country.countryDescription = countryDescriptionField.text ?? ""
 		country.euMember =  isEuMemberSwitch.isOn
 		country.gdp =  Int64(Int(countryGdpField.text ?? "")!)
 
-		let imageData = imageView.image?.jpegData(compressionQuality: 0.8)
+		let imageData = imageView.image?.jpegData(compressionQuality: 0.7)
 		country.flagData = imageData
 
 		CoreDataAssistant.saveContext()

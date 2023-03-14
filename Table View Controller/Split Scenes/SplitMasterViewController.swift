@@ -53,7 +53,6 @@ class SplitMasterViewController: UIViewController, UITableViewDelegate, UITableV
 			
 			detailVC.didSelectCountry(country: selectedCountry)
 			splitViewController?.showDetailViewController(detailVC, sender: nil)
-			
 		}
 		tableView.deselectRow(at: indexPath, animated: true)
 	}

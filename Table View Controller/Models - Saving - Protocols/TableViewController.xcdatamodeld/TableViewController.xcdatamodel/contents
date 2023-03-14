@@ -3,7 +3,7 @@
     <entity name="Country" representedClassName=".Country" syncable="YES">
         <attribute name="countryDescription" attributeType="String"/>
         <attribute name="euMember" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="flagData" attributeType="Binary"/>
+        <attribute name="flagData" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="gdp" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="1" usesScalarValueType="YES"/>

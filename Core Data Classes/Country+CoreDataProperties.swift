@@ -16,13 +16,13 @@ extension Country {
         return NSFetchRequest<Country>(entityName: "Country")
     }
 
-    @NSManaged public var countryDescription: String?
+    @NSManaged public var countryDescription: String
     @NSManaged public var euMember: Bool
-    @NSManaged public var flagData: Data?
+    @NSManaged public var flagData: Data
     @NSManaged public var gdp: Int64
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
-    @NSManaged public var name: String?
+    @NSManaged public var name: String
 
 }
 
