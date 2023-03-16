@@ -100,7 +100,7 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 	//MARK: - Table didSelectRow()
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
-		performSegue(withIdentifier: "seguetoDetailView", sender: self) // self = the tableView. (who performed segue). could be nil
+		performSegue(withIdentifier: "seguetoDetailView", sender: self)
 		self.table.deselectRow(at: indexPath, animated: true)
 	}
 	
@@ -123,7 +123,7 @@ extension TableAndCollectionViewController: UITableViewDelegate, UITableViewData
 		
 		let grandpa = self.parent?.parent as? tabBarController
 		grandpa?.tabBar.items?.first?.badgeValue = String((CoreDataAssistant.intermediateCountries[0].count ) + (CoreDataAssistant.intermediateCountries[1].count))
-		//updateMasterTable()
+		
 	}
 	
 	//MARK: Table moveRowAt()
