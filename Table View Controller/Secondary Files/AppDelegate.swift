@@ -13,11 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	var window: UIWindow?
 	
-	//	func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
-	//		
-	//		
-	//	}
-	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		
 		let isEnabled = UserDefaults.standard.value(forKey: "CountriesAreInitialised") as? Bool
