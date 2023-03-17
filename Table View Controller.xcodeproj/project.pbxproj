@@ -22,6 +22,7 @@
 		EF5A8A1C297C680F000962E5 /* GeorgeRoundedBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF5A8A1B297C680A000962E5 /* GeorgeRoundedBoldItalic.otf */; };
 		EF66193529965583004922A4 /* SplitCountryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF66193429965583004922A4 /* SplitCountryProtocol.swift */; };
 		EF6BB24929ACA4DB00A1E66A /* flags in Resources */ = {isa = PBXBuildFile; fileRef = EF6BB24829ACA4DB00A1E66A /* flags */; };
+		EF6E9EBB29C4636F004423E6 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6E9EBA29C4636F004423E6 /* Weather.swift */; };
 		EF7627B529BF357B00E719A2 /* UIImage Compress Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7627B429BF357B00E719A2 /* UIImage Compress Extension.swift */; };
 		EF7627BB29BF559200E719A2 /* Core Data Assistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7627BA29BF559200E719A2 /* Core Data Assistant.swift */; };
 		EF79405B299CFB1F00A6E64E /* SplitMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF79405A299CFB1F00A6E64E /* SplitMasterViewController.swift */; };
@@ -42,8 +43,8 @@
 		EF0C127229A8FB1B005EB756 /* TableViewController.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TableViewController.xcdatamodel; sourceTree = "<group>"; };
 		EF1D83092976E9A00084B7B9 /* AddNewCountryParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCountryParentViewController.swift; sourceTree = "<group>"; };
 		EF2962F3298ACF8000DB9E22 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
-		EF2AA2FC29C0BC94002F0085 /* Country+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Country+CoreDataClass.swift"; path = "Core Data Classes/Country+CoreDataClass.swift"; sourceTree = "<group>"; };
-		EF2AA2FD29C0BC94002F0085 /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Country+CoreDataProperties.swift"; path = "Core Data Classes/Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		EF2AA2FC29C0BC94002F0085 /* Country+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataClass.swift"; sourceTree = "<group>"; };
+		EF2AA2FD29C0BC94002F0085 /* Country+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Country+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EF40A6C62993BDFE003AD14C /* SplitMasterTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitMasterTableCell.swift; sourceTree = "<group>"; };
 		EF40A6CC2993CC32003AD14C /* SplitDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitDetailViewController.swift; sourceTree = "<group>"; };
 		EF40A6D02993E232003AD14C /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
@@ -53,8 +54,8 @@
 		EF5A8A19297C6382000962E5 /* GeorgeRoundedSemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GeorgeRoundedSemiboldItalic.otf; sourceTree = "<group>"; };
 		EF5A8A1B297C680A000962E5 /* GeorgeRoundedBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GeorgeRoundedBoldItalic.otf; sourceTree = "<group>"; };
 		EF66193429965583004922A4 /* SplitCountryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitCountryProtocol.swift; sourceTree = "<group>"; };
-		EF667D5829B8C22C0079D978 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EF6BB24829ACA4DB00A1E66A /* flags */ = {isa = PBXFileReference; lastKnownFileType = folder; path = flags; sourceTree = "<group>"; };
+		EF6E9EBA29C4636F004423E6 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		EF7627B429BF357B00E719A2 /* UIImage Compress Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage Compress Extension.swift"; sourceTree = "<group>"; };
 		EF7627BA29BF559200E719A2 /* Core Data Assistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Core Data Assistant.swift"; sourceTree = "<group>"; };
 		EF79405A299CFB1F00A6E64E /* SplitMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitMasterViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 				EFF0860929AB7646000F7881 /* Core Data Init.swift */,
 				EF7627B429BF357B00E719A2 /* UIImage Compress Extension.swift */,
 				EFD85413299A7F9F005CA030 /* Locations.swift */,
+				EF6E9EBA29C4636F004423E6 /* Weather.swift */,
 				EF0C127129A8FB1B005EB756 /* TableViewController.xcdatamodeld */,
 			);
 			path = "Models - Saving - Protocols";
@@ -142,6 +144,8 @@
 		EF782D9029ACF4AD00654271 /* Core Data Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EF2AA2FC29C0BC94002F0085 /* Country+CoreDataClass.swift */,
+				EF2AA2FD29C0BC94002F0085 /* Country+CoreDataProperties.swift */,
 			);
 			path = "Core Data Classes";
 			sourceTree = "<group>";
@@ -149,8 +153,6 @@
 		EFD21BB8297171EF000C0F11 = {
 			isa = PBXGroup;
 			children = (
-				EF2AA2FC29C0BC94002F0085 /* Country+CoreDataClass.swift */,
-				EF2AA2FD29C0BC94002F0085 /* Country+CoreDataProperties.swift */,
 				EF782D9029ACF4AD00654271 /* Core Data Classes */,
 				EFD21BC3297171EF000C0F11 /* Table View Controller */,
 				EFD21BC2297171EF000C0F11 /* Products */,
@@ -187,7 +189,6 @@
 				EF6BB24829ACA4DB00A1E66A /* flags */,
 				EFD21BC4297171EF000C0F11 /* AppDelegate.swift */,
 				EFD21BC6297171EF000C0F11 /* SceneDelegate.swift */,
-				EF667D5829B8C22C0079D978 /* README.md */,
 				EFD21BCD297171F1000C0F11 /* Assets.xcassets */,
 				EFD21BCF297171F1000C0F11 /* LaunchScreen.storyboard */,
 			);
@@ -288,6 +289,7 @@
 				EF40A6D12993E232003AD14C /* SplitViewController.swift in Sources */,
 				EFF0860A29AB7646000F7881 /* Core Data Init.swift in Sources */,
 				EF0C127329A8FB1B005EB756 /* TableViewController.xcdatamodeld in Sources */,
+				EF6E9EBB29C4636F004423E6 /* Weather.swift in Sources */,
 				EF7627BB29BF559200E719A2 /* Core Data Assistant.swift in Sources */,
 				EF40A6C72993BDFE003AD14C /* SplitMasterTableCell.swift in Sources */,
 				EF2AA2FF29C0BC94002F0085 /* Country+CoreDataProperties.swift in Sources */,

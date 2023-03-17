@@ -66,7 +66,6 @@ final class CoreDataAssistant {
 	static func loadCountries() -> [[Country]] {
 		
 		var countries = [[Country]]()
-		print("loadCountries() CALLED:")
 		if let sections = CoreDataAssistant.fetchedResultsController.sections {
 			for section in sections {
 				var countriesInSection : [Country] = []

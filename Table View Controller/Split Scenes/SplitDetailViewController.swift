@@ -13,6 +13,7 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	var country: Country? {
 		didSet {
 			setUpDetailView()
+			setUpWeatherView()
 		}
 	}
 	
@@ -34,11 +35,61 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	}
 	
 	
+	private func setUpWeatherView() {
+		
+		let headers = [
+			"X-RapidAPI-Key": "edeaab50d3msh5e66efba0a15f63p1f78d8jsnb42899463a43",
+			"X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
+		]
+		
+		let urlLatLong = {
+			
+			let stringLat = "\(self.country?.latitude ?? 0)"
+			let stringLong = "\(self.country?.longitude ?? 0)"
+			return "\(stringLat),\(stringLong)"
+		}()
+		
+		
+		
+		let request = NSMutableURLRequest(url: NSURL(string: "https://weatherapi-com.p.rapidapi.com/current.json?q=\(urlLatLong)")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+		request.httpMethod = "GET"
+		request.allHTTPHeaderFields = headers
+		
+		let configuration = URLSessionConfiguration.default
+		configuration.waitsForConnectivity = true
+		let session = URLSession.shared
+		
+		let task: Void = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+			
+			guard let httpResponse = response as? HTTPURLResponse else {
+				print("PANIC: httpResponse failed to cast")
+				return
+			}
+			if httpResponse.statusCode != 200 {
+				print("PANIC HTTP URL RESPONSE != 200")
+				return
+			}
+			guard let data = data else {
+				print("PANIC: URLSession:: data -> \(error.debugDescription)")
+				return
+			}
+			do {
+				let decoder = JSONDecoder()
+				let weather = try decoder.decode(Weather.self, from: data)
+			} catch {
+				print("PANIC:  JSONDecoder() :: .decode() -> \(error.localizedDescription)")
+			}
+			
+		}).resume()
+		
+	}
+	
+	
 	private func setUpDetailView() {
 		if let name = self.country?.name {
 			self.countryNameLabel.text = "\(name)".uppercased()
 		} else { self.countryNameLabel.text = "" }
-
+		
 		self.location = CLLocation(latitude: country?.latitude ?? 0.0, longitude: country?.longitude ?? 0.0)
 		self.mapView.centerToLocation(location: location)
 		let annotation = MKPointAnnotation()
@@ -73,9 +124,10 @@ extension MKMapView {
 }
 
 extension SplitDetailViewController: SplitMasterDetailDelegate {
-
+	
 	func didSelectCountry(country: Country) {
 		self.country = country
 	}
-
+	
 }
+
