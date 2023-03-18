@@ -609,19 +609,193 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I9x-j2-WGX">
-                                <rect key="frame" x="12" y="144" width="369" height="325"/>
+                                <rect key="frame" x="12" y="144" width="369" height="272"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="HDx-rI-QoL"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="HDx-rI-QoL"/>
                                 </constraints>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gTC-8P-NQA">
+                                <rect key="frame" x="16" y="431" width="147" height="178"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="UuB-fg-d4d" userLabel="temperatureStack">
+                                        <rect key="frame" x="0.0" y="0.0" width="147" height="40"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lwb-AR-PTp" userLabel="temperatureImage">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="lwb-AR-PTp" secondAttribute="height" multiplier="1:1" id="2uJ-Rm-NFf"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="Kdv-hQ-QpZ"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="adZ-lS-UBh"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6F2-Hz-q4A" userLabel="temperatureLabel">
+                                                <rect key="frame" x="67" y="0.0" width="80" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="Qah-Ux-izI"/>
+                                                    <constraint firstAttribute="width" secondItem="6F2-Hz-q4A" secondAttribute="height" multiplier="2:1" id="ao0-FI-Hd5"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="6F2-Hz-q4A" firstAttribute="height" secondItem="lwb-AR-PTp" secondAttribute="height" id="pKR-jQ-fy6"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="5JY-hg-S9y" userLabel="feelsLikeStack">
+                                        <rect key="frame" x="0.0" y="46" width="147" height="40"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bae-L7-heM" userLabel="feelsLikeImage">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="FOe-4d-0TB"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="Hgh-o4-Bga"/>
+                                                    <constraint firstAttribute="width" secondItem="Bae-L7-heM" secondAttribute="height" multiplier="1:1" id="h9L-b6-dif"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBU-HK-Sl4" userLabel="feelsLikeLabel">
+                                                <rect key="frame" x="67" y="0.0" width="80" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="VBU-HK-Sl4" secondAttribute="height" multiplier="2:1" id="Hdn-KW-ceO"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="oQB-jZ-chD"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="VBU-HK-Sl4" firstAttribute="height" secondItem="Bae-L7-heM" secondAttribute="height" id="pPV-IK-av5"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="ApK-vP-842" userLabel="humidityStack">
+                                        <rect key="frame" x="0.0" y="92" width="147" height="40"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PIg-to-Wit" userLabel="humidityImage">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="4YO-5M-KgR"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="M97-A6-z6D"/>
+                                                    <constraint firstAttribute="width" secondItem="PIg-to-Wit" secondAttribute="height" multiplier="1:1" id="XVR-qZ-GYS"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9s-rp-koC" userLabel="humidityLabel">
+                                                <rect key="frame" x="67" y="0.0" width="80" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="V9s-rp-koC" secondAttribute="height" multiplier="2:1" id="8FP-Wv-Ddx"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="a8p-xO-b2T"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="V9s-rp-koC" firstAttribute="height" secondItem="PIg-to-Wit" secondAttribute="height" id="w1n-ng-hCv"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="4E9-u6-8Si" userLabel="uvStack">
+                                        <rect key="frame" x="0.0" y="138" width="147" height="40"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U7V-Dl-Gxb" userLabel="uvImage">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="C7x-zl-8n2"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="DGH-nZ-glB"/>
+                                                    <constraint firstAttribute="width" secondItem="U7V-Dl-Gxb" secondAttribute="height" multiplier="1:1" id="nN7-7a-N36"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCw-Yf-eFk" userLabel="uvLabel">
+                                                <rect key="frame" x="67" y="0.0" width="80" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="9wL-hB-4op"/>
+                                                    <constraint firstAttribute="width" secondItem="WCw-Yf-eFk" secondAttribute="height" multiplier="2:1" id="Aod-Un-8X8"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="WCw-Yf-eFk" firstAttribute="height" secondItem="U7V-Dl-Gxb" secondAttribute="height" id="dD5-fz-zcy"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="SCM-me-CLL" userLabel="weatherStack">
+                                <rect key="frame" x="233" y="431" width="70" height="125"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bUg-rX-jb7" userLabel="weatherIconImage">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ek6-fI-UCH" userLabel="weatherLabel">
+                                        <rect key="frame" x="0.0" y="97" width="70" height="28"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Ek6-fI-UCH" secondAttribute="height" multiplier="5:2" id="Xa6-yF-YT6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="FIN-eI-ufg"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="7yO-Ws-j16" userLabel="localTimeStack">
+                                <rect key="frame" x="123" y="690" width="147" height="40"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xmd-FW-XP1" userLabel="localTimeImage">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="xmd-FW-XP1" secondAttribute="height" multiplier="1:1" id="6na-C2-Oc6"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="aUP-qS-sZy"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="tk7-wC-7jV"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urR-wI-6Aa" userLabel="localtimeLabel">
+                                        <rect key="frame" x="67" y="0.0" width="80" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="urR-wI-6Aa" secondAttribute="height" multiplier="2:1" id="0ri-gv-eJz"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="hqS-pa-VcF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="urR-wI-6Aa" firstAttribute="height" secondItem="xmd-FW-XP1" secondAttribute="height" id="nZm-HR-GXq"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lfL-rd-fGU"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="lfL-rd-fGU" firstAttribute="trailing" secondItem="SCM-me-CLL" secondAttribute="trailing" constant="90" id="8Lq-S3-K5v"/>
                             <constraint firstItem="I9x-j2-WGX" firstAttribute="top" secondItem="lfL-rd-fGU" secondAttribute="top" constant="41" id="CHh-CN-d7y"/>
                             <constraint firstItem="I9x-j2-WGX" firstAttribute="top" secondItem="DXz-gg-oUF" secondAttribute="bottom" constant="10" id="GKr-ez-KeI"/>
-                            <constraint firstItem="lfL-rd-fGU" firstAttribute="bottom" secondItem="I9x-j2-WGX" secondAttribute="bottom" priority="700" constant="300" id="Ubn-ce-uey"/>
+                            <constraint firstItem="gTC-8P-NQA" firstAttribute="leading" secondItem="k6t-Cg-NJP" secondAttribute="leadingMargin" id="T3L-lm-k8O"/>
+                            <constraint firstItem="lfL-rd-fGU" firstAttribute="bottom" secondItem="I9x-j2-WGX" secondAttribute="bottom" priority="700" constant="330" id="Ubn-ce-uey"/>
+                            <constraint firstItem="lfL-rd-fGU" firstAttribute="bottom" secondItem="gTC-8P-NQA" secondAttribute="bottom" constant="160" id="ZXI-YF-iNp"/>
+                            <constraint firstItem="lfL-rd-fGU" firstAttribute="bottom" secondItem="7yO-Ws-j16" secondAttribute="bottom" constant="39" id="bPw-GS-MX5"/>
+                            <constraint firstItem="SCM-me-CLL" firstAttribute="top" secondItem="I9x-j2-WGX" secondAttribute="bottom" constant="15" id="bn5-n9-5yE"/>
+                            <constraint firstItem="gTC-8P-NQA" firstAttribute="top" secondItem="I9x-j2-WGX" secondAttribute="bottom" constant="15" id="bvJ-RE-zG4"/>
+                            <constraint firstItem="7yO-Ws-j16" firstAttribute="centerX" secondItem="lfL-rd-fGU" secondAttribute="centerX" id="djP-wP-6OH"/>
                             <constraint firstItem="I9x-j2-WGX" firstAttribute="leading" secondItem="lfL-rd-fGU" secondAttribute="leading" constant="12" id="f2N-Rf-Tgn"/>
                             <constraint firstItem="DXz-gg-oUF" firstAttribute="top" secondItem="lfL-rd-fGU" secondAttribute="top" constant="10" id="g7N-t6-crm"/>
                             <constraint firstItem="lfL-rd-fGU" firstAttribute="trailing" secondItem="I9x-j2-WGX" secondAttribute="trailing" constant="12" id="sJd-zP-HoQ"/>
@@ -633,12 +807,24 @@
                     <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="countryNameLabel" destination="DXz-gg-oUF" id="vK0-GO-eTL"/>
+                        <outlet property="feelsLikeImage" destination="Bae-L7-heM" id="PCM-ZY-RTO"/>
+                        <outlet property="feelsLikeLabel" destination="VBU-HK-Sl4" id="b8z-V5-TX7"/>
+                        <outlet property="humidityImage" destination="PIg-to-Wit" id="Iac-94-gvr"/>
+                        <outlet property="humidityLabel" destination="V9s-rp-koC" id="HRD-xO-edY"/>
+                        <outlet property="localTimeLabel" destination="urR-wI-6Aa" id="Yme-48-mgK"/>
+                        <outlet property="localtimeImage" destination="xmd-FW-XP1" id="5MP-hW-9OV"/>
                         <outlet property="mapView" destination="I9x-j2-WGX" id="k8E-du-FLu"/>
+                        <outlet property="temperatureImage" destination="lwb-AR-PTp" id="pn1-Zs-BcV"/>
+                        <outlet property="temperatureLabel" destination="6F2-Hz-q4A" id="BVw-sg-h0V"/>
+                        <outlet property="uvImage" destination="U7V-Dl-Gxb" id="Rvd-I9-Md9"/>
+                        <outlet property="uvLabel" destination="WCw-Yf-eFk" id="Egi-E0-RFJ"/>
+                        <outlet property="weatherIcon" destination="bUg-rX-jb7" id="Xbb-gZ-rVQ"/>
+                        <outlet property="weatherLabel" destination="Ek6-fI-UCH" id="iLj-W3-Zug"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0gW-c0-7Bu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1407" y="1361"/>
+            <point key="canvasLocation" x="1406.8702290076335" y="1359.8591549295775"/>
         </scene>
         <!--Countries List-->
         <scene sceneID="pc9-G4-GwQ">

@@ -10,6 +10,32 @@ import MapKit
 
 class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	
+	
+	@IBOutlet weak var temperatureImage: UIImageView!
+	@IBOutlet weak var temperatureLabel: UILabel!
+	
+	@IBOutlet weak var feelsLikeImage: UIImageView!
+	@IBOutlet weak var feelsLikeLabel: UILabel!
+	
+	@IBOutlet weak var humidityImage: UIImageView!
+	@IBOutlet weak var humidityLabel: UILabel!
+	
+	
+	@IBOutlet weak var uvImage: UIImageView!
+	@IBOutlet weak var uvLabel: UILabel!
+	
+	
+	@IBOutlet weak var mapView: MKMapView!
+	@IBOutlet weak var countryNameLabel: UILabel!
+	
+	
+	@IBOutlet weak var localtimeImage: UIImageView!
+	@IBOutlet weak var localTimeLabel: UILabel!
+	
+	@IBOutlet weak var weatherIcon: UIImageView!
+	@IBOutlet weak var weatherLabel: UILabel!
+	
+	
 	var country: Country? {
 		didSet {
 			setUpDetailView()
@@ -18,10 +44,7 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	}
 	
 	var location = CLLocation(latitude: 37.4347, longitude: 25.3461)
-	
-	@IBOutlet weak var mapView: MKMapView!
-	@IBOutlet weak var countryNameLabel: UILabel!
-	
+	var weather: Weather?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -32,6 +55,17 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 		mapView.layer.borderWidth = 5
 		
 		SplitMasterViewController.delegate = self
+		
+		temperatureImage.image = UIImage(systemName: "thermometer.medium")?.withRenderingMode(.alwaysTemplate) ?? nil
+		humidityImage.image = UIImage(systemName: "humidity.fill")?.withRenderingMode(.alwaysTemplate) ?? nil
+		uvImage.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysOriginal) ?? nil
+		feelsLikeImage.image = UIImage(systemName: "figure.arms.open")?.withRenderingMode(.alwaysTemplate) ?? nil
+		localtimeImage.image = UIImage(systemName: "mappin.and.ellipse")?.withRenderingMode(.alwaysTemplate)
+		
+		self.temperatureImage.tintColor = .red
+		self.humidityImage.tintColor = .blue
+		self.feelsLikeImage.tintColor = .gray
+		self.localtimeImage.tintColor = .blue
 	}
 	
 	
@@ -59,7 +93,7 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 		configuration.waitsForConnectivity = true
 		let session = URLSession.shared
 		
-		let task: Void = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+		let _: Void = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
 			
 			guard let httpResponse = response as? HTTPURLResponse else {
 				print("PANIC: httpResponse failed to cast")
@@ -73,15 +107,37 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 				print("PANIC: URLSession:: data -> \(error.debugDescription)")
 				return
 			}
-			do {
-				let decoder = JSONDecoder()
-				let weather = try decoder.decode(Weather.self, from: data)
-			} catch {
-				print("PANIC:  JSONDecoder() :: .decode() -> \(error.localizedDescription)")
+			if let jsonString = String(data: data, encoding: .utf8) {
+				
+				if let data = jsonString.data(using: .utf8) {
+					do {
+						let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+						
+						let weatherData = try JSONSerialization.data(withJSONObject: json?["current"] ?? [:], options: .prettyPrinted)
+						let decoder = JSONDecoder()
+						let current = try decoder.decode(Current.self, from: weatherData)
+						let locationData = try JSONSerialization.data(withJSONObject: json?["location"] ?? [:], options: .prettyPrinted)
+						let location = try decoder.decode(Location.self, from: locationData)
+						self.weather = Weather(current: current, location: location)
+						print(self.weather!)
+						if let weather = self.weather {
+							self.setUpLabels(with: weather)
+						}
+					} catch {
+						print("PANIC: Failed to decode weather data -> \(error)")
+					}
+				}
+				
+				print(jsonString)
 			}
+			//			do {
+			//				let decoder = JSONDecoder()
+			//				self.weather = try decoder.decode(Weather.self, from: data)
+			//			} catch {
+			//				print("PANIC:  JSONDecoder() :: .decode() -> \(error.localizedDescription)")
+			//			}
 			
 		}).resume()
-		
 	}
 	
 	
@@ -112,6 +168,43 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 			annotationView!.canShowCallout = true
 		} else { annotationView!.annotation = annotation }
 		return annotationView
+	}
+	
+	private func setUpLabels(with weather: Weather) {
+		
+		var weatherimage : UIImage?
+		
+		if let imageUrl = URL(string: weather.current.condition.iconUrl),
+		   let imageData = try? Data(contentsOf: imageUrl) {
+			weatherimage = UIImage(data: imageData)
+		}
+		DispatchQueue.main.async {
+			
+			if let weatherimage = weatherimage {
+				self.weatherIcon.image = weatherimage
+			} else { self.weatherIcon.image = UIImage(systemName: "cloud.sun") }
+			
+			self.temperatureLabel.text = String(weather.current.temperature) + " °C"
+			self.humidityLabel.text = String(weather.current.humidity) + " %"
+			self.feelsLikeLabel.text = String(weather.current.feelsLike) + " °C"
+			self.uvLabel.text = String(weather.current.uv)
+			
+			self.temperatureLabel.font = UIFont(name: "George Rounded Bold Italic", size: 20)
+			self.humidityLabel.font = UIFont(name: "George Rounded Bold Italic", size: 20)
+			self.feelsLikeLabel.font = UIFont(name: "George Rounded Bold Italic", size: 20)
+			self.uvLabel.font = UIFont(name: "George Rounded Bold Italic", size: 20)
+			
+			let localTime = weather.location.localTime.components(separatedBy: " ").last
+			if let localTime = localTime {
+				self.localTimeLabel.text = localTime
+			}
+			self.localTimeLabel.font = UIFont(name: "George Rounded Bold Italic", size: 20)
+			
+			if weather.current.condition.text != "" {
+				self.weatherLabel.text = weather.current.condition.text
+			} else { self.weatherLabel.text = "No Data" }
+			self.weatherLabel.font = UIFont(name: "George Rounded Bold Italic", size: 22)
+		}
 	}
 }
 

@@ -32,9 +32,7 @@ class TableAndCollectionViewController: UIViewController, UIPopoverPresentationC
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.orange
 		self.navigationItem.rightBarButtonItem?.tintColor = UIColor.orange
 		table.rowHeight = 135
-		
-		let counter = CoreDataAssistant.intermediateCountries[0].count + (CoreDataAssistant.intermediateCountries[1].count)
-		print("ViewDidLoad COUNTER: \(counter)")
+
 		let grandpa = self.parent?.parent as? tabBarController
 		grandpa?.tabBar.items?.first?.badgeValue = String((CoreDataAssistant.intermediateCountries[0].count ) + (CoreDataAssistant.intermediateCountries[1].count))
 	}
