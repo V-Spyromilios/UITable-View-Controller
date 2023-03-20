@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 
+
 class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	
 	
@@ -39,7 +40,7 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	var country: Country? {
 		didSet {
 			setUpDetailView()
-			setUpWeatherView()
+			pullWeatherData()
 		}
 	}
 	
@@ -69,7 +70,7 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	}
 	
 	
-	private func setUpWeatherView() {
+	private func pullWeatherData() {
 		
 		let headers = [
 			"X-RapidAPI-Key": "edeaab50d3msh5e66efba0a15f63p1f78d8jsnb42899463a43",
@@ -80,62 +81,60 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 			
 			let stringLat = "\(self.country?.latitude ?? 0)"
 			let stringLong = "\(self.country?.longitude ?? 0)"
+			//TODO: if long/ lang nil setUpNilLabels()
 			return "\(stringLat),\(stringLong)"
 		}()
-		
-		
-		
-		let request = NSMutableURLRequest(url: NSURL(string: "https://weatherapi-com.p.rapidapi.com/current.json?q=\(urlLatLong)")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+		guard let urlRequest = URL(string: "https://weatherapi-com.p.rapidapi.com/current.json?q=\(urlLatLong)") else { return }
+		var request = URLRequest(url: urlRequest)
+//
+//		let request = NSMutableURLRequest(url: NSURL(string: "https://weatherapi-com.p.rapidapi.com/current.json?q=\(urlLatLong)")! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
 		request.httpMethod = "GET"
 		request.allHTTPHeaderFields = headers
+		
+//		request.addValue("weatherapi-com.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
 		
 		let configuration = URLSessionConfiguration.default
 		configuration.waitsForConnectivity = true
 		let session = URLSession.shared
 		
-		let _: Void = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-			
-			guard let httpResponse = response as? HTTPURLResponse else {
-				print("PANIC: httpResponse failed to cast")
-				return
-			}
-			if httpResponse.statusCode != 200 {
-				print("PANIC HTTP URL RESPONSE != 200")
-				return
-			}
-			guard let data = data else {
-				print("PANIC: URLSession:: data -> \(error.debugDescription)")
-				return
-			}
-			if let jsonString = String(data: data, encoding: .utf8) {
+			let _: Void = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
 				
-				if let data = jsonString.data(using: .utf8) {
-					do {
-						let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-						
-						let weatherData = try JSONSerialization.data(withJSONObject: json?["current"] ?? [:], options: .prettyPrinted)
-						let decoder = JSONDecoder()
-						let current = try decoder.decode(Current.self, from: weatherData)
-						let locationData = try JSONSerialization.data(withJSONObject: json?["location"] ?? [:], options: .prettyPrinted)
-						let location = try decoder.decode(Location.self, from: locationData)
-						self.weather = Weather(current: current, location: location)
-						print(self.weather!)
-						if let weather = self.weather {
-							self.setUpLabels(with: weather)
-						}
-					} catch {
-						print("PANIC: Failed to decode weather data -> \(error)")
-					}
+				guard let httpResponse = response as? HTTPURLResponse else {
+					print("PANIC: httpResponse failed to cast")
+					return
 				}
+				if httpResponse.statusCode != 200 {
+					print("PANIC HTTP URL RESPONSE != 200")
+					return
+				}
+				guard let data = data else {
+					print("PANIC: URLSession:: data -> \(error.debugDescription)")
+					return
+				}
+//						do {
+//							let decoder = JSONDecoder()
+//							self.weather = try decoder.decode(Weather.self, from: data)
+//						} catch {
+//							print("PANIC:  JSONDecoder() :: .decode() -> \(error.localizedDescription)")
+//						}
+			do {
+				let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+
+				let weatherData = try JSONSerialization.data(withJSONObject: json?["current"] ?? [:], options: [])
+				let locationData = try JSONSerialization.data(withJSONObject: json?["location"] ?? [:], options: [])
+
+				let decoder = JSONDecoder()
+				let current = try decoder.decode(Current.self, from: weatherData)
+				let location = try decoder.decode(Location.self, from: locationData)
+
+				self.weather = Weather(current: current, location: location)
 				
-				print(jsonString)
+				if let weather = self.weather {
+					self.setUpLabels(with: weather)
+				}
+			} catch {
+				print("PANIC: Failed to decode weather data -> \(error)")
 			}
-			//			do {
-			//				let decoder = JSONDecoder()
-			//				self.weather = try decoder.decode(Weather.self, from: data)
-			//			} catch {
-			//				print("PANIC:  JSONDecoder() :: .decode() -> \(error.localizedDescription)")
-			//			}
 			
 		}).resume()
 	}
@@ -204,6 +203,10 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 				self.weatherLabel.text = weather.current.condition.text
 			} else { self.weatherLabel.text = "No Data" }
 			self.weatherLabel.font = UIFont(name: "George Rounded Bold Italic", size: 22)
+			
+				self.countryNameLabel.text = "\(weather.location.name)"
+			self.countryNameLabel.font = .systemFont(ofSize: 16)
+			
 		}
 	}
 }

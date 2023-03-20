@@ -608,12 +608,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I9x-j2-WGX">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9x-j2-WGX">
                                 <rect key="frame" x="12" y="144" width="369" height="272"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="HDx-rI-QoL"/>
                                 </constraints>
-                                <standardMapConfiguration key="preferredConfiguration"/>
+                                <imageryMapConfiguration key="preferredConfiguration" elevationStyle="realistic"/>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gTC-8P-NQA">
                                 <rect key="frame" x="16" y="431" width="147" height="178"/>
@@ -733,14 +733,14 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="SCM-me-CLL" userLabel="weatherStack">
-                                <rect key="frame" x="233" y="431" width="70" height="125"/>
+                                <rect key="frame" x="285" y="431" width="90" height="140"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bUg-rX-jb7" userLabel="weatherIconImage">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="77"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ek6-fI-UCH" userLabel="weatherLabel">
-                                        <rect key="frame" x="0.0" y="97" width="70" height="28"/>
+                                        <rect key="frame" x="0.0" y="104" width="90" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Ek6-fI-UCH" secondAttribute="height" multiplier="5:2" id="Xa6-yF-YT6"/>
@@ -751,7 +751,7 @@
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="125" id="FIN-eI-ufg"/>
+                                    <constraint firstAttribute="height" constant="140" id="FIN-eI-ufg"/>
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="7yO-Ws-j16" userLabel="localTimeStack">
@@ -786,7 +786,7 @@
                         <viewLayoutGuide key="safeArea" id="lfL-rd-fGU"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="lfL-rd-fGU" firstAttribute="trailing" secondItem="SCM-me-CLL" secondAttribute="trailing" constant="90" id="8Lq-S3-K5v"/>
+                            <constraint firstItem="lfL-rd-fGU" firstAttribute="trailing" secondItem="SCM-me-CLL" secondAttribute="trailing" constant="18" id="8Lq-S3-K5v"/>
                             <constraint firstItem="I9x-j2-WGX" firstAttribute="top" secondItem="lfL-rd-fGU" secondAttribute="top" constant="41" id="CHh-CN-d7y"/>
                             <constraint firstItem="I9x-j2-WGX" firstAttribute="top" secondItem="DXz-gg-oUF" secondAttribute="bottom" constant="10" id="GKr-ez-KeI"/>
                             <constraint firstItem="gTC-8P-NQA" firstAttribute="leading" secondItem="k6t-Cg-NJP" secondAttribute="leadingMargin" id="T3L-lm-k8O"/>

@@ -35,6 +35,7 @@
 		EFD21BCC297171EF000C0F11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFD21BCA297171EF000C0F11 /* Main.storyboard */; };
 		EFD21BCE297171F1000C0F11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFD21BCD297171F1000C0F11 /* Assets.xcassets */; };
 		EFD21BD1297171F1000C0F11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFD21BCF297171F1000C0F11 /* LaunchScreen.storyboard */; };
+		EFD71C2F29C8961F003B9EBF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EFD71C2E29C8961F003B9EBF /* Alamofire */; };
 		EFD85414299A7F9F005CA030 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD85413299A7F9F005CA030 /* Locations.swift */; };
 		EFF0860A29AB7646000F7881 /* Core Data Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF0860929AB7646000F7881 /* Core Data Init.swift */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFD71C2F29C8961F003B9EBF /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +213,9 @@
 			dependencies = (
 			);
 			name = "Table View Controller";
+			packageProductDependencies = (
+				EFD71C2E29C8961F003B9EBF /* Alamofire */,
+			);
 			productName = "Table View Controller";
 			productReference = EFD21BC1297171EF000C0F11 /* Table View Controller.app */;
 			productType = "com.apple.product-type.application";
@@ -239,6 +244,9 @@
 				Base,
 			);
 			mainGroup = EFD21BB8297171EF000C0F11;
+			packageReferences = (
+				EFD71C2D29C8961F003B9EBF /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = EFD21BC2297171EF000C0F11 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -510,6 +518,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EFD71C2D29C8961F003B9EBF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EFD71C2E29C8961F003B9EBF /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFD71C2D29C8961F003B9EBF /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		EF0C127129A8FB1B005EB756 /* TableViewController.xcdatamodeld */ = {
