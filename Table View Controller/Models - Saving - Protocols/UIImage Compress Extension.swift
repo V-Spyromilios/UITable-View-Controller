@@ -13,7 +13,7 @@ extension UIImage {
 	func compress(quality: CGFloat) -> Data? {
 
 		guard let imageData = self.jpegData(compressionQuality: quality) else {
-			print("PANIC: compressed() failed to compress image to Jpeg.")
+			print("PANIC: compress() failed to compress image to Jpeg.")
 			return nil
 		}
 		return imageData
