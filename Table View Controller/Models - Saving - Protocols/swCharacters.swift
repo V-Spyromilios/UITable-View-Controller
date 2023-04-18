@@ -19,7 +19,6 @@ struct Character: Decodable {
 	let imageUrl : String
 	var image: UIImage?
 
-
 	enum CodingKeys : String, CodingKey {
 
 		case name
@@ -32,8 +31,8 @@ struct Character: Decodable {
 
 		self.name = try container.decode(String.self, forKey: .name)
 		let httpString = try container.decode(String.self, forKey: .imageUrl)
-		let httpsString = httpString.replacingOccurrences(of: "http", with: "https")
-		self.imageUrl = httpsString
+//		let httpsString = httpString.replacingOccurrences(of: "http", with: "https")
+		self.imageUrl = httpString
 	}
 }
 

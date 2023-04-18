@@ -130,7 +130,7 @@ extension SplitDetailViewController: SplitMasterDetailDelegate {
 
 // fetch weather json
 extension SplitDetailViewController {
-	
+
 	private func requestWeatherData() async -> Weather? {
 
 		print("Starting Weather Request..")
@@ -168,8 +168,8 @@ extension SplitDetailViewController {
 				return nil
 			}
 			let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
-			let weatherData = try JSONSerialization.data(withJSONObject: json?["current"] ?? [], options: [])
-			let locationData = try JSONSerialization.data(withJSONObject: json?["location"] ?? [], options: [])
+			let weatherData = try JSONSerialization.data(withJSONObject: json?["current"] ?? [] as [Any], options: [])
+			let locationData = try JSONSerialization.data(withJSONObject: json?["location"] ?? [] as [Any], options: [])
 			
 			let decoder = JSONDecoder()
 			let current = try decoder.decode(Current.self, from: weatherData)
@@ -224,7 +224,7 @@ extension SplitDetailViewController {
 		}
 	}
 
-
+//MARK: setUpWetherLabels
 	private func setUpWeatherLabels(with weather: Weather) {
 		
 		print("Setting Up Weather Labels..")

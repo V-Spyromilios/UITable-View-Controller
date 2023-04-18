@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EF07731E29E80F38006F7EB9 /* swCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF07731D29E80F38006F7EB9 /* swCharacters.swift */; };
-		EF07732229E82D10006F7EB9 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF07732129E82D10006F7EB9 /* ContentViewController.swift */; };
+		EF07732229E82D10006F7EB9 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF07732129E82D10006F7EB9 /* PageViewController.swift */; };
 		EF0C127329A8FB1B005EB756 /* TableViewController.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF0C127129A8FB1B005EB756 /* TableViewController.xcdatamodeld */; };
 		EF1D830A2976E9A00084B7B9 /* AddNewCountryParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1D83092976E9A00084B7B9 /* AddNewCountryParentViewController.swift */; };
 		EF2962F4298ACF8000DB9E22 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2962F3298ACF8000DB9E22 /* PopUpViewController.swift */; };
@@ -33,7 +33,7 @@
 		EF8DE9D829C9D5D60088EB03 /* CrawlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8DE9D729C9D5D60088EB03 /* CrawlViewController.swift */; };
 		EF92AB082977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF92AB072977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift */; };
 		EFA371B229C965BE00E919FA /* SwNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA371B129C965BE00E919FA /* SwNavigationController.swift */; };
-		EFA371B429C96D4A00E919FA /* SwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA371B329C96D4A00E919FA /* SwViewController.swift */; };
+		EFA371B429C96D4A00E919FA /* StarWarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA371B329C96D4A00E919FA /* StarWarsViewController.swift */; };
 		EFA371B629C9A49300E919FA /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA371B529C9A49300E919FA /* Films.swift */; };
 		EFA371B829C9B9DA00E919FA /* SwTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA371B729C9B9DA00E919FA /* SwTableViewCell.swift */; };
 		EFD21BC5297171EF000C0F11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC4297171EF000C0F11 /* AppDelegate.swift */; };
@@ -44,12 +44,13 @@
 		EFD21BD1297171F1000C0F11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFD21BCF297171F1000C0F11 /* LaunchScreen.storyboard */; };
 		EFD71C2F29C8961F003B9EBF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EFD71C2E29C8961F003B9EBF /* Alamofire */; };
 		EFD85414299A7F9F005CA030 /* Locations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD85413299A7F9F005CA030 /* Locations.swift */; };
+		EFEDF25129ED4C5000987A3D /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEDF25029ED4C5000987A3D /* PageController.swift */; };
 		EFF0860A29AB7646000F7881 /* Core Data Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF0860929AB7646000F7881 /* Core Data Init.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EF07731D29E80F38006F7EB9 /* swCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swCharacters.swift; sourceTree = "<group>"; };
-		EF07732129E82D10006F7EB9 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		EF07732129E82D10006F7EB9 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		EF0C127229A8FB1B005EB756 /* TableViewController.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TableViewController.xcdatamodel; sourceTree = "<group>"; };
 		EF1D83092976E9A00084B7B9 /* AddNewCountryParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCountryParentViewController.swift; sourceTree = "<group>"; };
 		EF2962F3298ACF8000DB9E22 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
@@ -74,7 +75,7 @@
 		EF8DE9D729C9D5D60088EB03 /* CrawlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrawlViewController.swift; sourceTree = "<group>"; };
 		EF92AB072977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCountryChildTableViewController.swift; sourceTree = "<group>"; };
 		EFA371B129C965BE00E919FA /* SwNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwNavigationController.swift; sourceTree = "<group>"; };
-		EFA371B329C96D4A00E919FA /* SwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwViewController.swift; sourceTree = "<group>"; };
+		EFA371B329C96D4A00E919FA /* StarWarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarWarsViewController.swift; sourceTree = "<group>"; };
 		EFA371B529C9A49300E919FA /* Films.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Films.swift; sourceTree = "<group>"; };
 		EFA371B729C9B9DA00E919FA /* SwTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwTableViewCell.swift; sourceTree = "<group>"; };
 		EFD21BC1297171EF000C0F11 /* Table View Controller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Table View Controller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +87,7 @@
 		EFD21BD0297171F1000C0F11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EFD21BD2297171F1000C0F11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFD85413299A7F9F005CA030 /* Locations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locations.swift; sourceTree = "<group>"; };
+		EFEDF25029ED4C5000987A3D /* PageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
 		EFF0860929AB7646000F7881 /* Core Data Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Core Data Init.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,10 +111,11 @@
 				EF40A6D02993E232003AD14C /* SplitViewController.swift */,
 				EF40A6C62993BDFE003AD14C /* SplitMasterTableCell.swift */,
 				EFA371B129C965BE00E919FA /* SwNavigationController.swift */,
-				EFA371B329C96D4A00E919FA /* SwViewController.swift */,
+				EFA371B329C96D4A00E919FA /* StarWarsViewController.swift */,
 				EFA371B729C9B9DA00E919FA /* SwTableViewCell.swift */,
+				EFEDF25029ED4C5000987A3D /* PageController.swift */,
 				EF8DE9D729C9D5D60088EB03 /* CrawlViewController.swift */,
-				EF07732129E82D10006F7EB9 /* ContentViewController.swift */,
+				EF07732129E82D10006F7EB9 /* PageViewController.swift */,
 			);
 			path = "Split Scenes";
 			sourceTree = "<group>";
@@ -308,18 +311,19 @@
 				EFD21BC9297171EF000C0F11 /* DetailViewController.swift in Sources */,
 				EF92AB082977F9DB00F359C7 /* AddNewCountryChildTableViewController.swift in Sources */,
 				EFD21BC5297171EF000C0F11 /* AppDelegate.swift in Sources */,
-				EF07732229E82D10006F7EB9 /* ContentViewController.swift in Sources */,
+				EF07732229E82D10006F7EB9 /* PageViewController.swift in Sources */,
 				EFD21BC7297171EF000C0F11 /* SceneDelegate.swift in Sources */,
 				EF2962F4298ACF8000DB9E22 /* PopUpViewController.swift in Sources */,
 				EF7627B529BF357B00E719A2 /* UIImage Compress Extension.swift in Sources */,
 				EF79405B299CFB1F00A6E64E /* SplitMasterViewController.swift in Sources */,
 				EF578C2E2980022700146346 /* TableAndCollectionViewController.swift in Sources */,
+				EFEDF25129ED4C5000987A3D /* PageController.swift in Sources */,
 				EF66193529965583004922A4 /* SplitCountryProtocol.swift in Sources */,
 				EF7EF0752971FFE700AA6344 /* Country Descriptions.swift in Sources */,
 				EF578C302980026400146346 /* CustomTableCell.swift in Sources */,
 				EFA371B629C9A49300E919FA /* Films.swift in Sources */,
 				EF07731E29E80F38006F7EB9 /* swCharacters.swift in Sources */,
-				EFA371B429C96D4A00E919FA /* SwViewController.swift in Sources */,
+				EFA371B429C96D4A00E919FA /* StarWarsViewController.swift in Sources */,
 				EF7BFFDA2986E808001D3A34 /* CustomCollectionCell.swift in Sources */,
 				EFA371B229C965BE00E919FA /* SwNavigationController.swift in Sources */,
 				EF40A6D12993E232003AD14C /* SplitViewController.swift in Sources */,
