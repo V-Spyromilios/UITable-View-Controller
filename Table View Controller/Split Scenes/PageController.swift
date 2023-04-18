@@ -28,6 +28,7 @@ class PageController : UIPageViewController {
 	//MARK: viewDidLoad
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
 		dataSource = self
 		delegate = self
 		Task.init {
@@ -64,7 +65,7 @@ class PageController : UIPageViewController {
 				pages.append(singlePage)
 			}
 		}
-		pageControl.numberOfPages = pages.count
+//		pageControl.numberOfPages = pages.count
 		if let firstPage = pages.first {
 			setViewControllers([firstPage], direction: .forward, animated: true)
 		}

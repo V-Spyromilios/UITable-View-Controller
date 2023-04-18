@@ -7,6 +7,7 @@
 
 import UIKit
 import MapKit
+import Alamofire
 
 class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	
@@ -31,29 +32,41 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var countryNameLabel: UILabel!
-	
+
 	
 	var country: Country? {
 		didSet {
 			Task.init {
 				print("Waiting Weather Data...")
 				//TODO: change requestWeatherData() to completion Handler
-				await self.weather = requestWeatherData()
-				
+				await getWeatherData(completion: weatherCompletion)
 				print("Weather Data Received, getting the Weather Icon..")
-				await getWeatherIcon()
 			}
 			DispatchQueue.main.async {
 				self.setUpMap()
-				if let weather = self.weather {
-					self.setUpWeatherLabels(with: weather)
-				}
 			}
 		}
 	}
 	
 	var location = CLLocation(latitude: 37.4347, longitude: 25.3461)
-	var weather: Weather?
+
+	//MARK: weatherCompletion
+	lazy var weatherCompletion : ((Result<Weather, Error>) -> Void) = { result in
+
+		switch result {
+			case .success(let weather):
+				Task {
+					do {
+						await self.getWeatherIcon(urlString: weather.current.condition.iconUrl)
+						DispatchQueue.main.async {
+							self.setUpWeatherLabels(with: weather)
+						}
+					}
+				}
+			case .failure(let error):
+				print(error)
+			}
+		}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -72,7 +85,6 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 		SplitMasterViewController.delegate = self
 		
 		let rightButton = UIBarButtonItem(barButtonSystemItem: .fastForward, target: self, action: #selector(showSW))
-		rightButton.title = "Dark Side"
 		rightButton.tintColor = .black
 		self.navigationItem.setRightBarButton(rightButton, animated: true)
 		
@@ -131,69 +143,49 @@ extension SplitDetailViewController: SplitMasterDetailDelegate {
 // fetch weather json
 extension SplitDetailViewController {
 
-	private func requestWeatherData() async -> Weather? {
-
-		print("Starting Weather Request..")
-		let headers = [
+	//MARK: getWeatherData
+	private func getWeatherData(completion: @escaping (Result<Weather, Error>) -> Void) async {
+		print("Getting Weather info...")
+		
+		let headers: HTTPHeaders = [
 			"X-RapidAPI-Key": "edeaab50d3msh5e66efba0a15f63p1f78d8jsnb42899463a43",
 			"X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
 		]
 		
 		let urlLatLong = {
-			
 			let stringLat = "\(self.country?.latitude ?? 0)"
 			let stringLong = "\(self.country?.longitude ?? 0)"
-			//TODO: if long/ lang nil setUpNilLabels()
 			return "\(stringLat),\(stringLong)"
 		}()
 		
-		guard let urlRequest = URL(string: "https://weatherapi-com.p.rapidapi.com/current.json?q=\(urlLatLong)") else {
-			print("PANIC: 'urlRequest' :: requestWeatherData()")
-			return nil
-			
-		}
-		var request = URLRequest(url: urlRequest)
-		request.httpMethod = "GET"
-		request.allHTTPHeaderFields = headers
+		let url = "https://weatherapi-com.p.rapidapi.com/current.json?q=\(urlLatLong)"
 		
-		let configuration = URLSessionConfiguration.default
-		configuration.waitsForConnectivity = true
-		let session = URLSession.shared
-		
-		do {
-			let (data, response) = try await session.data(for: request)
-			guard let httpsResponse = response as? HTTPURLResponse,
-				  httpsResponse.statusCode == 200 else {
-				print("PANIC: httpsResponse.statusCode != 200")
-				return nil
+		AF.request(url, headers: headers).validate().responseDecodable(of: Weather.self) { response in
+			switch response.result {
+			case .success(let weatherResponse):
+				let weather = weatherResponse
+				print("Weather Rquest completed.")
+				completion(.success(weather))
+			case .failure(let error):
+				print("PANIC: \(error)")
+				completion(.failure(error))
 			}
-			let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any]
-			let weatherData = try JSONSerialization.data(withJSONObject: json?["current"] ?? [] as [Any], options: [])
-			let locationData = try JSONSerialization.data(withJSONObject: json?["location"] ?? [] as [Any], options: [])
-			
-			let decoder = JSONDecoder()
-			let current = try decoder.decode(Current.self, from: weatherData)
-			let location = try decoder.decode(Location.self, from: locationData)
-			let weather = Weather(current: current, location: location)
-			print("Weather Rquest completed.")
-			return weather
-		} catch {
-			print("PANIC: Failed to decode data -> \(error)")
-			return nil
 		}
 	}
-	
-	private func getWeatherIcon() async {
+
+
+	//MARK: getWeatherIcon
+	private func getWeatherIcon(urlString: String) async {
 		print("Getting Weather Icon..")
 		
 		var weatherImage : UIImage?
 		
-		guard let weather = weather else {
-			print("PANIC: getWeatherIcon() :: 'weather' is nil.")
-			return
-		}
+//		guard let weather = weather else {
+//			print("PANIC: getWeatherIcon() :: 'weather' is nil.")
+//			return
+//		}
 		
-		let urlRequest = URL(string: weather.current.condition.iconUrl)
+		let urlRequest = URL(string: urlString)
 		guard let urlRequest = urlRequest else 	{
 			print("PANIC: getWeatherIcon() :: 'urlRequest' is nil.")
 			return
@@ -224,7 +216,7 @@ extension SplitDetailViewController {
 		}
 	}
 
-//MARK: setUpWetherLabels
+//MARK: setUpWeatherLabels
 	private func setUpWeatherLabels(with weather: Weather) {
 		
 		print("Setting Up Weather Labels..")
