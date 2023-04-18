@@ -9,9 +9,8 @@ import UIKit
 import Alamofire
 
 class PageController : UIPageViewController {
-	
-	@IBOutlet weak var pageControl: UIPageControl!
 
+	@IBOutlet weak var pageControl: UIPageControl!
 	fileprivate var pages = [PageViewController]()
 	fileprivate var receivedCharacters = [Character]()
 	
@@ -20,12 +19,7 @@ class PageController : UIPageViewController {
 		
 		switch result {
 		case .success(let characters):
-			self.getImages {
-				DispatchQueue.main.async {
-					print("initPageController...")
-					self.initPages()
-				}
-			}
+			self.initPages()
 		case .failure(let error):
 			print("PANIC: charactersCompletion -> \(error)")
 		}
@@ -34,12 +28,10 @@ class PageController : UIPageViewController {
 	//MARK: viewDidLoad
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
 		dataSource = self
 		delegate = self
 		Task.init {
 			do {
-				print("awaiting Characters...")
 				await requestCharacters(completion: charactersCompletion!)
 			}
 		}
@@ -53,7 +45,6 @@ class PageController : UIPageViewController {
 		AF.request(urlString).responseDecodable(of: [Character].self) { response in
 			switch response.result {
 			case .success(let characters):
-				print("requestCharacters is SUCCESS")
 				for i in 0...5 {
 					self.receivedCharacters.append(characters[i])
 				}
@@ -64,28 +55,6 @@ class PageController : UIPageViewController {
 		}
 	}
 	
-	//MARK: getImages
-	private func getImages(completion: @escaping () -> Void) {
-		
-		let dispatchGroup = DispatchGroup()
-		
-		for var character in receivedCharacters {
-			dispatchGroup.enter()
-			AF.request(character.imageUrl).responseData { response in
-				defer { dispatchGroup.leave() }
-				switch response.result {
-				case .success(let data):
-					character.image = UIImage(data: data)
-				case .failure(let error):
-					print("PANIC: getImages AF .failure -> \(error)")
-				}
-			}
-		}
-		dispatchGroup.notify(queue: .main) {
-			completion()
-		}
-	}
-	
 	//MARK: initPages
 	private func initPages() {
 		
@@ -93,17 +62,15 @@ class PageController : UIPageViewController {
 			if let singlePage = storyboard?.instantiateViewController(identifier: "ContentViewControllerID") as? PageViewController {
 				singlePage.character = character
 				pages.append(singlePage)
-				
 			}
 		}
-		self.pageControl.numberOfPages = pages.count
+		pageControl.numberOfPages = pages.count
 		if let firstPage = pages.first {
 			setViewControllers([firstPage], direction: .forward, animated: true)
 		}
-		pageControl.currentPageIndicatorTintColor = .red
-		pageControl.pageIndicatorTintColor = UIColor(named: "SwYellow")
+		//pageControl.currentPageIndicatorTintColor = .red
+		//pageControl.pageIndicatorTintColor = UIColor(named: "SwYellow")
 		didMove(toParent: self)
-		print("InitPages Completed")
 	}
 }
 
@@ -140,6 +107,6 @@ extension PageController: UIPageViewControllerDataSource, UIPageViewControllerDe
 		guard let viewControllers = pageViewController.viewControllers else { return }
 		guard let currentIndex = pages.firstIndex(of: viewControllers[0] as! PageViewController) else { return }
 		
-		pageControl.currentPage = currentIndex
+		//pageControl.currentPage = currentIndex
 	}
 }

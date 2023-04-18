@@ -31,11 +31,10 @@ class StarWarsViewController: UIViewController {
 	//MARK: viewDidLoad
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+
 		setUpBackground()
 		Task.init {
 			do {
-				print("awaiting Films...")
 				await requestJsonFilms(completion: filmsCompletion!)
 			}
 		}
