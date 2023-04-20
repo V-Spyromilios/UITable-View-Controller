@@ -4,10 +4,17 @@
 //
 //  Created by Evangelos Spyromilios on 08.02.23.
 //
+// Change of var country: Country triggers getWeatherData()  in the background and setMap() on the main.
+// getWeatherData() requests data and decodes it to Weather. response is passed to completion handler.
+// weatherCompletion, in case of success, detaches getWeatherIcon() and calls the seUpWeatherLabels with the
+//  data received from getWeatherData(). getWeatherIcon requests the data, initialises the UIImage and, on
+// main thread sets the weatherIcon.image.
+//
 
 import UIKit
 import MapKit
 import Alamofire
+
 
 class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	
@@ -32,42 +39,60 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var countryNameLabel: UILabel!
-
+	
 	
 	var country: Country? {
 		didSet {
-			Task.init {
-				print("Waiting Weather Data...")
-				//TODO: change requestWeatherData() to completion Handler
-				await getWeatherData(completion: weatherCompletion)
-				print("Weather Data Received, getting the Weather Icon..")
+			DispatchQueue.global().async {
+				Task.detached { [self] in
+					print("Before Weather Data...") // 2
+					await getWeatherData(completion: weatherCompletion)
+					print("Weather Data Received. ?!") // 6!
+				}
 			}
-			DispatchQueue.main.async {
-				self.setUpMap()
-			}
+			setUpMap()
 		}
 	}
 	
 	var location = CLLocation(latitude: 37.4347, longitude: 25.3461)
-
+	
 	//MARK: weatherCompletion
 	lazy var weatherCompletion : ((Result<Weather, Error>) -> Void) = { result in
+		print("Inside Weather Completion.") // 8
+		switch result {
+		case .success(let weather):
+			DispatchQueue.global().async {
+				Task.detached {
+					print("Entering getWeatherIcon from detached...")
+					print("\(weather.current.condition.iconUrl)")
+					await self.getWeatherIcon(urlString: weather.current.condition.iconUrl, completion: self.weatherIconCompletion) // After weatherLabels !
+				}
+			}
+			DispatchQueue.main.async {
+				self.setUpWeatherLabels(with: weather)  // before getWeatherIcon
+			}
+		case .failure(let error):
+			print(error)
+		}
+	}
+
+	//MARK: weatherIconCompletion
+	lazy var weatherIconCompletion : ((Result<Data, Error>) -> Void) = { result in
 
 		switch result {
-			case .success(let weather):
-				Task {
-					do {
-						await self.getWeatherIcon(urlString: weather.current.condition.iconUrl)
-						DispatchQueue.main.async {
-							self.setUpWeatherLabels(with: weather)
-						}
-					}
+		case .failure(let error):
+			print("PANIC: weatherIconCompletion Received Error: \(error)")
+		case .success(let data):
+			Task.detached {
+				DispatchQueue.main.async {
+					self.weatherIcon.image = UIImage(data: data)
+					print("weatherIconCompletion :: Weather Icon Ready.")
 				}
-			case .failure(let error):
-				print(error)
 			}
 		}
-	
+	}
+
+	//MARK: viewDidLoad
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -84,23 +109,25 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 		
 		SplitMasterViewController.delegate = self
 		
-		let rightButton = UIBarButtonItem(barButtonSystemItem: .fastForward, target: self, action: #selector(showSW))
+		let rightButton = UIBarButtonItem(barButtonSystemItem: .fastForward, target: self, action: #selector(showStarWars))
 		rightButton.tintColor = .black
 		self.navigationItem.setRightBarButton(rightButton, animated: true)
-		
 	}
 	
-	@objc private func showSW() {
+	@objc private func showStarWars() {
 		self.performSegue(withIdentifier: "swSegue", sender: self)
 	}
 	
+	//MARK: setUpMap
 	private func setUpMap() {
-
+		
+		print("Inside setUpMap...") // 1
 		if let name = self.country?.name {
 			self.countryNameLabel.text = "\(name)".uppercased()
 		} else { self.countryNameLabel.text = "" }
 		
 		self.location = CLLocation(latitude: country?.latitude ?? 0.0, longitude: country?.longitude ?? 0.0)
+		//print("setUpMap :: Lat: \(self.location.description)")
 		self.mapView.centerToLocation(location: location)
 		let annotation = MKPointAnnotation()
 		if let gdp = self.country?.gdp {
@@ -109,6 +136,7 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 		else { annotation.title = "NO DATA"}
 		annotation.coordinate = CLLocationCoordinate2D(latitude: country?.latitude ?? 0.0, longitude: country?.longitude ?? 0.0)
 		self.mapView.addAnnotation(annotation)
+		print("Map Ready.") // 3
 	}
 	
 	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -140,12 +168,11 @@ extension SplitDetailViewController: SplitMasterDetailDelegate {
 	}
 }
 
-// fetch weather json
 extension SplitDetailViewController {
-
+	
 	//MARK: getWeatherData
 	private func getWeatherData(completion: @escaping (Result<Weather, Error>) -> Void) async {
-		print("Getting Weather info...")
+		print("Inside Weather Data...") // 5
 		
 		let headers: HTTPHeaders = [
 			"X-RapidAPI-Key": "edeaab50d3msh5e66efba0a15f63p1f78d8jsnb42899463a43",
@@ -164,62 +191,45 @@ extension SplitDetailViewController {
 			switch response.result {
 			case .success(let weatherResponse):
 				let weather = weatherResponse
-				print("Weather Rquest completed.")
+				print("Weather Request completed with success. ?!") // 7!
 				completion(.success(weather))
+				return
 			case .failure(let error):
-				print("PANIC: \(error)")
+				print("PANIC: Weather Request completed with ERROR -> \(error)")
 				completion(.failure(error))
+				return
 			}
 		}
 	}
-
-
+	
+	
 	//MARK: getWeatherIcon
-	private func getWeatherIcon(urlString: String) async {
-		print("Getting Weather Icon..")
+	private func getWeatherIcon(urlString: String, completion: @escaping ((Result <Data, Error>) -> Void)) async {
+
+		print("Inside getWeatherIcon...") //  ! USUAL POINT OF FREEZING - this not printed
 		
-		var weatherImage : UIImage?
-		
-//		guard let weather = weather else {
-//			print("PANIC: getWeatherIcon() :: 'weather' is nil.")
-//			return
-//		}
-		
-		let urlRequest = URL(string: urlString)
-		guard let urlRequest = urlRequest else 	{
+		let url = URL(string: urlString)
+		guard let url = url else {
 			print("PANIC: getWeatherIcon() :: 'urlRequest' is nil.")
 			return
 		}
-		var request = URLRequest(url: urlRequest)
-		request.httpMethod = "GET"
-		request.allHTTPHeaderFields = [:]
 		
-		let configuration = URLSessionConfiguration.default
-		configuration.waitsForConnectivity = true
-		let session = URLSession.shared
-		
-		do {
-			let (data, response) = try await session.data(for: request)
-			guard let httpsResponse = response as? HTTPURLResponse,
-				  httpsResponse.statusCode == 200 else {
-				print("PANIC: httpsResponse.statusCode != 200")
+		AF.request(url).validate().responseData { response in //Check above responseDecodable  <-->  responseData
+			switch response.result {
+			case .failure(let error):
+				completion(.failure(error))
+				return
+			case .success(let data):
+				completion(.success(data))
 				return
 			}
-			weatherImage = UIImage(data: data)
-		} catch {
-			print("PANIC: getWeatherIcon() :: failed to get weatherIcon Data")
-			return
-		}
-		DispatchQueue.main.async {
-			print(" Weather Icon Ready..")
-			self.weatherIcon.image = weatherImage
 		}
 	}
-
-//MARK: setUpWeatherLabels
+	
+	//MARK: setUpWeatherLabels
 	private func setUpWeatherLabels(with weather: Weather) {
 		
-		print("Setting Up Weather Labels..")
+		print("Inside setUpWeatherLabels..") //9
 		
 		self.temperatureImage.image = UIImage(systemName: "thermometer.medium")?.withRenderingMode(.alwaysTemplate) ?? nil
 		self.humidityImage.image = UIImage(systemName: "humidity.fill")?.withRenderingMode(.alwaysTemplate) ?? nil
@@ -252,6 +262,6 @@ extension SplitDetailViewController {
 		
 		self.countryNameLabel.text = "\(weather.location.name)"
 		self.countryNameLabel.font = .systemFont(ofSize: 16)
-		print("Labels Ready.")
+		print("Labels Ready.") // 10
 	}
 }
