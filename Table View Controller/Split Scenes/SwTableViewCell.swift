@@ -27,7 +27,7 @@ class SwTableViewCell: UITableViewCell {
 	func updateCustomSwCell(with movie: Movie) {
 
 		self.titleLabel.text = movie.title
-		self.detailLabel.text = movie.releaseDate
+		self.detailLabel.text = ""
 		
 		self.titleLabel.textColor = UIColor(named: "SwYellow")
 		self.detailLabel.textColor = UIColor.gray

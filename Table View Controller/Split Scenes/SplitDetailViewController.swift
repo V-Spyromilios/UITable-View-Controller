@@ -44,59 +44,55 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	@IBOutlet weak var countryNameLabel: UILabel!
 	
 	
+	private let privateCountry = BehaviorRelay<Country?>(value: nil)
 	var country: Country? {
 		didSet {
-			DispatchQueue.global().async {
-				Task.detached { [self] in
-					print("Before Weather Data...") // 2
-					await getWeatherData(completion: weatherCompletion)
-					print("Weather Data Received. ?!") // 6!
+				var country : Observable<Country?> {
+					privateCountry.asObservable()
+					//getWeather
 				}
-			}
-			activityIndicator.startAnimating()
-			setUpMap()
 		}
 	}
 	
 	var location = CLLocation(latitude: 37.4347, longitude: 25.3461)
 	
-	//MARK: weatherCompletion
-	lazy var weatherCompletion : ((Result<Weather, Error>) async -> Void) = { result in
-		print("Inside Weather Completion.") // 8
-		switch result {
-		case .success(let weather):
-			DispatchQueue.global().async {
-				Task.detached {
-					print("Entering getWeatherIcon from detached...")
-					print("\(weather.current.condition.iconUrl)")
-					await self.getWeatherIcon(urlString: weather.current.condition.iconUrl, completion: self.weatherIconCompletion) // After weatherLabels !
-				}
-			}
-			DispatchQueue.main.async {
-				self.setUpWeatherLabels(with: weather)  // before getWeatherIcon
-			}
-		case .failure(let error):
-			print(error)
-		}
-	}
+//	//MARK: weatherCompletion
+//	lazy var weatherCompletion : ((Result<Weather, Error>) async -> Void) = { result in
+//		print("Inside Weather Completion.") // 8
+//		switch result {
+//		case .success(let weather):
+//			DispatchQueue.global().async {
+//				Task.detached {
+//					print("Entering getWeatherIcon from detached...")
+//					print("\(weather.current.condition.iconUrl)")
+//					await self.getWeatherIcon(urlString: weather.current.condition.iconUrl, completion: self.weatherIconCompletion) // After weatherLabels !
+//				}
+//			}
+//			DispatchQueue.main.async {
+//				self.setUpWeatherLabels(with: weather)  // before getWeatherIcon
+//			}
+//		case .failure(let error):
+//			print(error)
+//		}
+//	}
 
 	//MARK: weatherIconCompletion
-	lazy var weatherIconCompletion : ((Result<Data, Error>) -> Void) = { result in
-
-		print("Inside weatherIconCompletion.")
-		switch result {
-		case .failure(let error):
-			print("PANIC: weatherIconCompletion Received Error: \(error)")
-		case .success(let data):
-			Task.detached {
-				DispatchQueue.main.async {
-					self.activityIndicator.stopAnimating()
-					self.weatherIcon.image = UIImage(data: data)
-					print("weatherIconCompletion :: Weather Icon Ready.")
-				}
-			}
-		}
-	}
+//	lazy var weatherIconCompletion : ((Result<Data, Error>) -> Void) = { result in
+//
+//		print("Inside weatherIconCompletion.")
+//		switch result {
+//		case .failure(let error):
+//			print("PANIC: weatherIconCompletion Received Error: \(error)")
+//		case .success(let data):
+//			Task.detached {
+//				DispatchQueue.main.async {
+//					self.activityIndicator.stopAnimating()
+//					self.weatherIcon.image = UIImage(data: data)
+//					print("weatherIconCompletion :: Weather Icon Ready.")
+//				}
+//			}
+//		}
+//	}
 
 	//MARK: viewDidLoad
 	override func viewDidLoad() {
@@ -177,40 +173,64 @@ extension SplitDetailViewController: SplitMasterDetailDelegate {
 }
 
 extension SplitDetailViewController {
-	
-	//MARK: getWeatherData
-	private func getWeatherData(completion: @escaping (Result<Weather, Error>) async -> Void) async {
-		print("Inside Weather Data...") // 5
-		
+
+	private func getWeather() {
+		guard let country = privateCountry.value else {
+			return
+		}
 		let headers: HTTPHeaders = [
 			"X-RapidAPI-Key": "edeaab50d3msh5e66efba0a15f63p1f78d8jsnb42899463a43",
 			"X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
 		]
-		
-		let urlLatLong = {
-			let stringLat = "\(self.country?.latitude ?? 0)"
-			let stringLong = "\(self.country?.longitude ?? 0)"
-			return "\(stringLat),\(stringLong)"
-		}()
-		
+		let urlLatLong = "\(country.latitude),\(country.longitude)"
 		let url = "https://weatherapi-com.p.rapidapi.com/current.json?q=\(urlLatLong)"
 		
-		AF.request(url, headers: headers).validate().responseDecodable(of: Weather.self) { response in
-			Task { // 'Task' as the responseDecodable expects syncronous, here await the completion (is async)
+		AF.request(url, headers: headers)
+			.validate()
+			.responseDecodable(of: Weather.self) { response in
 				switch response.result {
-				case .success(let weatherResponse):
-					let weather = weatherResponse
-					print("Weather Request completed with success. ?!") // 7!
-					await completion(.success(weather))
-					return
+				case .success(let weather):
+					print("Weather:", weather)
 				case .failure(let error):
-					print("PANIC: Weather Request completed with ERROR -> \(error)")
-					await completion(.failure(error))
-					return
+					print("Error:", error)
 				}
-			}
 		}
 	}
+
+	
+	//MARK: getWeatherData
+//	private func getWeatherData(completion: @escaping (Result<Weather, Error>) async -> Void) async {
+//		print("Inside Weather Data...") // 5
+//
+//		let headers: HTTPHeaders = [
+//			"X-RapidAPI-Key": "edeaab50d3msh5e66efba0a15f63p1f78d8jsnb42899463a43",
+//			"X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
+//		]
+//
+//		let urlLatLong = {
+//			let stringLat = "\(self.country?.latitude ?? 0)"
+//			let stringLong = "\(self.country?.longitude ?? 0)"
+//			return "\(stringLat),\(stringLong)"
+//		}()
+//
+//		let url = "https://weatherapi-com.p.rapidapi.com/current.json?q=\(urlLatLong)"
+//
+//		AF.request(url, headers: headers).validate().responseDecodable(of: Weather.self) { response in
+//			Task { // 'Task' as the responseDecodable expects syncronous, here await the completion (is async)
+//				switch response.result {
+//				case .success(let weatherResponse):
+//					let weather = weatherResponse
+//					print("Weather Request completed with success. ?!") // 7!
+//					await completion(.success(weather))
+//					return
+//				case .failure(let error):
+//					print("PANIC: Weather Request completed with ERROR -> \(error)")
+//					await completion(.failure(error))
+//					return
+//				}
+//			}
+//		}
+//	}
 	
 	
 	//MARK: getWeatherIcon

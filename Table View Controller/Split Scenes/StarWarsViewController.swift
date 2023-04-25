@@ -56,7 +56,7 @@ class StarWarsViewController: UIViewController {
 extension StarWarsViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return films?.movies.count ?? 0
+		return films?.results.count ?? 0
 	}
 	
 	
@@ -64,7 +64,7 @@ extension StarWarsViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "swTableCell", for: indexPath) as! SwTableViewCell
 		if let films = self.films {
-			let selectedItem = films.movies[indexPath.row]
+			let selectedItem = films.results[indexPath.row]
 			
 			cell.updateCustomSwCell(with: selectedItem)
 		}
@@ -75,7 +75,7 @@ extension StarWarsViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		guard let indexPath = tableView.indexPathForSelectedRow else { return }
 		
-		guard let selectedMovie = self.films?.movies[indexPath.row] else { return }
+		guard let selectedMovie = self.films?.results[indexPath.row] else { return }
 		let crawlVC = storyboard?.instantiateViewController(withIdentifier: "crawlIdentifier") as! CrawlViewController
 		
 		crawlVC.crawl = selectedMovie.crawl

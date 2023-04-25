@@ -30,9 +30,7 @@ struct Character: Decodable {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 
 		self.name = try container.decode(String.self, forKey: .name)
-		let httpString = try container.decode(String.self, forKey: .imageUrl)
-//		let httpsString = httpString.replacingOccurrences(of: "http", with: "https")
-		self.imageUrl = httpString
+		self.imageUrl = try container.decode(String.self, forKey: .imageUrl)
 	}
 }
 
