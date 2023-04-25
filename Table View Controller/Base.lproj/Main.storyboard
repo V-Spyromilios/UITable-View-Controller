@@ -784,6 +784,10 @@
                                     <constraint firstItem="urR-wI-6Aa" firstAttribute="height" secondItem="xmd-FW-XP1" secondAttribute="height" id="nZm-HR-GXq"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="gOd-cZ-Bgb">
+                                <rect key="frame" x="320" y="95" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lfL-rd-fGU"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -808,6 +812,7 @@
                     <navigationItem key="navigationItem" id="yZ1-ky-H6Q"/>
                     <splitViewDetailSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="gOd-cZ-Bgb" id="1Pt-bD-lkF"/>
                         <outlet property="countryNameLabel" destination="DXz-gg-oUF" id="cj8-ay-kFf"/>
                         <outlet property="feelsLikeImage" destination="Bae-L7-heM" id="PCM-ZY-RTO"/>
                         <outlet property="feelsLikeLabel" destination="VBU-HK-Sl4" id="b8z-V5-TX7"/>

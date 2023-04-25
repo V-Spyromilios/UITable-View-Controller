@@ -14,10 +14,13 @@
 import UIKit
 import MapKit
 import Alamofire
+import RxSwift
+import RxCocoa
 
 
 class SplitDetailViewController: UIViewController, MKMapViewDelegate {
-	
+
+	@IBOutlet weak var activityIndicator : UIActivityIndicatorView!
 	
 	@IBOutlet weak var temperatureImage: UIImageView!
 	@IBOutlet weak var temperatureLabel: UILabel!
@@ -50,6 +53,7 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 					print("Weather Data Received. ?!") // 6!
 				}
 			}
+			activityIndicator.startAnimating()
 			setUpMap()
 		}
 	}
@@ -57,7 +61,7 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	var location = CLLocation(latitude: 37.4347, longitude: 25.3461)
 	
 	//MARK: weatherCompletion
-	lazy var weatherCompletion : ((Result<Weather, Error>) -> Void) = { result in
+	lazy var weatherCompletion : ((Result<Weather, Error>) async -> Void) = { result in
 		print("Inside Weather Completion.") // 8
 		switch result {
 		case .success(let weather):
@@ -79,12 +83,14 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	//MARK: weatherIconCompletion
 	lazy var weatherIconCompletion : ((Result<Data, Error>) -> Void) = { result in
 
+		print("Inside weatherIconCompletion.")
 		switch result {
 		case .failure(let error):
 			print("PANIC: weatherIconCompletion Received Error: \(error)")
 		case .success(let data):
 			Task.detached {
 				DispatchQueue.main.async {
+					self.activityIndicator.stopAnimating()
 					self.weatherIcon.image = UIImage(data: data)
 					print("weatherIconCompletion :: Weather Icon Ready.")
 				}
@@ -95,6 +101,8 @@ class SplitDetailViewController: UIViewController, MKMapViewDelegate {
 	//MARK: viewDidLoad
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		activityIndicator.color = .orange
+		activityIndicator.hidesWhenStopped = true
 		
 		let backButton = UIBarButtonItem()
 		let swColor = UIColor(red: 255/255, green: 232/255, blue: 31/255, alpha: 0.8)
@@ -171,7 +179,7 @@ extension SplitDetailViewController: SplitMasterDetailDelegate {
 extension SplitDetailViewController {
 	
 	//MARK: getWeatherData
-	private func getWeatherData(completion: @escaping (Result<Weather, Error>) -> Void) async {
+	private func getWeatherData(completion: @escaping (Result<Weather, Error>) async -> Void) async {
 		print("Inside Weather Data...") // 5
 		
 		let headers: HTTPHeaders = [
@@ -188,16 +196,18 @@ extension SplitDetailViewController {
 		let url = "https://weatherapi-com.p.rapidapi.com/current.json?q=\(urlLatLong)"
 		
 		AF.request(url, headers: headers).validate().responseDecodable(of: Weather.self) { response in
-			switch response.result {
-			case .success(let weatherResponse):
-				let weather = weatherResponse
-				print("Weather Request completed with success. ?!") // 7!
-				completion(.success(weather))
-				return
-			case .failure(let error):
-				print("PANIC: Weather Request completed with ERROR -> \(error)")
-				completion(.failure(error))
-				return
+			Task { // 'Task' as the responseDecodable expects syncronous, here await the completion (is async)
+				switch response.result {
+				case .success(let weatherResponse):
+					let weather = weatherResponse
+					print("Weather Request completed with success. ?!") // 7!
+					await completion(.success(weather))
+					return
+				case .failure(let error):
+					print("PANIC: Weather Request completed with ERROR -> \(error)")
+					await completion(.failure(error))
+					return
+				}
 			}
 		}
 	}
@@ -206,7 +216,7 @@ extension SplitDetailViewController {
 	//MARK: getWeatherIcon
 	private func getWeatherIcon(urlString: String, completion: @escaping ((Result <Data, Error>) -> Void)) async {
 
-		print("Inside getWeatherIcon...") //  ! USUAL POINT OF FREEZING - this not printed
+		print("Inside getWeatherIcon...") //  ! USUAL POINT OF FREEZING - does not print
 		
 		let url = URL(string: urlString)
 		guard let url = url else {

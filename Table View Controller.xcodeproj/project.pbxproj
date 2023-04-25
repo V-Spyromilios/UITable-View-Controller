@@ -36,6 +36,10 @@
 		EFA371B429C96D4A00E919FA /* StarWarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA371B329C96D4A00E919FA /* StarWarsViewController.swift */; };
 		EFA371B629C9A49300E919FA /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA371B529C9A49300E919FA /* Films.swift */; };
 		EFA371B829C9B9DA00E919FA /* SwTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA371B729C9B9DA00E919FA /* SwTableViewCell.swift */; };
+		EFB4703929F2C96900ADB140 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = EFB4703829F2C96900ADB140 /* RxCocoa */; };
+		EFB4703B29F2C96900ADB140 /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = EFB4703A29F2C96900ADB140 /* RxCocoa-Dynamic */; };
+		EFB4703D29F2C96900ADB140 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EFB4703C29F2C96900ADB140 /* RxSwift */; };
+		EFB4703F29F2C96900ADB140 /* RxSwift-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = EFB4703E29F2C96900ADB140 /* RxSwift-Dynamic */; };
 		EFD21BC5297171EF000C0F11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC4297171EF000C0F11 /* AppDelegate.swift */; };
 		EFD21BC7297171EF000C0F11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC6297171EF000C0F11 /* SceneDelegate.swift */; };
 		EFD21BC9297171EF000C0F11 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD21BC8297171EF000C0F11 /* DetailViewController.swift */; };
@@ -96,6 +100,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFB4703929F2C96900ADB140 /* RxCocoa in Frameworks */,
+				EFB4703F29F2C96900ADB140 /* RxSwift-Dynamic in Frameworks */,
+				EFB4703B29F2C96900ADB140 /* RxCocoa-Dynamic in Frameworks */,
+				EFB4703D29F2C96900ADB140 /* RxSwift in Frameworks */,
 				EFD71C2F29C8961F003B9EBF /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +247,10 @@
 			name = "Table View Controller";
 			packageProductDependencies = (
 				EFD71C2E29C8961F003B9EBF /* Alamofire */,
+				EFB4703829F2C96900ADB140 /* RxCocoa */,
+				EFB4703A29F2C96900ADB140 /* RxCocoa-Dynamic */,
+				EFB4703C29F2C96900ADB140 /* RxSwift */,
+				EFB4703E29F2C96900ADB140 /* RxSwift-Dynamic */,
 			);
 			productName = "Table View Controller";
 			productReference = EFD21BC1297171EF000C0F11 /* Table View Controller.app */;
@@ -270,6 +282,7 @@
 			mainGroup = EFD21BB8297171EF000C0F11;
 			packageReferences = (
 				EFD71C2D29C8961F003B9EBF /* XCRemoteSwiftPackageReference "Alamofire" */,
+				EFB4703729F2C96800ADB140 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = EFD21BC2297171EF000C0F11 /* Products */;
 			projectDirPath = "";
@@ -554,6 +567,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EFB4703729F2C96800ADB140 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		EFD71C2D29C8961F003B9EBF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -565,6 +586,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EFB4703829F2C96900ADB140 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFB4703729F2C96800ADB140 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		EFB4703A29F2C96900ADB140 /* RxCocoa-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFB4703729F2C96800ADB140 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxCocoa-Dynamic";
+		};
+		EFB4703C29F2C96900ADB140 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFB4703729F2C96800ADB140 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		EFB4703E29F2C96900ADB140 /* RxSwift-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFB4703729F2C96800ADB140 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = "RxSwift-Dynamic";
+		};
 		EFD71C2E29C8961F003B9EBF /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EFD71C2D29C8961F003B9EBF /* XCRemoteSwiftPackageReference "Alamofire" */;
