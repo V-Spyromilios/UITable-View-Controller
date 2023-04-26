@@ -13,6 +13,4 @@ class SwNavigationController: UINavigationController {
         super.viewDidLoad()
 
     }
-
-
 }

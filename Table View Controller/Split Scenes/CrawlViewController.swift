@@ -8,7 +8,6 @@
 import UIKit
 
 class CrawlViewController: UIViewController {
-
 	
 	@IBOutlet weak var crawlLabel: UILabel!
 	var crawl: String?
@@ -23,7 +22,6 @@ class CrawlViewController: UIViewController {
 		crawlLabel.adjustsFontSizeToFitWidth = true
 		crawlLabel.font = UIFont(name: "Gotham", size: 40)
     }
-    
 
 	private func setUpCrawlBackground() {
 

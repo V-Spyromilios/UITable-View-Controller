@@ -20,14 +20,13 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		}
 	}
 	@IBOutlet weak var countryGdpField: UITextField!
-	
-	
+
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		countryGdpField.keyboardType = .numberPad
-		
-		//MARK: - Add Gesture Rec. to Image for PHPicker
+
 		let tapRecogniser = UITapGestureRecognizer(target: self, action: #selector(choosePhoto))
 		imageView.addGestureRecognizer(tapRecogniser)
 		
@@ -48,7 +47,8 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		}
 		parentViewController?.OkButton.isEnabled = true
 	}
-	
+
+	//MARK: choosePhoto
 	@objc func choosePhoto() {
 		openPHPicker()
 	}
@@ -62,12 +62,10 @@ class AddNewCountryChildTableViewController: UITableViewController, PHPickerView
 		country.countryDescription = countryDescriptionField.text ?? ""
 		country.euMember =  isEuMemberSwitch.isOn
 		country.gdp =  Int64(Int(countryGdpField.text ?? "")!)
-		
-		
+
 		if let imageData = imageView.image?.jpegData(compressionQuality: 0.7) {
 			country.flagData = imageData
 		}
-		
 		if country.euMember == true {
 			CoreDataAssistant.intermediateCountries[0].append(country)
 		} else {

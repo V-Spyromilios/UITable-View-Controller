@@ -74,7 +74,7 @@ extension SplitMasterViewController: UISplitViewControllerDelegate {
 	func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
 		
 		if let detailVC = secondaryViewController as? SplitDetailViewController {
-			if detailVC.country == nil {
+			if !detailVC.isCountrySet {
 				return true
 			}
 		}

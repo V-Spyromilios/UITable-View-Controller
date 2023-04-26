@@ -32,13 +32,13 @@ final class CoreDataAssistant {
 	}()
 	
 	static var fetchedResultsController: NSFetchedResultsController<Country> = {
+
 		let fetchRequest: NSFetchRequest<Country> = Country.fetchRequest()
 		fetchRequest.sortDescriptors = [
 			NSSortDescriptor(key: "euMember", ascending: false),
 			NSSortDescriptor(key: "name", ascending: true)
 		]
-		
-		// Use a custom keyPath to group the countries into two sections based on euMember attribute
+
 		let sectionKeyPath = #keyPath(Country.euMember)
 		let controller = NSFetchedResultsController(fetchRequest: fetchRequest,
 													managedObjectContext: context,
@@ -79,5 +79,5 @@ final class CoreDataAssistant {
 		}
 		return countries
 	}
-	
+
 }

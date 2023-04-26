@@ -27,7 +27,6 @@ class StarWarsViewController: UIViewController {
 		}
 	}
 	
-	
 	//MARK: viewDidLoad
 	override func viewDidLoad() {
 		super.viewDidLoad()

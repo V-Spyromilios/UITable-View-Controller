@@ -65,12 +65,9 @@ class PageController : UIPageViewController {
 				pages.append(singlePage)
 			}
 		}
-//		pageControl.numberOfPages = pages.count
 		if let firstPage = pages.first {
 			setViewControllers([firstPage], direction: .forward, animated: true)
 		}
-		//pageControl.currentPageIndicatorTintColor = .red
-		//pageControl.pageIndicatorTintColor = UIColor(named: "SwYellow")
 		didMove(toParent: self)
 	}
 }
@@ -78,6 +75,7 @@ class PageController : UIPageViewController {
 
 //MARK: DataSource, Delegate
 extension PageController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+
 	func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
 		
 		guard let thisPage = viewController as? PageViewController else { return nil }
@@ -107,7 +105,6 @@ extension PageController: UIPageViewControllerDataSource, UIPageViewControllerDe
 		
 		guard let viewControllers = pageViewController.viewControllers else { return }
 		guard let currentIndex = pages.firstIndex(of: viewControllers[0] as! PageViewController) else { return }
-		
-		//pageControl.currentPage = currentIndex
 	}
+
 }
